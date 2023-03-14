@@ -80,5 +80,4 @@ machine as well), especially if you set up a local X-Road instance.
 ## Credits
 
 * X-Road Catalog was originally developed by the [Finnish Digital Agency](https://dvv.fi/en) during 2016-2023.
-* In 2023 it was agreed that [Nordic Institute for Interoperability Solutions (NIIS)](https://www.niis.org/) takes 
-* maintenance responsibility.
+* In 2023 it was agreed that [Nordic Institute for Interoperability Solutions (NIIS)](https://www.niis.org/) takes maintenance responsibility.
