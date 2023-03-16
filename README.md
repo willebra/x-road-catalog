@@ -9,9 +9,8 @@ This repository contains information about the X-Road Catalog, its source code, 
 
 ## Introduction to X-Road Catalog
 
-X-Road Catalog is an [X-Road](https://github.com/nordic-institute/X-Road/) extension that collects information, more 
-specifically members, subsystems and services, from an X-Road ecosystem and provides a REST and SOAP interfaces to read 
-the data.
+X-Road Catalog is an [X-Road](https://github.com/nordic-institute/X-Road/) extension that collects information on
+members, subsystems and services from an X-Road ecosystem and provides a REST and SOAP interfaces to access the data.
 
 X-Road Catalog can be used together with an additional API Catalog component - a web portal that contains descriptions of all the 
 services available in the ecosystem. The primary purpose of the API Catalog is to provide a user-friendly channel to 
@@ -36,14 +35,14 @@ pricing information, SLAs, etc.
 
 The X-Road Catalog software consists of three modules:
 
-- [xroad-catalog-collector](xroad-catalog-collector/README.md)
+- [X-Road Catalog Collector](xroad-catalog-collector/README.md)
   * Collects information from the X-Road ecosystem (possibly also from external APIs) and stores it to the postgresql database. 
   * Implemented using concurrent Akka actors. 
-- [xroad-catalog-lister](xroad-catalog-lister/README.md)
-  * SOAP and REST interfaces that offer information collected by the Collector. 
+- [X-Road Catalog Lister](xroad-catalog-lister/README.md)
+  * Provides REST and SOAP interfaces that offer information collected by the Collector. 
   * Can be used as an X-Road service (X-Road headers are in place).
-- [xroad-catalog-persistence](xroad-catalog-persistence/README.md)
-  * Library used to persist and read persisted data. Used by the `xroad-catalog-collector` and `xroad-catalog-lister` modules.
+- [X-Road Catalog Persistence](xroad-catalog-persistence/README.md)
+  * Library used to persist and read persisted data. Used by the X-Road Catalog Collector and X-Road Catalog Lister modules.
   
 ![X-Road Catalog overview](img/architecture.png)
 
@@ -68,7 +67,7 @@ Running the X-Road Catalog software requires Linux (Ubuntu or RHEL). If you are 
 * Gradle
 
 *Recommended for development environment*
-* Docker (for deb/rpm packaging)
+* Docker (for rpm packaging)
 * [LXD](https://linuxcontainers.org/lxd/)
   * for setting up a local X-Road instance
 * Ansible

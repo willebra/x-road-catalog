@@ -1,27 +1,28 @@
 # X-Road Catalog User Guide
-Version: 3.0.1
+Version: 3.1.0
 Doc. ID: XRDCAT-CONF
 
 ---
 
 ## Version history <!-- omit in toc -->
-| Date       | Version | Description                                                                    | Author             |
-|------------|---------|--------------------------------------------------------------------------------|--------------------|
-| 21.07.2021 | 1.0.0   | Initial draft                                                                  | Bert Viikmäe       |
-| 21.07.2021 | 1.0.1   | Add installation section                                                       | Bert Viikmäe       |
-| 22.07.2021 | 1.0.2   | Add X-Road Catalog Collector section                                           | Bert Viikmäe       |
-| 23.07.2021 | 1.0.3   | Add X-Road Catalog Lister section                                              | Bert Viikmäe       |
-| 23.07.2021 | 1.0.4   | Add X-Road Catalog Persistence section                                         | Bert Viikmäe       |
-| 25.08.2021 | 1.0.5   | Add list distinct services endpoint description                                | Bert Viikmäe       |
-| 02.09.2021 | 1.0.6   | Add list errors endpoint description                                           | Bert Viikmäe       |
-| 22.09.2021 | 1.0.7   | Update heartbeat endpoint description                                          | Bert Viikmäe       |
-| 26.10.2021 | 1.0.8   | Update listErrors endpoint description                                         | Bert Viikmäe       |
-| 27.10.2021 | 1.1.0   | Add listSecurityServers and listDescriptors endpoint descriptions              | Bert Viikmäe       |
-| 15.12.2021 | 1.1.1   | Update listErrors endpoint description                                         | Bert Viikmäe       |
-| 08.02.2022 | 1.2.0   | Add getOrganization and getOrganizationChanges endpoint descriptions           | Bert Viikmäe       |
-| 29.07.2022 | 2.0.0   | Substitute since with start and end date parameter and update related chapters | Bert Viikmäe       |
-| 04.10.2022 | 2.1.0   | Add getRest and getEndpoints descriptions                                      | Bert Viikmäe       |
-| 15.01.2023 | 3.0.0   | Restructure of the document                                                    | Bert Viikmäe       |
+| Date       | Version | Description                                                                    | Author           |
+|------------|---------|--------------------------------------------------------------------------------|------------------|
+| 21.07.2021 | 1.0.0   | Initial draft                                                                  | Bert Viikmäe     |
+| 21.07.2021 | 1.0.1   | Add installation section                                                       | Bert Viikmäe     |
+| 22.07.2021 | 1.0.2   | Add X-Road Catalog Collector section                                           | Bert Viikmäe     |
+| 23.07.2021 | 1.0.3   | Add X-Road Catalog Lister section                                              | Bert Viikmäe     |
+| 23.07.2021 | 1.0.4   | Add X-Road Catalog Persistence section                                         | Bert Viikmäe     |
+| 25.08.2021 | 1.0.5   | Add list distinct services endpoint description                                | Bert Viikmäe     |
+| 02.09.2021 | 1.0.6   | Add list errors endpoint description                                           | Bert Viikmäe     |
+| 22.09.2021 | 1.0.7   | Update heartbeat endpoint description                                          | Bert Viikmäe     |
+| 26.10.2021 | 1.0.8   | Update listErrors endpoint description                                         | Bert Viikmäe     |
+| 27.10.2021 | 1.1.0   | Add listSecurityServers and listDescriptors endpoint descriptions              | Bert Viikmäe     |
+| 15.12.2021 | 1.1.1   | Update listErrors endpoint description                                         | Bert Viikmäe     |
+| 08.02.2022 | 1.2.0   | Add getOrganization and getOrganizationChanges endpoint descriptions           | Bert Viikmäe     |
+| 29.07.2022 | 2.0.0   | Substitute since with start and end date parameter and update related chapters | Bert Viikmäe     |
+| 04.10.2022 | 2.1.0   | Add getRest and getEndpoints descriptions                                      | Bert Viikmäe     |
+| 15.01.2023 | 3.0.0   | Restructure of the document                                                    | Bert Viikmäe     |
+| 16.03.2023 | 3.1.0   | Editorial changes                                                              | Petteri Kivimäki |
 
 ## Table of Contents <!-- omit in toc -->
 
@@ -33,13 +34,12 @@ Doc. ID: XRDCAT-CONF
   * [1.1 Target Audience](#11-target-audience)
 * [2. Installation](#2-installation)
     * [2.1 Prerequisites to Installation](#21-prerequisites-to-installation)
+        * [2.1.1 Running](#211-running)
+        * [2.1.2 Developing and building](#212-developing-and-building)
     * [2.2 Installation](#22-installation)
     * [2.3 SSL](#23-ssl)
     * [2.4 Status of services](#24-status-of-services)
     * [2.5 Logs](#25-logs)
-    * [2.6 Profiles](#26-profiles)
-        * [2.6.1 Default profile](#261-default-profile)
-        * [2.6.2 FI profile](#262-fi-profile)      
 * [3. X-Road Catalog](#3-x-road-catalog)
     * [3.1 X-Road Catalog Collector](#31-x-road-catalog-collector)
     * [3.2 X-Road Catalog Lister](#32-x-road-catalog-lister)
@@ -62,7 +62,7 @@ Doc. ID: XRDCAT-CONF
             * [3.2.2.5 Check heartbeat](#3225-check-heartbeat)  
             * [3.2.2.6 List distinct service statistics](#3226-list-distinct-service-statistics)  
             * [3.2.2.7 List errors](#3227-list-errors) 
-            * [3.2.2.8 List security servers](#3228-list-security-servers) 
+            * [3.2.2.8 List Security Servers](#3228-list-security-servers) 
             * [3.2.2.9 List descriptors](#3229-list-descriptors) 
             * [3.2.2.10 Get endpoints](#32210-get-endpoints)
             * [3.2.2.11 Get Rest](#32211-get-rest)
@@ -80,56 +80,79 @@ This document is licensed under the Creative Commons Attribution-ShareAlike 3.0 
 
 ## 1. Introduction
 
-The purpose of this piece of software is to collect information, more specifically members, subsystems and services, from an X-Road Catalog instance and offer an interface where the information can be read.
+X-Road Catalog is an [X-Road](https://github.com/nordic-institute/X-Road/) extension that collects information on 
+members, subsystems and services from an X-Road ecosystem and provides a REST and SOAP interfaces to access the data.
 
-The software consists of three parts:
+X-Road Catalog consists of three modules:
+
 - X-Road Catalog Collector
-    * Collects members, subsystems and services from the X-Road instance and stores them to a database.
-    * Implemented using concurrent Akka actors.
+    * Collects information from the X-Road ecosystem and stores it to a database.
+    * Optionally, can collect information from external APIs too, e.g., a national business registry.
 - X-Road Catalog Lister
-    * Provides SOAP and REST endpoints offering information collected by the collector.
+    * Provides REST and SOAP interfaces offering information collected by the collector.
     * Can be used as an X-Road service (X-Road headers are in place)
 - X-Road Catalog Persistence
-    * Library used to persist and read persisted data. Used by both of the above.
+    * Library used to persist and read persisted data.
+    * Used by the X-Road Catalog Collector and X-Road Catalog Lister modules.
 
 ### 1.1 Target Audience
 
-The intended audience of this user guide are system administrators responsible for managing and configuring systems and applicatons that use X-Road services.
-The document is intended for readers with a good knowledge of Linux server management, computer networks, and the X-Road functioning principles.
+The intended audience of this user guide are X-Road Operators responsible for managing and configuring the X-Road Central 
+Server and related services. The document is intended for readers with a good knowledge of Linux server management, 
+computer networks, and the X-Road principles.
 
 ## 2. Installation
 
 ## 2.1 Prerequisites to Installation
 
-Running the X-Road Catalog software requires Linux (Ubuntu or RHEL). If you are using some other operating system (e.g. Windows or macOS), the easiest option is to first install Ubuntu 18.04 or RHEL 7.0 into a virtual machine.
+### 2.1.1 Running
 
-*Required for building*
+Running the X-Road Catalog software using available RPM packages requires Red Hat Enterprise Linux (RHEL) 
+version 7 on a x86-64 platform. The software can be installed both on physical and virtualized hardware.
+
+### 2.1.2 Developing and building
+
+Developing and building the X-Road Catalog software requires an Ubuntu or a RHEL host. If you are using some other 
+operating system (e.g. Windows or MacOS), the easiest option is to first install Ubuntu 22.04 or RHEL7 into a virtual 
+machine.
+
+Required for building:
 * OpenJDK / JDK version 11
 * Gradle
 
-*Recommended for development environment*
-* Docker (for deb/rpm packaging)
-* LXD (https://linuxcontainers.org/lxd/)
-  * for setting up a local X-Road instance
+Recommended for development environment:
+* Docker (for rpm packaging)
+* [LXD](https://linuxcontainers.org/lxd/)
+  * For setting up a local X-Road instance.
 * Ansible
-  * for automating the X-Road instance installation
+  * For automating the [X-Road ecosystem installation](https://github.com/nordic-institute/X-Road/tree/develop/ansible).
 
-The development environment should have at least 8GB of memory and 20GB of free disk space (applies to a virtual machine as well), especially if you set up a local X-Road instance.
-
+The development environment should have at least 8GB of memory and 20GB of free disk space (applies to a virtual machine 
+as well), especially if you set up a local X-Road ecosystem.
 
 ## 2.2 Installation
 
-The installable software consists of xroad-catalog-collector and xroad-catalog-lister. Both are provided as RPM packages. 
+The installable software consists of `xroad-catalog-collector` and `xroad-catalog-lister`. Both are provided as RPM packages. 
 
-``` $ sudo yum install xroad-catalog-lister xroad-catalog-collector``` or ```rpm -i install xroad-catalog-lister xroad-catalog-collector```
+```bash
+sudo yum install xroad-catalog-lister xroad-catalog-collector
+```
+
+Or alternatively:
+
+```bash
+rpm -i install xroad-catalog-lister xroad-catalog-collector
+```
 
 Instructions on how to build the RPM packages using Docker can be found:
 [here](xroad-catalog-collector/README.md#build-rpm-packages-on-non-redhat-platform)
 and
 [here](xroad-catalog-lister/README.md#build-rpm-packages-on-non-redhat-platform)
 
-Configure parameters in /etc/xroad/xroad-catalog/collector-production.properties, especially X-Road instance information and URL of security server.
-```
+Configure parameters in `/etc/xroad/xroad-catalog/collector-production.properties`, especially X-Road instance 
+information and URL of Security Server.
+
+```properties
 xroad-catalog.xroad-instance=<XROAD_INSTANCE>
 xroad-catalog.member-class=<MEMBER_CLASS>
 xroad-catalog.member-code=<MEMBER_CODE>
@@ -138,7 +161,8 @@ xroad-catalog.security-server-host=<SECURITY_SERVER_HOST>
 ```
 
 In addition, configure also parameters related to behaviour of X-Road Catalog Collector: 
-```
+
+```properties
 xroad-catalog.flush-log-time-after-hour=<ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_AFTER>
 xroad-catalog.flush-log-time-before-hour=<ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_BEFORE>
 xroad-catalog.error-log-length-in-days=<ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS>
@@ -148,82 +172,85 @@ xroad-catalog.fetch-time-before-hour=<XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_BEF
 xroad-catalog.collector-interval-min=<XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_MINUTES>
 ```
 
-``` ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_AFTER ``` is a parameter for setting the start of time interval during which the error logs in the db will be deleted 
-    when those exceed the amount in days set by ``` ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS ``` parameter, e.g. value ``` 18 ``` means starting from ``` 18:00 ```
+`ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_AFTER` is a parameter for setting the start of time interval during which the error logs in the db will be deleted
+when those exceed the amount in days set by `ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` parameter, e.g. value `18` means starting from `18:00`.
 
-``` ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_BEFORE ``` is a parameter for setting the end of time interval during which the error logs in the db will be deleted 
-    when those exceed the amount in days set by ``` ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS ``` parameter, e.g. value ``` 23 ``` means ending at ``` 23:00 ```
+`ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_BEFORE` is a parameter for setting the end of time interval during which the error logs in the db will be deleted 
+    when those exceed the amount in days set by `ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` parameter, e.g. value  `23` means ending at `23:00`.
 
-``` ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS ``` is a parameter for setting the amount in days for how long the errors logs should be kept in the db, 
-    e.g. value ``` 90 ``` means ``` for 90 days ```
+`ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` is a parameter for setting the amount in days for how long the errors logs should be kept in the db, 
+    e.g. value `90` means `for 90 days`.
 
-``` XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED ``` is a parameter for setting whether the X-Road Catalog Collector should try 
-    to fetch data from security server continuously during a day or only between certain hours, e.g. value ``` true ``` means ``` continously ```
+`XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` is a parameter for setting whether the X-Road Catalog Collector should try 
+    to fetch data from Security Server continuously during a day or only between certain hours, e.g. value `true` means `continously`.
 
-``` XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_AFTER ``` is a parameter for setting the start of time interval during which the X-Road Catalog Collector should try 
-    to fetch data from security server continuously (this parameter will be ignored if the parameter ``` XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED ``` is set 
-    to ``` true ```), e.g. value ``` 18 ``` means starting from ``` 18:00 ```
+`XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_AFTER` is a parameter for setting the start of time interval during which the X-Road Catalog Collector should try 
+    to fetch data from Security Server continuously (this parameter will be ignored if the parameter `XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` is set 
+    to `true`), e.g. value `18` means starting from `18:00`.
 
-``` XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_BEFORE ``` is a parameter for setting the end of time interval during which the X-Road Catalog Collector should try 
-    to fetch data from security server continuously (this parameter will be ignored if the parameter ``` XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED ``` is set 
-    to ``` true ```), e.g. value ``` 23 ``` means ending at ``` 23:00 ```
+`XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_BEFORE` is a parameter for setting the end of time interval during which the X-Road Catalog Collector should try 
+    to fetch data from Security Server continuously (this parameter will be ignored if the parameter `XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` is set 
+    to `true`), e.g. value `23` means ending at `23:00`.
 
-``` XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_MINUTES ``` is a parameter for setting the amount of time in minutes after which the X-Road Catalog Collector 
-    should start re-fetching data from security server, e.g. value ``` 60 ``` means ``` every 60 minutes ```
+`XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_MINUTES` is a parameter for setting the amount of time in minutes after which the X-Road Catalog Collector 
+    should start re-fetching data from Security Server, e.g. value `60` means `every 60 minutes`.
 
-Change also the database password in /etc/xroad/xroad-catalog/catalogdb-production.properties.
-```
+Change also the database password in `/etc/xroad/xroad-catalog/catalogdb-production.properties`:
+```properties
 spring.datasource.password=password
 ```
-and in the DB:
-```
-$ sudo -u postgres psql -U postgres -d postgres -c "alter user xroad_catalog with password 'password';"
+And in the DB:
+```bash
+sudo -u postgres psql -U postgres -d postgres -c "alter user xroad_catalog with password 'password';"
 ```
 
 Make sure that the services are enabled on boot and restart services in order to make the changes to have effect.
-```
-# Enable the service to start on boot
-$ sudo systemctl enable xroad-catalog-lister
-$ sudo systemctl enable xroad-catalog-collector
-$ sudo systemctl restart xroad-catalog-lister
-$ sudo systemctl restart xroad-catalog-collector
+```bash
+sudo systemctl enable xroad-catalog-lister
+sudo systemctl enable xroad-catalog-collector
+sudo systemctl restart xroad-catalog-lister
+sudo systemctl restart xroad-catalog-collector
 ```
 ### X-Road Catalog installation in Production
+
 ![X-Road Catalog production](xroad_catalog_production.png)
 
 ## 2.3 SSL
 
-If secure connection to the security server is required, add the server's cert for the JVM trust store, for example as follows.
+If secure connection to the Security Server is required, add the server's cert for the JVM trust store. For example:
 
-```
-$ sudo cp cert.pem /etc/pki/ca-trust/source/anchors/
-$ sudo update-ca-trust extract
+```bash
+sudo cp cert.pem /etc/pki/ca-trust/source/anchors/
+sudo update-ca-trust extract
 ```
 
 If you don't have the certificate, it can be asked as follows:
 
-```
-$ openssl s_client -showcerts -connect <SERVER_ADDRESS>:443  </dev/null
-```
-
-If listMethods requires authentication, create a certificate and add it to keystore file /etc/xroad/xroad-catalog/keystore as follows:
-```
-$ sudo keytool -alias xroad-catalog -genkeypair -keystore /etc/xroad/xroad-catalog/keystore -validity 7300 -keyalg RSA -keysize 2048 -sigalg SHA256withRSA -dname C=FI,CN=xroad-catalog
-
-$ keytool -keystore /etc/xroad/xroad-catalog/keystore -exportcert -rfc -alias xroad-catalog > xroad-catalog.cer
+```bash
+openssl s_client -showcerts -connect <SERVER_ADDRESS>:443  </dev/null
 ```
 
-Created xroad-catalog.cer must be added to security server (Through UI: Security Server Clients > SELECT SERVICE > Internal Servers > Internal TLS Certificates > ADD)
+If accessing the `listMethods` service requires authentication, create a key and a certificate and add it to keystore file 
+`/etc/xroad/xroad-catalog/keystore` (note: replace the `<COUNTRY_CODE>` placeholder with a real country code):
 
-The keystore password can be configured in /etc/xroad/xroad-catalog/collector-production.properties
+```bash
+sudo keytool -alias xroad-catalog -genkeypair -keystore /etc/xroad/xroad-catalog/keystore -validity 7300 -keyalg RSA -keysize 2048 -sigalg SHA256withRSA -dname C=<COUNTRY_CODE>,CN=xroad-catalog
+keytool -keystore /etc/xroad/xroad-catalog/keystore -exportcert -rfc -alias xroad-catalog > xroad-catalog.cer
 ```
+
+The created `xroad-catalog.cer` file must be added to the Security Server (Through UI: Security Server Clients > SELECT SERVICE > Internal Servers > Internal TLS Certificates > ADD)
+
+The keystore password can be configured in `/etc/xroad/xroad-catalog/collector-production.properties`.
+
+```properties
 xroad-catalog.ssl-keystore-password=changeit
 ```
 
-
 ## 2.4 Status of Services
 
-This instruction expects that xroad-catalog-collector and xroad-catalog-lister are installed on the same server. It is also possible to install them on different servers but then database settings need to be set for both services. For server of xroad-catalog-lister file /etc/xroad/xroad-catalog/catalogdb-production.properties must be manually created.
+This instruction expects that `xroad-catalog-collector` and `xroad-catalog-lister` are installed on the same server. It 
+is also possible to install them on different servers, but then database settings need to be set for both services. For 
+server of `xroad-catalog-lister` file `/etc/xroad/xroad-catalog/catalogdb-production.properties` must be manually created.
 
 ```
 [root@ip-172-31-128-199 xroad-catalog]# service xroad-catalog-collector status
@@ -271,116 +298,65 @@ Hint: Some lines were ellipsized, use -l to show in full.
 
 ## 2.5 Logs
 
+The application logs of the `xroad-catalog-collector` and `xroad-catalog-lister` can be accessed using the `journalctl`
+command:
+
 ```
 $ sudo journalctl -fu xroad-catalog-collector --since="2016-04-07 10:50 --output=cat"
 $ sudo journalctl -fu xroad-catalog-lister --since="2016-04-07 10:50 --output=cat"
 ```
 
-## 2.6 Profiles
-
-Spring profiles are used to configure different implementation/features in X-Road Catalog.
-
-* Docker image is built within a CI/CD pipeline build process
-
-  for X-Road Catalog Collector:
-```
-  docker build -t collector-rpm packages/xroad-catalog-collector/docker --build-arg CATALOG_PROFILE=fi
-```
-
-  for X-Road Catalog Lister:
-```
-docker build -t lister-rpm packages/xroad-catalog-lister/docker --build-arg CATALOG_PROFILE=fi
-```
-
-  Profile value is provided to the respective "Dockerfile" with an argument ```--build-arg CATALOG_PROFILE=fi``` here
-  Then within the "Dockerfile" an environment variable ```CATALOG_PROFILE``` is initalized with that profile value.
-
-* A shell script "build_rpm.sh" is run within a docker container, which takes a ```p``` (profile) parameter as input, which is read from the environment variable ```CATALOG_PROFILE```
-* The shell script "build_rpm.sh" passes on the profile parameter(the script assumes the profile is ```default``` when no value is given with the ```profile``` parameter) 
-  to ```xroad-catalog-collector.spec``` or ```xroad-catalog-lister.spec``` which configures a prepares the creation Systemd service for X-Road Catalog Collector or X-Road Catalog Lister. 
-* Within that ```.spec``` file the catalog profile value will be written to a properties file:
-
-```
-   echo "CATALOG_PROFILE=%{profile}" >> catalog-profile.properties
-```
-
-* Then that file will be copied to ```/etc/xroad/xroad-catalog``` among other properties files 
-* In addition, specific db scripts will be run within that "spec" file according to the value of the ```profile```:
-
-```
-   sudo -u postgres psql --file=/usr/share/xroad/sql/create_tables_%{profile}.sql
-```
-
-* Finally, the profile value will be read from that properties file:
-
-```
-   source /etc/xroad/xroad-catalog/catalog-profile.properties
-```
-
-* Then a Systemd service will be created with the following content
-
-   for X-Road Catalog Collector:
-
-```
-   exec ${JAVA_HOME}/bin/java -Xms128m -Xmx2g -Dspring.profiles.active=base,production -Dspring.profiles.include=$CATALOG_PROFILE -jar /usr/lib/xroad-catalog/xroad-catalog-collector.jar --spring.config.location=/etc/xroad/xroad-catalog/ --spring.config.name=collector,catalogdb
-```
-
-   for X-Road Catalog Lister:
-
-```
-   exec ${JAVA_HOME}/bin/java -Xms128m -Xmx2g -Dserver.port=8070 -Dspring.profiles.active=production -Dspring.profiles.include=$CATALOG_PROFILE -jar /usr/lib/xroad-catalog/xroad-catalog-lister.jar --spring.config.location=/etc/xroad/xroad-catalog/ --spring.config.name=lister,catalogdb
-```
-
-### 2.6.1 Default profile
-
-The default profile(a profile used for default operation of X-Road Catalog, without any country-specific features)
-The default profile can be set with ```spring.profiles.active=default```
-
-### 2.6.2 FI profile
-
-The FI profile(an extra profile used in addition to the default profile, which has country specific features)
-The FI profile can be set with ```spring.profiles.active=fi```
-
 ## 3. X-Road Catalog
+
+X-Road Catalog consists of three modules:
+
+- X-Road Catalog Collector - collects information from the X-Road ecosystem (possibly also from external APIs) and 
+stores it to the postgresql database.
+- X-Road Catalog Lister - provides REST and SOAP interfaces that offer information collected by the X-Road Catalog Collector module.
+- X-Road Catalog Persistence - persists the collected information. Used by the X-Road Catalog Collector and X-Road 
+Catalog Lister modules.
 
 ### 3.1 X-Road Catalog Collector
 
-The purpose of this piece of software is to collect members, subsystems and services from the X-Road instance and store them to the PostgreSQL database. 
+The purpose of this module is to collect members, subsystems and services from the X-Road ecosystem and store them to the PostgreSQL database. 
 
-[xroad-catalog-collector](xroad-catalog-collector/README.md)
+More information about the [X-Road Catalog Collector](xroad-catalog-collector/README.md) module.
 
 ### 3.2 X-Road Catalog Lister
 
-The purpose of this piece of software is to provide a webservice which lists all the X-Road members and the services they provide together with service descriptions
+The purpose of this module is to provide a web service which lists all the X-Road members and the services they provide together with service descriptions.
 
-[xroad-catalog-lister](xroad-catalog-lister/README.md)
+More information about the [X-Road Catalog Lister](xroad-catalog-lister/README.md) module.
 
 ### 3.2.1 SOAP endpoints
 
-The main endpoints this software provides with the [default profile](#261-default-profile): 
-* ListMembers - a SOAP endpoint to list all the members the Catalog Collector has stored to the db
-* GetWsdl - a SOAP endpoint to retrieve a WSDL description for a given service
-* GetOpenAPI - a SOAP endpoint to retrieve an OpenAPI description for a given service
-* GetServiceType - a SOAP endpoint for requesting whether a given service is of type SOAP, REST or OPENAPI
-* IsProvider - a SOAP endpoint for requesting whether a given member is a provider
-* GetErrors - a SOAP endpoint for requesting a list of errors related to fetching data from different apis and security servers
+The main SOAP endpoints the module  provides with the [default profile](#261-default-profile): 
+
+* `ListMembers` - get a list all the members the Catalog Collector has stored to the db.
+* `GetWsdl` - retrieve a WSDL description for a given service.
+* `GetOpenAPI` - retrieve an OpenAPI description for a given service.
+* `GetServiceType` - retrieve the service type (`SOAP`, `REST` or `OPENAPI3`) for a given service.
+* `IsProvider` - check is a given member a service provider.
+* `GetErrors` - get a list of errors related to fetching data from different apis and Security Servers.
 
 In addition, some more SOAP endpoints are provided when the [FI profile](#262-fi-profile) is active:
-* GetOrganizations - a SOAP endpoint for requesting public organization details
-* HasOrganizationChanged - a SOAP endpoint for requesting whether given public organization has some of its details changed
-* GetCompanies - a SOAP endpoint for requesting private company details
-* HasCompanyChanged - a SOAP endpoint for requesting whether given private company has some of its details changed
 
+* `GetOrganizations` - retrieve public organization details.
+* `HasOrganizationChanged` - check have the details of a given public organisation changed.
+* `GetCompanies` - retrieve private company details.
+* `HasCompanyChanged` - check have the details of a given private company changed.
 
 ### 3.2.1.1 List all members
 
 In order to list all members and related subsystems and services, a request in XML format has to be sent to the respective SOAP endpoint:
 
-``` $ curl -k -d @servicerequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/ListMembers ```
+```bash
+curl -k -d @servicerequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/ListMembers
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
+**Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
 
-Contents of the example ```servicerequest.xml``` file:
+Contents of the example `servicerequest.xml` file:
 ```xml
 <soapenv:Envelope 
 xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
@@ -531,32 +507,34 @@ Contents of the XML response of the request
 </SOAP-ENV:Envelope>
 ```
 
-The XML response has a ```<SOAP-ENV:Body>``` element with the following structure:
+The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 
-* ListMembersResponse
-  * memberList
-    * member
-      * subsystems
-        * subsystem
-          * subsystemCode
-          * services
-            * service
-            * serviceCode
-            * wsdl (if the given service description is a WSDL description)
-              * externalId
+* `ListMembersResponse`
+  * `memberList`
+    * `member`
+      * `subsystems`
+        * `subsystem`
+          * `subsystemCode`
+          * `services`
+            * `service`
+            * `serviceCode`
+            * `wsdl` (if the given service description is a WSDL description)
+              * `externalId`
 
-In addition, each subsystem, service and wsdl contains also fields ```created```, ```changed```, ```fetched``` and ```removed```, 
-reflecting the creation, change, fetch and removal (when a subsystem/service/wsdl was fetched by X-Road Catalog Collector to the DB) dates
+In addition, each subsystem, service and wsdl contains also fields `created`, `changed`, `fetched` and `removed`, 
+reflecting the creation, change, fetch and removal (when a subsystem/service/wsdl was fetched by X-Road Catalog Collector to the DB) dates.
 
 ### 3.2.1.2 Retrieve WSDL descriptions
 
 In order to retrieve a WSDL service description, a request in XML format has to be sent to the respective SOAP endpoint:
 
-``` $ curl -k -d @wsdlrequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetWsdl ```
+```bash
+curl -k -d @wsdlrequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetWsdl
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
+**Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
 
-Contents of the example ```wsdlrequest.xml``` file:
+Contents of the example `wsdlrequest.xml` file:
 ```xml
 <soapenv:Envelope 
 xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
@@ -589,7 +567,7 @@ xmlns:xrcl="http://xroad.vrk.fi/xroad-catalog-lister">
 </soapenv:Envelope>
 ```
 
-In the request there is a field ```externalId```, indicating the id of the WSDL to be retrieved
+In the request, the `externalId` field identifies the WSDL to be retrieved.
 
 The response of the given request is in XML format, containing the WSDL service description. 
 A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.md)
@@ -598,11 +576,13 @@ A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.
 
 In order to retrieve an OPENAPI service descriptions, a request in XML format has to be sent to the respective SOAP endpoint:
 
-``` $ curl -k -d @openapirequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetOpenAPI ```
+```bash
+curl -k -d @openapirequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetOpenAPI
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
+**Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
 
-Contents of the example ```openapirequest.xml``` file:
+Contents of the example `openapirequest.xml` file:
 ```xml
 <soapenv:Envelope 
 xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
@@ -635,7 +615,7 @@ xmlns:xrcl="http://xroad.vrk.fi/xroad-catalog-lister">
 </soapenv:Envelope>
 ```
 
-In the request there is a field ```externalId```, indicating the id of the OPENAPI to be retrieved
+In the request, the `externalId` field identifies the OPENAPI to be retrieved.
 
 The response of the given request is in XML format, containing the OPENAPI service description. 
 A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.md)
@@ -646,9 +626,9 @@ In order to retrieve service type information, a request in XML format has to be
 
 ``` $ curl -k -d @GetServiceTypeRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetServiceType ```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
+**Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
 
-Contents of the example ```GetServiceTypeRequest.xml``` file:
+Contents of the example `GetServiceTypeRequest.xml` file:
 ```xml
 <soapenv:Envelope 
 xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
@@ -686,30 +666,33 @@ xmlns:xrcl="http://xroad.vrk.fi/xroad-catalog-lister">
 </soapenv:Envelope>
 ```
 
-In the request there are the following fields that need to be filled:
- ```xRoadInstance``` - X-Road Instance name, e.g. DEV
- ```memberClass``` - member class, e.g. GOV
- ```memberCode``` -  member code, e.g. 1234
- ```serviceCode``` - service code, e.g. authCertDeletion
- ```subsystemCode``` - subsystem code, e.g. MANAGEMENT
- ```serviceVersion``` - service version, e.g. v1
+The following request fields need to be filled:
 
-The XML response has a ```<SOAP-ENV:Body>``` element with the following structure:
+* `xRoadInstance` - X-Road Instance name, e.g. `DEV`.
+* `memberClass` - member class, e.g., `GOV`.
+* `memberCode` -  member code, e.g., `1234`.
+* `serviceCode` - service code, e.g., `authCertDeletion`-
+* `subsystemCode` - subsystem code, e.g., `MANAGEMENT`.
+* `serviceVersion` - service version, e.g., `v1`.
 
-* GetServiceTypeResponse
-  * type (values: REST/OPENAPI3/WSDL)
+The XML response has a `<SOAP-ENV:Body>` element with the following structure:
+
+* `GetServiceTypeResponse`
+  * `type` (values: `REST`/`OPENAPI3`/`WSDL`)
 
 A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.md)
                    
 ### 3.2.1.5 Check if member is provider
 
-In order to check if a given X-Road member (security server) is a provider, a request in XML format has to be sent to the respective SOAP endpoint:
+In order to check if a given X-Road member (Security Server) is a provider, a request in XML format has to be sent to the respective SOAP endpoint:
 
-``` $ curl -k -d @IsProviderRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/IsProvider ```
+```bash
+curl -k -d @IsProviderRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/IsProvider
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
+**Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
 
-Contents of the example ```IsProviderRequest.xml``` file:
+Contents of the example `IsProviderRequest.xml` file:
 ```xml
 <soapenv:Envelope 
 xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
@@ -744,15 +727,16 @@ xmlns:xrcl="http://xroad.vrk.fi/xroad-catalog-lister">
 </soapenv:Envelope>
 ```
 
-In the request there are the following fields that need to be filled:
- ```xRoadInstance``` - X-Road Instance name, e.g. DEV
- ```memberClass``` - member class, e.g. GOV
- ```memberCode``` -  member code, e.g. 1234
+The following request fields need to be filled:
 
-The XML response has a ```<SOAP-ENV:Body>``` element with the following structure:
+* `xRoadInstance` - X-Road Instance name, e.g., `DEV`.
+* `memberClass` - member class, e.g., `GOV`.
+* `memberCode` -  member code, e.g., `1234`.
 
-* IsProviderResponse
-  * provider (values: true/false)
+The XML response has a `<SOAP-ENV:Body>` element with the following structure:
+
+* `IsProviderResponse`
+  * `provider` (values: `true`/`false`)
 
 A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.md)
 
@@ -760,11 +744,13 @@ A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.
 
 In order to fetch information about errors in the X-Road Catalog, a request in XML format has to be sent to the respective SOAP endpoint:
 
-``` $ curl -k -d @GetErrorsRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetErrors ```
+```bash
+curl -k -d @GetErrorsRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetErrors
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
+**Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
 
-Contents of the example ```GetErrorsRequest.xml``` file:
+Contents of the example `GetErrorsRequest.xml` file:
 ```xml
 <soapenv:Envelope
         xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
@@ -797,30 +783,33 @@ Contents of the example ```GetErrorsRequest.xml``` file:
     </soapenv:Body>
 </soapenv:Envelope>
 ```
-In the request there are the following fields that need to be filled:
-```startDateTime``` - date after which to list errors, e.g. 2020-01-01
-```endDateTime``` - date before which to list errors, e.g. 2022-01-01
+The following request fields need to be filled:
 
-The XML response has a ```<SOAP-ENV:Body>``` element with the following structure:
+* `startDateTime` - date after which to list errors, e.g., `2020-01-01`.
+* `endDateTime` - date before which to list errors, e.g., `2022-01-01`.
 
-* GetErrorsResponse
-    * errorLogList
-        * errorLog
-            * message
-            * code
-            * created
+The XML response has a `<SOAP-ENV:Body>` element with the following structure:
+
+* `GetErrorsResponse`
+    * `errorLogList`
+        * `errorLog`
+            * `message`
+            * `code`
+            * `created`
 
 ### 3.2.1.7 List organizations
 
-Requires ```FI``` profile (check [2.6.2 FI profile](#262-fi-profile))
+**Note!** Requires the `FI` profile.
 
 In order to fetch information about organizations, a request in XML format has to be sent to the respective SOAP endpoint:
 
-``` $ curl -k -d @GetOrganizationsRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetOrganizations ```
+```bash
+curl -k -d @GetOrganizationsRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetOrganizations
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
+**Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
 
-Contents of the example ```GetOrganizationsRequest.xml``` file:
+Contents of the example `GetOrganizationsRequest.xml` file:
 ```xml
 <soapenv:Envelope
         xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
@@ -853,142 +842,145 @@ Contents of the example ```GetOrganizationsRequest.xml``` file:
 </soapenv:Envelope>
 ```
 
-In the request there are the following fields that need to be filled:
- ```businessCode``` - business code of the searchable organization, e.g. 0181367-9
+The following request fields need to be filled:
 
-The XML response has a ```<SOAP-ENV:Body>``` element with the following structure:
+* `businessCode` - business code of the searchable organization, e.g., `0181367-9`.
 
-* GetOrganizationsResponse
-  * organizationList
-    * organization
-        * organizationType
-        * publishingStatus
-        * businessCode
-        * guid
-        * organizationNames
-	      * organizationName
-            * language
-        	* type
-        	* value
-        	* created
-        	* changed
-        	* fetched
-        	* removed
-        * organizationDescriptions
-          * organizationDescription
-            * language
-            * type
-            * value
-            * created
-            * changed
-            * fetched
-            * removed
-        * emails
-          * email
-            * language
-        	* type
-        	* value
-        	* created
-        	* changed
-        	* fetched
-        	* removed
-        * phoneNumbers
-	      * phoneNumber
-       	    * language
-            * additionalInformation
-            * serviceChargeType
-            * chargeDescription
-            * prefixNumber
-            * number
-            * isFinnishServiceNumber
-        	* created
-        	* changed
-        	* fetched
-        	* removed
-        * webPages
-	      * webPage
-            * language
-            * url
-            * value
-        	* created
-        	* changed
-        	* fetched
-        	* removed
-        * addresses
-	      * address
-            * country
-            * type
-            * subType
-            * streetAddresses
-              * streetAddress
-                * postalCode
-                * latitude
-                * longitude
-                * coordinateState
-                * streets
-                  * street
-        		  * language
-                  * value
-        		  * created
-        		  * changed
-        		  * fetched
-        		  * removed
-              * postOffices
-               	  * streetAddressPostOffice
-        		    * language
-                	* value
-        			* created
-        			* changed
-        			* fetched
-        			* removed
-              * municipalities
-                * streetAddressMunicipality
-                  * code
-                  * streetAddressMunicipalityNames
-                  * streetAddressMunicipalityName
-        		  * language
-                  * value
-        		  * created
-        		  * changed
-        		  * fetched
-        		  * removed
-        		* created
-        	    * changed
-        	    * fetched
-        	    * removed
-		      * additionalInformation
-        		  * streetAddressAdditionalInformation
-               	    * language
-                	* value
-        			* created
-        			* changed
-        			* fetched
-        			* removed
-        	* created
-        	* changed
-        	* fetched
-        	* removed
-        * created
-        * changed
-        * fetched
-        * removed
+The XML response has a `<SOAP-ENV:Body>` element with the following structure:
+
+* `GetOrganizationsResponse`
+  * `organizationList`
+    * `organization`
+        * `organizationType`
+        * `publishingStatus`
+        * `businessCode`
+        * `guid`
+        * `organizationNames`
+	      * `organizationName`
+            * `language`
+        	* `type`
+        	* `value`
+        	* `created`
+        	* `changed`
+        	* `fetched`
+        	* `removed`
+        * `organizationDescriptions`
+          * organizationDescription`
+            * `language`
+            * `type`
+            * `value`
+            * `created`
+            * `changed`
+            * `fetched`
+            * `removed`
+        * `emails`
+          * `email`
+            * `language`
+        	* `type`
+        	* `value`
+        	* `created`
+        	* `changed`
+        	* `fetched`
+        	* `removed`
+        * `phoneNumbers`
+	      * `phoneNumber`
+       	    * `language`
+            * `additionalInformation`
+            * `serviceChargeType`
+            * `chargeDescription`
+            * `prefixNumber`
+            * `number`
+            * `isFinnishServiceNumber`
+        	* `created`
+        	* `changed`
+        	* `fetched`
+        	* `removed`
+        * `webPages`
+	      * `webPage`
+            * `language`
+            * `url`
+            * `value`
+        	* `created`
+        	* `changed`
+        	* `fetched`
+        	* `removed`
+        * `addresses`
+	      * `address`
+            * `country`
+            * `type`
+            * `subType`
+            * `streetAddresses`
+              * `streetAddress`
+                * `postalCode`
+                * `latitude`
+                * `longitude`
+                * `coordinateState`
+                * `streets`
+                  * `street`
+        		  * `language`
+                  * `value`
+        		  * `created`
+        		  * `changed`
+        		  * `fetched`
+        		  * `removed`
+              * `postOffices`
+               	  * `streetAddressPostOffice`
+        		    * `language`
+                	* `value`
+        			* `created`
+        			* `changed`
+        			* `fetched`
+        			* `removed`
+              * `municipalities`
+                * `streetAddressMunicipality`
+                  * `code`
+                  * `streetAddressMunicipalityNames`
+                  * `streetAddressMunicipalityName`
+        		  * `language`
+                  * `value`
+        		  * `created`
+        		  * `changed`
+        		  * `fetched`
+        		  * `removed`
+        		* `created`
+        	    * `changed`
+        	    * `fetched`
+        	    * `removed`
+		      * `additionalInformation`
+        		  * `streetAddressAdditionalInformation`
+               	    * `language`
+                	* `value`
+        			* `created`
+        			* `changed`
+        			* `fetched`
+        			* `removed`
+        	* `created`
+        	* `changed`
+        	* `fetched`
+        	* `removed`
+        * `created`
+        * `changed`
+        * `fetched`
+        * `removed`
         
-In addition, most sections also contain fields ```created```, ```changed```, ```fetched``` and ```remoced```, 
-reflecting the creation, change, fetch and removal (when the respective data was fetched by X-Road Catalog Collector to the DB) dates
+In addition, most sections also contain fields `created`, `changed`, `fetched` and `removed`, reflecting the creation, 
+change, fetch and removal (when the respective data was fetched by X-Road Catalog Collector to the DB) dates.
 
 A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.md)
 
 ### 3.2.1.8 List organization changes
 
-Requires ```FI``` profile (check [2.6.2 FI profile](#262-fi-profile))
+**Note!** Requires the `FI` profile.
 
 In order to fetch information about changed organization fields, a request in XML format has to be sent to the respective SOAP endpoint:
 
-``` $ curl -k -d @HasOrganizationChangedRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/HasOrganizationChanged ```
+```bash
+curl -k -d @HasOrganizationChangedRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/HasOrganizationChanged
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
+**Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
 
-Contents of the example ```HasOrganizationChangedRequest.xml``` file:
+Contents of the example `HasOrganizationChangedRequest.xml` file:
 ```xml
 <soapenv:Envelope
         xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
@@ -1023,32 +1015,34 @@ Contents of the example ```HasOrganizationChangedRequest.xml``` file:
 </soapenv:Envelope>
 ```
 
-In the request there are the following fields that need to be filled:
- ```guid``` - unique id of the searchable organization, e.g. e6b33f11-bb47-496e-98c5-6a736dae6014
- ```startDateTime``` - date to check against after which an organization may have changed its field values, e.g. 2020-01-01
- ```endDateTime``` - date to check against before which an organization may have changed its field values, e.g. 2022-01-01
+The following request fields need to be filled:
+- `guid` - unique id of the searchable organization, e.g., `e6b33f11-bb47-496e-98c5-6a736dae6014`.
+- `startDateTime` - date to check against after which an organization may have changed its field values, e.g., `2020-01-01`.
+- `endDateTime` - date to check against before which an organization may have changed its field values, e.g., `2022-01-01`.
  
-The XML response has a ```<SOAP-ENV:Body>``` element with the following structure:
+The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 
-* HasOrganizationChangedResponse
-  * changed (values true/false)
-  * changedValueList
-    * changedValue
-      * name (values e.g. OrganizationName, Email, Address etc)
+* `HasOrganizationChangedResponse`
+  * `changed` (values `true`/`false`)
+  * `changedValueList`
+    * `changedValue`
+      * `name` (values e.g., `OrganizationName`, `Email`, `Address`, etc.)
  
 A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.md)
 
 ### 3.2.1.9 List companies
 
-Requires ```FI``` profile (check [2.6.2 FI profile](#262-fi-profile))
+**Note!** Requires the `FI` profile.
 
 In order to fetch information about companies, a request in XML format has to be sent to the respective SOAP endpoint:
 
-``` $ curl -k -d @GetCompaniesRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetCompanies ```
+```bash
+curl -k -d @GetCompaniesRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetCompanies
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
+**Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
 
-Contents of the example ```GetCompaniesRequest.xml``` file:
+Contents of the example `GetCompaniesRequest.xml` file:
 ```xml
 <soapenv:Envelope
         xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
@@ -1081,175 +1075,177 @@ Contents of the example ```GetCompaniesRequest.xml``` file:
 </soapenv:Envelope>
 ```
 
-In the request there are the following fields that need to be filled:
- ```businessId``` - business code of the searchable organization, e.g. 1710128-9
+The following request fields need to be filled:
+- `businessId` - business code of the searchable organization, e.g., `1710128-9`.
 
-The XML response has a ```<SOAP-ENV:Body>``` element with the following structure:
+The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 
-* GetCompaniesResponse
-  * companyList
-    * company
-      * companyForm
-      * detailsUri
-      * businessId
-      * name
-      * registrationDate
-      * businessAddresses 
-        * businessAddress
-          * source
-          * version
-          * careOf
-          * street
-          * postCode
-          * city
-          * language
-          * type
-          * country
-          * registrationDate
-          * created
-          * changed
-          * fetched
-          * removed
-      * businessAuxiliaryNames
-        * businessAuxiliaryName
-          * source
-          * ordering
-          * version
-          * name
-          * language
-          * registrationDate
-          * created
-          * changed
-          * fetched
-          * removed
-      * businessIdChanges
-        * businessIdChange
-          * source
-          * description
-          * reason
-          * changeDate
-          * change
-          * oldBusinessId
-          * newBusinessId
-          * language
-          * created
-          * changed
-          * fetched
-          * removed
-      * businessLines
-        * businessLine
-          * source
-          * ordering
-          * version
-          * name
-          * language
-          * registrationDate
-          * created
-          * changed
-          * fetched
-          * removed
-      * businessNames
-        * businessName
-          * companyId
-          * source
-          * ordering
-          * version
-          * name
-          * language
-          * registrationDate
-          * endDate
-          * created
-          * changed
-          * fetched 
-          * removed         
-      * companyForms
-        * companyForm
-          * source
-          * version
-          * name
-          * language
-          * type
-          * registrationDate
-          * created
-          * changed
-          * fetched
-          * removed
-      * contactDetails
-        * contactDetail
-          * source
-          * version
-          * language
-          * value
-          * type
-          * registrationDate
-          * created
-          * changed
-          * fetched
-      * languages
-        * language
-          * source
-          * version
-          * name
-          * language
-          * registrationDate
-          * created
-          * changed
-          * fetched
-      * liquidations
-        * liquidation
-          * companyId
-          * source
-          * version
-          * name
-          * language
-          * registrationDate
-          * endDate
-          * created
-          * changed
-          * fetched 
-          * removed  
-      * registeredEntries
-        * registeredEntry
-          * companyId
-          * description
-          * status
-          * register
-          * language
-          * authority
-          * registrationDate
-          * endDate
-          * created
-          * changed
-          * fetched 
-          * removed 
-      * registeredOffices
-        * registeredOffice
-          * companyId
-          * source
-          * ordering
-          * version
-          * name
-          * language
-          * registrationDate
-          * endDate
-          * created
-          * changed
-          * fetched 
-          * removed   
+* `GetCompaniesResponse`
+  * `companyList`
+    * `company`
+      * `companyForm`
+      * `detailsUri`
+      * `businessId`
+      * `name`
+      * `registrationDate`
+      * `businessAddresses`
+        * `businessAddress`
+          * `source`
+          * `version`
+          * `careOf`
+          * `street`
+          * `postCode`
+          * `city`
+          * `language`
+          * `type`
+          * `country`
+          * `registrationDate`
+          * `created`
+          * `changed`
+          * `fetched`
+          * `removed`
+      * `businessAuxiliaryNames`
+        * `businessAuxiliaryName`
+          * `source`
+          * `ordering`
+          * `version`
+          * `name`
+          * `language`
+          * `registrationDate`
+          * `created`
+          * `changed`
+          * `fetched`
+          * `removed`
+      * `businessIdChanges`
+        * `businessIdChange`
+          * `source`
+          * `description`
+          * `reason`
+          * `changeDate`
+          * `change`
+          * `oldBusinessId`
+          * `newBusinessId`
+          * `language`
+          * `created`
+          * `changed`
+          * `fetched`
+          * `removed`
+      * `businessLines`
+        * `businessLine`
+          * `source`
+          * `ordering`
+          * `version`
+          * `name`
+          * `language`
+          * `registrationDate`
+          * `created`
+          * `changed`
+          * `fetched`
+          * `removed`
+      * `businessNames`
+        * `businessName`
+          * `companyId`
+          * `source`
+          * `ordering`
+          * `version`
+          * `name`
+          * `language`
+          * `registrationDate`
+          * `endDate`
+          * `created`
+          * `changed`
+          * `fetched`
+          * `removed`         
+      * `companyForms`
+        * `companyForm`
+          * `source`
+          * `version`
+          * `name`
+          * `language`
+          * `type`
+          * `registrationDate`
+          * `created`
+          * `changed`
+          * `fetched`
+          * `removed`
+      * `contactDetails`
+        * `contactDetail`
+          * `source`
+          * `version`
+          * `language`
+          * `value`
+          * `type`
+          * `registrationDate`
+          * `created`
+          * `changed`
+          * `fetched`
+      * `languages`
+        * `language`
+          * `source`
+          * `version`
+          * `name`
+          * `language`
+          * `registrationDate`
+          * `created`
+          * `changed`
+          * `fetched`
+      * `liquidations`
+        * `liquidation`
+          * `companyId`
+          * `source`
+          * `version`
+          * `name`
+          * `language`
+          * `registrationDate`
+          * `endDate`
+          * `created`
+          * `changed`
+          * `fetched`
+          * `removed`
+      * `registeredEntries`
+        * `registeredEntry`
+          * `companyId`
+          * `description`
+          * `status`
+          * `register`
+          * `language`
+          * `authority`
+          * `registrationDate`
+          * `endDate`
+          * `created`
+          * `changed`
+          * `fetched`
+          * `removed` 
+      * `registeredOffices`
+        * `registeredOffice`
+          * `companyId`
+          * `source`
+          * `ordering`
+          * `version`
+          * `name`
+          * `language`
+          * `registrationDate`
+          * `endDate`
+          * `created`
+          * `changed`
+          * `fetched`
+          * `removed`   
 
 A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.md)
                              
 ### 3.2.1.10 List company changes
 
-Requires ```FI``` profile (check [2.6.2 FI profile](#262-fi-profile))
+**Note!** Requires the `FI` profile.
 
 In order to fetch information about changed company fields, a request in XML format has to be sent to the respective SOAP endpoint:
 
-``` $ curl -k -d @HasCompanyChangedRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/HasCompanyChanged ```
+```bash
+curl -k -d @HasCompanyChangedRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/HasCompanyChanged
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
+**Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
 
-Contents of the example ```HasCompanyChangedRequest.xml``` file:
+Contents of the example `HasCompanyChangedRequest.xml` file:
 ```xml
 <soapenv:Envelope
         xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
@@ -1284,52 +1280,57 @@ Contents of the example ```HasCompanyChangedRequest.xml``` file:
 </soapenv:Envelope>
 ```
 
-In the request there are the following fields that need to be filled:
- ```businessId``` - business id of the searchable company, e.g. 1710128-9
- ```startDateTime``` - date to check against after which a company may have changed its field values, e.g. 2020-01-01
- ```endDateTime``` - date to check against before which a company may have changed its field values, e.g. 2022-01-01
+The following request fields need to be filled:
+- `businessId` - business id of the searchable company, e.g., `1710128-9`.
+- `startDateTime` - date to check against after which a company may have changed its field values, e.g., `2020-01-01`.
+- `endDateTime` - date to check against before which a company may have changed its field values, e.g., `2022-01-01`.
 
-The XML response has a ```<SOAP-ENV:Body>``` element with the following structure:
+The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 
-* HasCompanyChangedResponse
-  * changed (values true/false)
-  * changedValueList
-    * changedValue
-      * name (values e.g. Company, ContactDetail etc)
+* `HasCompanyChangedResponse`
+  * `changed` (values `true`/`false`)
+  * `changedValueList`
+    * `changedValue`
+      * `name` (values e.g., `Company`, `ContactDetail`, etc.)
  
 A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.md)
 
-
 ### 3.2.2 REST endpoints
 
-The main endpoints this software provides with the [default profile](#261-default-profile):
-* getServiceStatistics - a REST endpoint for requesting a list of statistics, consisting of numbers of SOAP/REST services over time
-* getServiceStatisticsCSV - a REST endpoint for requesting a list of statistics in CSV format, consisting of numbers of SOAP/REST services over time
-* getListOfServices - a REST endpoint for requesting a list of members and related subsystems, services and security servers over time
-* getListOfServicesCSV - a REST endpoint for requesting a list of members and related subsystems, services and security servers in CSV format
-* getDistinctServiceStatistics - a REST endpoint for requesting a list of statistics, consisting of numbers of distinct services over time
-* listErrors - a REST endpoint for listing errors for a given member or subsystem, supports pagination
-* heartbeat - a REST endpoint for requesting the heartbeat of X-Road Catalog
-* listSecurityServers - a REST endpoint for listing security servers and related information
-* listDescriptors - a REST endpoint for listing subsystems
-* getRest - a REST endpoint for displaying a list of endpoints for a REST type of service
-* getEndpoints - a REST endpoint for displaying a list of endpoints for a REST or OPENAPI3 type of service 
+The main endpoints provided by the default profile:
 
-In addition, some more REST endpoints are provided when the [FI profile](#262-fi-profile) is active:
-* getOrganization - a REST endpoint for listing organization/company data
-* getOrganizationChanges - a REST endpoint for requesting whether given organization/company has some of its details changed
-* organizationHeartbeat - a REST endpoint for requesting the heartbeat of organization and companies of X-Road Catalog
+* `getServiceStatistics` - request a list of statistics, consisting of numbers of SOAP/REST services over time.
+* `getServiceStatisticsCSV` - request a list of statistics in CSV format, consisting of numbers of SOAP/REST services over time.
+* `getListOfServices` - request a list of members and related subsystems, services and Security Servers over time.
+* `getListOfServicesCSV` - request a list of members and related subsystems, services and Security Servers in CSV format.
+* `getDistinctServiceStatistics` - request a list of statistics, consisting of numbers of distinct services over time.
+* `listErrors` - list errors for a given member or subsystem, supports pagination.
+* `heartbeat` - request the heartbeat of X-Road Catalog.
+* `listSecurityServers` - list Security Servers and related information.
+* `listDescriptors` - list subsystems.
+* `getRest` - request a list of endpoints for a REST type of service.
+* `getEndpoints` - request a list of endpoints for a `REST` or `OPENAPI3` type of service.
+
+In addition, some more REST endpoints are provided when the `FI` profile is active:
+
+* `getOrganization` - list organization/company data.
+* `getOrganizationChanges` - request whether given organization/company has some of its details changed.
+* `organizationHeartbeat` - request the heartbeat of organization and companies of X-Road Catalog.
 
 
 ### 3.2.2.1 List service statistics
 
 In order to fetch information about service statistics in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/getServiceStatistics?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/getServiceStatistics?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
-* START_DATE - an optional parameter(a string in format YYYY-MM-DD), if not used, today's date will be assumed
-* END_DATE - an optional parameter(a string in format YYYY-MM-DD), if not used, today's date will be assumed
+The required request parameters are:
+
+* `SERVER_ADDRESS` - the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
+* `START_DATE` - an optional parameter(a string in format `YYYY-MM-DD`), if not used, today's date will be assumed.
+* `END_DATE` - an optional parameter(a string in format `YYYY-MM-DD`), if not used, today's date will be assumed.
 
 Response in JSON:
 ```json
@@ -1365,23 +1366,28 @@ Response in JSON:
 
 The response has the following fields:
 
-* serviceStatisticsList
-    * created
-    * numberOfSoapServices
-    * numberOfRestServices
-    * numberOfOpenApiServices
+* `serviceStatisticsList`
+    * `created`
+    * `numberOfSoapServices`
+    * `numberOfRestServices`
+    * `numberOfOpenApiServices`
 
 ### 3.2.2.2 List service statistics in CSV format
 
 In order to fetch information about service statistics in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/getServiceStatisticsCSV?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: text/csv" --output service_statistics.csv ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/getServiceStatisticsCSV?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: text/csv" --output service_statistics.csv
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
-* START_DATE - an optional parameter(a string in format YYYY-MM-DD), if not used, today's date will be assumed
-* END_DATE - an optional parameter(a string in format YYYY-MM-DD), if not used, today's date will be assumed
+The required request parameters are:
 
-Response is a file ```service_statistics.csv``` with the following content:
+* `SERVER_ADDRESS` - the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
+* `START_DATE` - an optional parameter(a string in format `YYYY-MM-DD`), if not used, today's date will be assumed.
+* `END_DATE` - an optional parameter(a string in format `YYYY-MM-DD`), if not used, today's date will be assumed.
+
+Response is a file `service_statistics.csv` with the following content:
+
 ```csv
 Date,Number of REST services,Number of SOAP services,Number of OpenApi services
 2022-07-01T00:00,0,0,0,0
@@ -1392,11 +1398,15 @@ Date,Number of REST services,Number of SOAP services,Number of OpenApi services
 
 In order to fetch information about services in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/getListOfServices?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/getListOfServices?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
-* START_DATE - an optional parameter(a string in format YYYY-MM-DD), if not used, today's date will be assumed
-* END_DATE - an optional parameter(a string in format YYYY-MM-DD), if not used, today's date will be assumed
+The required request parameters are:
+
+* `SERVER_ADDRESS` - the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
+* `START_DATE` - an optional parameter(a string in format `YYYY-MM-DD`), if not used, today's date will be assumed.
+* `END_DATE` - an optional parameter(a string in format `YYYY-MM-DD`), if not used, today's date will be assumed.
 
 Response in JSON:
 
@@ -1553,38 +1563,42 @@ Response in JSON:
 
 The response has the following fields:
 
-* memberData
-    * date
-    * memberDataList
-        * created
-        * memberClass
-        * memberCode
-        * name
-        * subsystemList
-            * created
-            * subsystemCode
-            * active (values: true/false)
-            * serviceList
-                * created
-                * serviceCode
-                * serviceVersion
-                * active (values: true/false)
-        * xroadInstance
-* securityServerData
-    * serverCode
-    * address
-    * memberClass
-    * memberCode
+* `memberData`
+    * `date`
+    * `memberDataList`
+        * `created`
+        * `memberClass`
+        * `memberCode`
+        * `name`
+        * `subsystemList`
+            * `created`
+            * `subsystemCode`
+            * `active` (values: `true`/`false`)
+            * `serviceList`
+                * `created`
+                * `serviceCode`
+                * `serviceVersion`
+                * `active` (values: `true`/`false`)
+        * `xroadInstance`
+* `securityServerData`
+    * `serverCode`
+    * `address`
+    * `memberClass`
+    * `memberCode`
 
 ### 3.2.2.4 List services in CSV format
 
 In order to fetch information about services in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/getListOfServicesCSV?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: text/csv" --output list_of_services.csv ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/getListOfServicesCSV?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: text/csv" --output list_of_services.csv
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
-* START_DATE - an optional parameter(a string in format YYYY-MM-DD), if not used, today's date will be assumed
-* END_DATE - an optional parameter(a string in format YYYY-MM-DD), if not used, today's date will be assumed
+The required request parameters are:
+
+* `SERVER_ADDRESS` - the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
+* `START_DATE` - an optional parameter(a string in format `YYYY-MM-DD`), if not used, today's date will be assumed.
+* `END_DATE` - an optional parameter(a string in format `YYYY-MM-DD`), if not used, today's date will be assumed.
 
 Response is a file ```list_of_services.csv``` with the following content:
 
@@ -1606,9 +1620,13 @@ DEV,GOV,1234,ss4,ss4,,,,,,,,
 
 In order to fetch X-Road Catalog heartbeat information, an HTTP request has to be sent to a respective REST endpoint:
 
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/heartbeat" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/heartbeat" -H "Content-Type: application/json"
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
+The required request parameters are:
+
+* `SERVER_ADDRESS` - the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
 
 Response in JSON:
 ```json
@@ -1629,27 +1647,31 @@ Response in JSON:
 
 The response has the following fields:
 
-* appWorking
-* dbWorking
-* appName
-* appVersion
-* systemTime
-* lastCollectionData
-    * membersLastFetched
-    * subsystemsLastFetched
-    * servicesLastFetched
-    * wsdlsLastFetched
-    * openapisLastFetched
+* `appWorking`
+* `dbWorking`
+* `appName`
+* `appVersion`
+* `systemTime`
+* `lastCollectionData`
+    * `membersLastFetched`
+    * `subsystemsLastFetched`
+    * `servicesLastFetched`
+    * `wsdlsLastFetched`
+    * `openapisLastFetched`
 
 ### 3.2.2.6 List distinct service statistics
 
 In order to fetch information about distinct service statistics in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/getDistinctServiceStatistics?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/getDistinctServiceStatistics?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
-* START_DATE - an optional parameter(a string in format YYYY-MM-DD), if not used, today's date will be assumed
-* END_DATE - an optional parameter(a string in format YYYY-MM-DD), if not used, today's date will be assumed
+The required request parameters are:
+
+* `SERVER_ADDRESS` - the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
+* `START_DATE` - an optional parameter(a string in format `YYYY-MM-DD`), if not used, today's date will be assumed.
+* `END_DATE` - an optional parameter(a string in format `YYYY-MM-DD`), if not used, today's date will be assumed.
 
 Response in JSON:
 ```json
@@ -1771,57 +1793,80 @@ Response in JSON:
 
 The response has the following fields:
 
-* serviceStatisticsList
-    * created
-    * numberOfDistinctServices
+* `serviceStatisticsList`
+    * `created`
+    * `numberOfDistinctServices`
 
 ### 3.2.2.7 List errors
 
 Requests
 
 List errors for a given subsystem:
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+```
 
 List errors for a given member:
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+```
 
 List errors for a given member class:
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+```
 
 List errors for a given instance:
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+```
 
 List errors for all the instances and members:
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/listErrors?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/listErrors?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+```
 
 List errors for a given subsystem with pagination:
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json"
+```
 
 List errors for a given member with pagination:
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json"
+```
 
 List errors for a given member class with pagination:
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json"
+```
 
 List errors for a given instance with pagination:
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json"
+```
 
 List errors for all the instances and members with pagination:
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/listErrors?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/listErrors?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json"
+```
 
-Example request
-``` $ curl "http://localhost:8900/api/listErrors/DEV/GOV/1234?startDate=2021-08-24&endDate=2021-08-25&page=0&limit=10" -H "Content-Type: application/json" ```
+Example request:
+```bash
+curl "http://localhost:8900/api/listErrors/DEV/GOV/1234?startDate=2021-08-24&endDate=2021-08-25&page=0&limit=10" -H "Content-Type: application/json"
+```
 
+The request parameters are:
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
-* INSTANCE name of X-Road instance, e.g. DEV
-* MEMBER_CLASS member class, e.g. GOV
-* MEMBER_CODE member code, e.g. 1234
-* SUBSYSTEM_CODE subsystem code, e.g. TEST
-* START_DATE - an optional parameter(a string in format YYYY-MM-DD), if not used, today's date will be assumed
-* END_DATE - an optional parameter(a string in format YYYY-MM-DD), if not used, today's date will be assumed
-* PAGE_NUMBER the number of page of the fetched results
-* NO_OF_ERRORS_PER_PAGE number of errors per fetched page
+* `SERVER_ADDRESS` - the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
+* `INSTANCE` - name of X-Road instance, e.g., `DEV`.
+* `MEMBER_CLASS` - member class, e.g., `GOV`.
+* `MEMBER_CODE` - member code, e.g., `1234`.
+* `SUBSYSTEM_CODE` - subsystem code, e.g., `TEST`.
+* `START_DATE` - (*optional*) a string in format `YYYY-MM-DD`, if not used, today's date will be assumed.
+* `END_DATE` - (*optional*) a string in format `YYYY-MM-DD`, if not used, today's date will be assumed.
+* `PAGE_NUMBER` - the number of page of the fetched results.
+* `NO_OF_ERRORS_PER_PAGE` - number of errors per fetched page.
 
 Response in JSON:
 ```json
@@ -2066,33 +2111,37 @@ Response in JSON:
 
 The response has the following fields:
 
-* pageNumber
-* pageSize
-* numberOfPages
-* errorLogList
-    * id
-    * message
-    * code
-    * created
-    * memberClass
-    * memberCode
-    * subsystemCode
-    * groupCode
-    * serviceCode
-    * serviceVersion
-    * securityCategoryCode
-    * serverCode
-    * xroadInstance
+* `pageNumber`
+* `pageSize`
+* `numberOfPages`
+* `errorLogList`
+    * `id`
+    * `message`
+    * `code`
+    * `created`
+    * `memberClass`
+    * `memberCode`
+    * `subsystemCode`
+    * `groupCode`
+    * `serviceCode`
+    * `serviceVersion`
+    * `securityCategoryCode`
+    * `serverCode`
+    * `xroadInstance`
 
-### 3.2.2.8 List security servers
+### 3.2.2.8 List Security Servers
 
 Request
 
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/listSecurityServers" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/listSecurityServers" -H "Content-Type: application/json"
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
+The required request parameters are:
 
-Response
+* `SERVER_ADDRESS` - the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
+
+Response:
 ```json
 {
   "securityServerDataList": [
@@ -2144,34 +2193,39 @@ Response
 
 The response has the following fields:
 
-* securityServerDataList
-    * owner
-        * memberClass
-        * memberCode
-        * name
-        * subsystemCode
-    * serverCode
-    * address
-    * clients
-        * memberClass
-        * memberCode
-        * name
-        * subsystemCode
+* `securityServerDataList`
+    * `owner`
+        * `memberClass`
+        * `memberCode`
+        * `name`
+        * `subsystemCode`
+    * `serverCode`
+    * `address`
+    * `clients`
+        * `memberClass`
+        * `memberCode`
+        * `name`
+        * `subsystemCode`
 
-**owner** indicates the owner of the security server
+The **owner** property indicates the owner member of the Security Server
 
-**clients** provides a list of clients using the security server, where a client can be considered a member when their subsystemCode is null
+The **clients** property provides a list of clients using the Security Server, where a client can be considered a member 
+when their `subsystemCode` is `null`.
 
 
 ### 3.2.2.9 List descriptors
 
 Request
 
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/listDescriptors" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/listDescriptors" -H "Content-Type: application/json"
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
+The required parameters are:
 
-Response
+* `SERVER_ADDRESS` - the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
+
+Response:
 
 ```json
 [
@@ -2212,48 +2266,56 @@ Response
 ]
 ```
 
-
 The response has the following fields:
 
 A list of:
-* x_road_instance
-* member_class
-* member_code
-* member_name
-* subsystem_code
-* subsystem_name
-* et
-* en
-* A list of emails with:
-* name
-* email address
 
-**subsystem_name** indicates a user-friendly name of the subsystem, in addition to not so friendly subsystem_code,
-in the current implementation contains default values, because X-Road currently does not provide such information, but
-the fields are still required for the X-Road Metrics to operate correctly
+* `x_road_instance`
+* `member_class`
+* `member_code`
+* `member_name`
+* `subsystem_code`
+* `subsystem_name`
+* `et`
+* `en`
 
-**email** A list consisting of name of a contact person and their e-mail address,  
-in the current implementation contains default values, because X-Road currently does not provide such information, but
-the fields are still required for the X-Road Metrics to operate correctly
+A list of emails with:
+
+* `name`
+* `email address`
+
+The **subsystem_name** property indicates a user-friendly name of the subsystem, in addition to the more technical 
+`subsystem_code` property. In the current implementation, the `subsystem_name` property contains default values, because 
+X-Road currently does not provide such information, but the fields are still required for the X-Road Metrics to operate 
+correctly.
+
+The **email** property is a list consisting of name of a contact person and their e-mail address. 
+In the current implementation, the property contains default values, because X-Road currently does not provide such 
+information, but the fields are still required for the X-Road Metrics to operate correctly.
 
 ### 3.2.2.10 Get endpoints
 
 Request
 
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/getEndpoints/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>/<SERVICE_CODE>" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/getEndpoints/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>/<SERVICE_CODE>" -H "Content-Type: application/json"
+```
 
+The required parameters are:
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
-* INSTANCE name of X-Road instance, e.g. DEV
-* MEMBER_CLASS member class, e.g. GOV
-* MEMBER_CODE member code, e.g. 1234
-* SUBSYSTEM_CODE subsystem code, e.g. TEST
-* SERVICE_CODE service code, e.g. CATALOG_HEARTBEAT
+* `SERVER_ADDRESS` - the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
+* `INSTANCE` - name of X-Road instance, e.g., `DEV`.
+* `MEMBER_CLASS` - member class, e.g., `GOV`.
+* `MEMBER_CODE` - member code, e.g., `1234`.
+* `SUBSYSTEM_CODE` - subsystem code, e.g., `TEST`.
+* `SERVICE_CODE` - service code, e.g., `CATALOG_HEARTBEAT`.
 
-Example request
-``` $ curl "http://localhost:8080/api/getEndpoints/DEV/GOV/1234/TEST/CATALOG_HEARTBEAT" -H "Content-Type: application/json" ```
+Example request:
+```bash
+curl "http://localhost:8080/api/getEndpoints/DEV/GOV/1234/TEST/CATALOG_HEARTBEAT" -H "Content-Type: application/json"
+```
 
-Response
+Response:
 
 ```json
 {
@@ -2276,37 +2338,41 @@ Response
 }
 ```
 
-
 The response has the following fields:
 
-* xroadInstance
-* memberClass
-* memberCode
-* subsystemCode
-* serviceCode
-* serviceVersion
-* endpointList
-    * method
-    * path
+* `xroadInstance`
+* `memberClass`
+* `memberCode`
+* `subsystemCode`
+* `serviceCode`
+* `serviceVersion`
+* `endpointList`
+    * `method`
+    * `path`
 
 ### 3.2.2.11 Get Rest
 
 Request
 
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/getRest/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>/<SERVICE_CODE>" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/getRest/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>/<SERVICE_CODE>" -H "Content-Type: application/json"
+```
 
+The required request parameters are:
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
-* INSTANCE name of X-Road instance, e.g. DEV
-* MEMBER_CLASS member class, e.g. GOV
-* MEMBER_CODE member code, e.g. 1234
-* SUBSYSTEM_CODE subsystem code, e.g. TEST
-* SERVICE_CODE service code, e.g. CATALOG_HEARTBEAT
+* `SERVER_ADDRESS` - the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
+* `INSTANCE` - name of X-Road instance, e.g., `DEV`.
+* `MEMBER_CLASS` - member class, e.g., `GOV`.
+* `MEMBER_CODE` - member code, e.g., `1234`.
+* `SUBSYSTEM_CODE` - subsystem code, e.g., `TEST`.
+* `SERVICE_CODE` - service code, e.g., `CATALOG_HEARTBEAT`.
 
-Example request
-``` $ curl "http://localhost:8080/api/getRest/DEV/GOV/1234/TEST/CATALOG_HEARTBEAT" -H "Content-Type: application/json" ```
+Example request:
+```bash
+curl "http://localhost:8080/api/getRest/DEV/GOV/1234/TEST/CATALOG_HEARTBEAT" -H "Content-Type: application/json"
+```
 
-Response
+Response:
 
 ```json
 {
@@ -2332,30 +2398,36 @@ Response
 
 The response has the following fields:
 
-* xroadInstance
-* memberClass
-* memberCode
-* subsystemCode
-* serviceCode
-* serviceVersion
-* endpointList
-    * method
-    * path
+* `xroadInstance`
+* `memberClass`
+* `memberCode`
+* `subsystemCode`
+* `serviceCode`
+* `serviceVersion`
+* `endpointList`
+    * `method`
+    * `path`
 
 ### 3.2.2.12 Get Organization
 
-Requires ```FI``` profile (check [2.6.2 FI profile](#262-fi-profile))
+**Note!** Requires the `FI` profile.
 
-Request
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/getOrganization/<BUSINESS_CODE>" -H "Content-Type: application/json" ```
+Request:
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/getOrganization/<BUSINESS_CODE>" -H "Content-Type: application/json"
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
-* BUSINESS_CODE businessCode of the organization
+The required request parameters are:
 
-Example request
-``` $ curl "http://localhost:8080/api/getOrganization/0130729-0" -H "Content-Type: application/json" ```
+* `SERVER_ADDRESS` - the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
+* `BUSINESS_CODE` - businessCode of the organization.
 
-Response
+Example request:
+```bash
+curl "http://localhost:8080/api/getOrganization/0130729-0" -H "Content-Type: application/json"
+```
+
+Response:
 
 ```json
 {
@@ -2387,289 +2459,295 @@ Response
 
 The response has the following fields:
 
-* organizationData
-    * organizationType
-    * publishingStatus
-    * businessCode
-    * guid
-    * organizationNames
-        * organizationName
-        * language
-        * type
-        * value
-        * created
-        * changed
-        * fetched
-        * removed
-    * organizationDescriptions
-        * organizationDescription
-        * language
-        * type
-        * value
-        * created
-        * changed
-        * fetched
-        * removed
-    * emails
-        * email
-        * language
-        * type
-        * value
-        * created
-        * changed
-        * fetched
-        * removed
-    * phoneNumbers
-        * phoneNumber
-            * language
-        * additionalInformation
-        * serviceChargeType
-        * chargeDescription
-        * prefixNumber
-        * number
-        * isFinnishServiceNumber
-        * created
-        * changed
-        * fetched
-        * removed
-    * webPages
-        * webPage
-        * language
-        * url
-        * value
-        * created
-        * changed
-        * fetched
-        * removed
-    * addresses
-        * address
-        * country
-        * type
-        * subType
-        * streetAddresses
-            * streetAddress
-            * postalCode
-            * latitude
-            * longitude
-            * coordinateState
-            * streets
-                * street
-                * language
-                * value
-                * created
-                * changed
-                * fetched
-                * removed
-            * postOffices
-              * streetAddressPostOffice
-              * language
-              * value
-              * created
-              * changed
-              * fetched
-              * removed
-            * municipalities
-                * streetAddressMunicipality
-                    * code
-                    * streetAddressMunicipalityNames
-                    * streetAddressMunicipalityName
-                    * language
-                    * value
-                    * created
-                    * changed
-                    * fetched
-                    * removed
-                * created
-                * changed
-                * fetched
-                * removed
-                * additionalInformation
-                    * streetAddressAdditionalInformation
-                        * language
-                        * value
-                        * created
-                        * changed
-                        * fetched
-                        * removed
-            * created
-            * changed
-            * fetched
-            * removed
-        * created
-        * changed
-        * fetched
-        * removed
-* companyData
-    * companyForm
-    * detailsUri
-    * businessCode
-    * name
-    * registrationDate
-    * businessAddresses
-        * businessAddress
-            * source
-            * version
-            * careOf
-            * street
-            * postCode
-            * city
-            * language
-            * type
-            * country
-            * registrationDate
-            * created
-            * changed
-            * fetched
-            * removed
-    * businessAuxiliaryNames
-        * businessAuxiliaryName
-            * source
-            * ordering
-            * version
-            * name
-            * language
-            * registrationDate
-            * created
-            * changed
-            * fetched
-            * removed
-    * businessIdChanges
-        * businessIdChange
-            * source
-            * description
-            * reason
-            * changeDate
-            * change
-            * oldBusinessId
-            * newBusinessId
-            * language
-            * created
-            * changed
-            * fetched
-            * removed
-    * businessLines
-        * businessLine
-            * source
-            * ordering
-            * version
-            * name
-            * language
-            * registrationDate
-            * created
-            * changed
-            * fetched
-            * removed
-    * businessNames
-        * businessName
-            * companyId
-            * source
-            * ordering
-            * version
-            * name
-            * language
-            * registrationDate
-            * endDate
-            * created
-            * changed
-            * fetched
-            * removed
-    * companyForms
-        * companyForm
-            * source
-            * version
-            * name
-            * language
-            * type
-            * registrationDate
-            * created
-            * changed
-            * fetched
-            * removed
-    * contactDetails
-        * contactDetail
-            * source
-            * version
-            * language
-            * value
-            * type
-            * registrationDate
-            * created
-            * changed
-            * fetched
-    * languages
-        * language
-            * source
-            * version
-            * name
-            * language
-            * registrationDate
-            * created
-            * changed
-            * fetched
-    * liquidations
-        * liquidation
-            * companyId
-            * source
-            * version
-            * name
-            * language
-            * registrationDate
-            * endDate
-            * created
-            * changed
-            * fetched
-            * removed
-    * registeredEntries
-        * registeredEntry
-            * companyId
-            * description
-            * status
-            * register
-            * language
-            * authority
-            * registrationDate
-            * endDate
-            * created
-            * changed
-            * fetched
-            * removed
-    * registeredOffices
-        * registeredOffice
-            * companyId
-            * source
-            * ordering
-            * version
-            * name
-            * language
-            * registrationDate
-            * endDate
-            * created
-            * changed
-            * fetched
-            * removed
+* `organizationData`
+    * `organizationType`
+    * `publishingStatus`
+    * `businessCode`
+    * `guid`
+    * `organizationNames`
+        * `organizationName`
+        * `language`
+        * `type`
+        * `value`
+        * `created`
+        * `changed`
+        * `fetched`
+        * `removed`
+    * `organizationDescriptions`
+        * `organizationDescription`
+        * `language`
+        * `type`
+        * `value`
+        * `created`
+        * `changed`
+        * `fetched`
+        * `removed`
+    * `emails`
+        * `email`
+        * `language`
+        * `type`
+        * `value`
+        * `created`
+        * `changed`
+        * `fetched`
+        * `removed`
+    * `phoneNumbers`
+        * `phoneNumber`
+            * `language`
+        * `additionalInformation`
+        * `serviceChargeType`
+        * `chargeDescription`
+        * `prefixNumber`
+        * `number`
+        * `isFinnishServiceNumber`
+        * `created`
+        * `changed`
+        * `fetched`
+        * `removed`
+    * `webPages`
+        * `webPage`
+        * `language`
+        * `url`
+        * `value`
+        * `created`
+        * `changed`
+        * `fetched`
+        * `removed`
+    * `addresses`
+        * `address`
+        * `country`
+        * `type`
+        * `subType`
+        * `streetAddresses`
+            * `streetAddress`
+            * `postalCode`
+            * `latitude`
+            * `longitude`
+            * `coordinateState`
+            * `streets`
+                * `street`
+                * `language`
+                * `value`
+                * `created`
+                * `changed`
+                * `fetched`
+                * `removed`
+            * `postOffices`
+              * `streetAddressPostOffice`
+              * `language`
+              * `value`
+              * `created`
+              * `changed`
+              * `fetched`
+              * `removed`
+            * `municipalities`
+                * `streetAddressMunicipality`
+                    * `code`
+                    * `streetAddressMunicipalityNames`
+                    * `streetAddressMunicipalityName`
+                    * `language`
+                    * `value`
+                    * `created`
+                    * `changed`
+                    * `fetched`
+                    * `removed`
+                * `created`
+                * `changed`
+                * `fetched`
+                * `removed`
+                * `additionalInformation`
+                    * `streetAddressAdditionalInformation`
+                        * `language`
+                        * `value`
+                        * `created`
+                        * `changed`
+                        * `fetched`
+                        * `removed`
+            * `created`
+            * `changed`
+            * `fetched`
+            * `removed`
+        * `created`
+        * `changed`
+        * `fetched`
+        * `removed`
+* `companyData`
+    * `companyForm`
+    * `detailsUri`
+    * `businessCode`
+    * `name`
+    * `registrationDate`
+    * `businessAddresses`
+        * `businessAddress`
+            * `source`
+            * `version`
+            * `careOf`
+            * `street`
+            * `postCode`
+            * `city`
+            * `language`
+            * `type`
+            * `country`
+            * `registrationDate`
+            * `created`
+            * `changed`
+            * `fetched`
+            * `removed`
+    * `businessAuxiliaryNames`
+        * `businessAuxiliaryName`
+            * `source`
+            * `ordering`
+            * `version`
+            * `name`
+            * `language`
+            * `registrationDate`
+            * `created`
+            * `changed`
+            * `fetched`
+            * `removed`
+    * `businessIdChanges`
+        * `businessIdChange`
+            * `source`
+            * `description`
+            * `reason`
+            * `changeDate`
+            * `change`
+            * `oldBusinessId`
+            * `newBusinessId`
+            * `language`
+            * `created`
+            * `changed`
+            * `fetched`
+            * `removed`
+    * `businessLines`
+        * `businessLine`
+            * `source`
+            * `ordering`
+            * `version`
+            * `name`
+            * `language`
+            * `registrationDate`
+            * `created`
+            * `changed`
+            * `fetched`
+            * `removed`
+    * `businessNames`
+        * `businessName`
+            * `companyId`
+            * `source`
+            * `ordering`
+            * `version`
+            * `name`
+            * `language`
+            * `registrationDate`
+            * `endDate`
+            * `created`
+            * `changed`
+            * `fetched`
+            * `removed`
+    * `companyForms`
+        * `companyForm`
+            * `source`
+            * `version`
+            * `name`
+            * `language`
+            * `type`
+            * `registrationDate`
+            * `created`
+            * `changed`
+            * `fetched`
+            * `removed`
+    * `contactDetails`
+        * `contactDetail`
+            * `source`
+            * `version`
+            * `language`
+            * `value`
+            * `type`
+            * `registrationDate`
+            * `created`
+            * `changed`
+            * `fetched`
+    * `languages`
+        * `language`
+            * `source`
+            * `version`
+            * `name`
+            * `language`
+            * `registrationDate`
+            * `created`
+            * `changed`
+            * `fetched`
+    * `liquidations`
+        * `liquidation`
+            * `companyId`
+            * `source`
+            * `version`
+            * `name`
+            * `language`
+            * `registrationDate`
+            * `endDate`
+            * `created`
+            * `changed`
+            * `fetched`
+            * `removed`
+    * `registeredEntries`
+        * `registeredEntry`
+            * `companyId`
+            * `description`
+            * `status`
+            * `register`
+            * `language`
+            * `authority`
+            * `registrationDate`
+            * `endDate`
+            * `created`
+            * `changed`
+            * `fetched`
+            * `removed`
+    * `registeredOffices`
+        * `registeredOffice`
+            * `companyId`
+            * `source`
+            * `ordering`
+            * `version`
+            * `name`
+            * `language`
+            * `registrationDate`
+            * `endDate`
+            * `created`
+            * `changed`
+            * `fetched`
+            * `removed`
 
-**organizationData** holds values for different data related to organization fetched from an external API
+The **organizationData** property holds values for different data related to organization fetched from an external API.
 
-**companyData** holds values for different data related to company fetched from another API in case the organization
-with the given businessCode was not found among the data retrieved from the first API
+The **companyData** property holds values for different data related to company fetched from another external API in case 
+the organization with the given `businessCode` was not found among the data retrieved from the first API.
 
 ### 3.2.2.13 Get Organization changes
 
-Requires ```FI``` profile (check [2.6.2 FI profile](#262-fi-profile))
+**Note!** Requires the `FI` profile.
 
 Request
 
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/getOrganizationChanges/<BUSINESS_CODE>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/getOrganizationChanges/<BUSINESS_CODE>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
-* BUSINESS_CODE businessCode of the organization
-* START_DATE - an optional parameter(a string in format YYYY-MM-DD), if not used, today's date will be assumed
-* END_DATE - an optional parameter(a string in format YYYY-MM-DD), if not used, today's date will be assumed
+The required request parameters are:
 
-Example request
-``` $ curl "http://localhost:8080/api/getOrganizationChanges/0130729-0?startDate=2021-08-24&endDate=2021-08-25" -H "Content-Type: application/json" ```
+* `SERVER_ADDRESS` - the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
+* `BUSINESS_CODE` - `businessCode` of the organization.
+* `START_DATE` - an optional parameter(a string in format `YYYY-MM-DD`), if not used, today's date will be assumed.
+* `END_DATE` - an optional parameter(a string in format `YYYY-MM-DD`), if not used, today's date will be assumed.
 
-Response
+Example request:
+```bash
+curl "http://localhost:8080/api/getOrganizationChanges/0130729-0?startDate=2021-08-24&endDate=2021-08-25" -H "Content-Type: application/json"
+```
+
+Response:
 
 ```json
 {
@@ -2802,24 +2880,28 @@ Response
 
 The response has the following fields:
 
-* changed
-* changedValueList
-    * name
+* `changed`
+* `changedValueList`
+    * `name`
 
-**changed** is a boolean value which indicates whether there were any changes in all the data
-**changedValueList** a list of changed data fields
-**name** the name of the data field which has changes
+The **changed** property is a boolean value which indicates whether there were any changes in all the data.
+The **changedValueList** property is a list of changed data fields.
+The **name** property is the name of the data field which has changes.
 
 
 ### 3.2.2.14 Check organization heartbeat
 
-Requires ```FI``` profile (check [2.6.2 FI profile](#262-fi-profile))
+**Note!** Requires the `FI` profile.
 
 In order to fetch X-Road Catalog organization heartbeat information, an HTTP request has to be sent to a respective REST endpoint:
 
-``` $ curl "http://<SERVER_ADDRESS>:8080/api/organizationHeartbeat" -H "Content-Type: application/json" ```
+```bash
+curl "http://<SERVER_ADDRESS>:8080/api/organizationHeartbeat" -H "Content-Type: application/json"
+```
 
-* SERVER_ADDRESS please use the server address, on which the X-Road Catalog Lister is running on, e.g. localhost
+The required request parameters are:
+
+* `SERVER_ADDRESS` - the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
 
 Response in JSON:
 ```json
@@ -2837,18 +2919,18 @@ Response in JSON:
 
 The response has the following fields:
 
-* appWorking
-* dbWorking
-* appName
-* appVersion
-* systemTime
-* lastCollectionData
-    * organizationsLastFetched
-    * companiesLastFetched
+* `appWorking`
+* `dbWorking`
+* `appName`
+* `appVersion`
+* `systemTime`
+* `lastCollectionData`
+    * `organizationsLastFetched`
+    * `companiesLastFetched`
 
 ### 3.3 X-Road Catalog Persistence
 
-The purpose of this piece of software is to persist and read persisted data. Used by the Collector and Lister
+The purpose of the module is to persist and read persisted data. Used by the X-Road Catalog Collector and X-Road 
+Catalog Lister modules.
 
-[xroad-catalog-persistence](xroad-catalog-persistence/README.md)
-
+More information about the [X-Road Catalog Persistence](xroad-catalog-persistence/README.md) module.
