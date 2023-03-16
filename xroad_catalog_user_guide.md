@@ -34,9 +34,8 @@ Doc. ID: XRDCAT-CONF
   * [1.1 Target Audience](#11-target-audience)
 * [2. Installation](#2-installation)
     * [2.1 Prerequisites to Installation](#21-prerequisites-to-installation)
-        * [2.1.1 Running](#211-running)
-        * [2.1.2 Developing and building](#212-developing-and-building)
     * [2.2 Installation](#22-installation)
+      * [2.2.1 Deployment diagram](#221-deployment-diagram) 
     * [2.3 SSL](#23-ssl)
     * [2.4 Status of services](#24-status-of-services)
     * [2.5 Logs](#25-logs)
@@ -105,34 +104,13 @@ computer networks, and the X-Road principles.
 
 ## 2.1 Prerequisites to Installation
 
-### 2.1.1 Running
-
-Running the X-Road Catalog software using available RPM packages requires Red Hat Enterprise Linux (RHEL) 
+Running X-Road Catalog using available RPM packages requires Red Hat Enterprise Linux (RHEL) 
 version 7 on a x86-64 platform. The software can be installed both on physical and virtualized hardware.
-
-### 2.1.2 Developing and building
-
-Developing and building the X-Road Catalog software requires an Ubuntu or a RHEL host. If you are using some other 
-operating system (e.g. Windows or MacOS), the easiest option is to first install Ubuntu 22.04 or RHEL7 into a virtual 
-machine.
-
-Required for building:
-* OpenJDK / JDK version 11
-* Gradle
-
-Recommended for development environment:
-* Docker (for rpm packaging)
-* [LXD](https://linuxcontainers.org/lxd/)
-  * For setting up a local X-Road instance.
-* Ansible
-  * For automating the [X-Road ecosystem installation](https://github.com/nordic-institute/X-Road/tree/develop/ansible).
-
-The development environment should have at least 8GB of memory and 20GB of free disk space (applies to a virtual machine 
-as well), especially if you set up a local X-Road ecosystem.
 
 ## 2.2 Installation
 
-The installable software consists of `xroad-catalog-collector` and `xroad-catalog-lister`. Both are provided as RPM packages. 
+The installable software consists of `xroad-catalog-collector` and `xroad-catalog-lister` modules. Both are provided 
+as RPM packages. 
 
 ```bash
 sudo yum install xroad-catalog-lister xroad-catalog-collector
@@ -144,12 +122,9 @@ Or alternatively:
 rpm -i install xroad-catalog-lister xroad-catalog-collector
 ```
 
-Instructions on how to build the RPM packages using Docker can be found:
-[here](xroad-catalog-collector/README.md#build-rpm-packages-on-non-redhat-platform)
-and
-[here](xroad-catalog-lister/README.md#build-rpm-packages-on-non-redhat-platform)
+Instructions on how to build the RPM packages using Docker can be found [here](BUILD.md).
 
-Configure parameters in `/etc/xroad/xroad-catalog/collector-production.properties`, especially X-Road instance 
+Configure the below parameters in `/etc/xroad/xroad-catalog/collector-production.properties`, especially X-Road instance 
 information and URL of Security Server.
 
 ```properties
@@ -176,26 +151,27 @@ xroad-catalog.collector-interval-min=<XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_MIN
 when those exceed the amount in days set by `ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` parameter, e.g. value `18` means starting from `18:00`.
 
 `ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_BEFORE` is a parameter for setting the end of time interval during which the error logs in the db will be deleted 
-    when those exceed the amount in days set by `ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` parameter, e.g. value  `23` means ending at `23:00`.
+when those exceed the amount in days set by `ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` parameter, e.g. value  `23` means ending at `23:00`.
 
 `ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` is a parameter for setting the amount in days for how long the errors logs should be kept in the db, 
-    e.g. value `90` means `for 90 days`.
+e.g. value `90` means `for 90 days`.
 
 `XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` is a parameter for setting whether the X-Road Catalog Collector should try 
-    to fetch data from Security Server continuously during a day or only between certain hours, e.g. value `true` means `continously`.
+to fetch data from Security Server continuously during a day or only between certain hours, e.g. value `true` means `continously`.
 
 `XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_AFTER` is a parameter for setting the start of time interval during which the X-Road Catalog Collector should try 
-    to fetch data from Security Server continuously (this parameter will be ignored if the parameter `XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` is set 
-    to `true`), e.g. value `18` means starting from `18:00`.
+to fetch data from Security Server continuously (this parameter will be ignored if the parameter `XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` is set 
+to `true`), e.g. value `18` means starting from `18:00`.
 
 `XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_BEFORE` is a parameter for setting the end of time interval during which the X-Road Catalog Collector should try 
-    to fetch data from Security Server continuously (this parameter will be ignored if the parameter `XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` is set 
-    to `true`), e.g. value `23` means ending at `23:00`.
+to fetch data from Security Server continuously (this parameter will be ignored if the parameter `XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` is set 
+to `true`), e.g. value `23` means ending at `23:00`.
 
 `XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_MINUTES` is a parameter for setting the amount of time in minutes after which the X-Road Catalog Collector 
-    should start re-fetching data from Security Server, e.g. value `60` means `every 60 minutes`.
+should start re-fetching data from Security Server, e.g. value `60` means `every 60 minutes`.
 
 Change also the database password in `/etc/xroad/xroad-catalog/catalogdb-production.properties`:
+
 ```properties
 spring.datasource.password=password
 ```
@@ -211,7 +187,7 @@ sudo systemctl enable xroad-catalog-collector
 sudo systemctl restart xroad-catalog-lister
 sudo systemctl restart xroad-catalog-collector
 ```
-### X-Road Catalog installation in Production
+### 2.2.1 Deployment diagram
 
 ![X-Road Catalog production](xroad_catalog_production.png)
 
@@ -569,8 +545,7 @@ xmlns:xrcl="http://xroad.vrk.fi/xroad-catalog-lister">
 
 In the request, the `externalId` field identifies the WSDL to be retrieved.
 
-The response of the given request is in XML format, containing the WSDL service description. 
-A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.md)
+The response of the given request is in XML format, containing the WSDL service description.
 
 ### 3.2.1.3 Retrieve OPENAPI descriptions
 
@@ -617,8 +592,7 @@ xmlns:xrcl="http://xroad.vrk.fi/xroad-catalog-lister">
 
 In the request, the `externalId` field identifies the OPENAPI to be retrieved.
 
-The response of the given request is in XML format, containing the OPENAPI service description. 
-A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.md)
+The response of the given request is in XML format, containing the OPENAPI service description.
 
 ### 3.2.1.4 Get service type
 
@@ -679,8 +653,6 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 
 * `GetServiceTypeResponse`
   * `type` (values: `REST`/`OPENAPI3`/`WSDL`)
-
-A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.md)
                    
 ### 3.2.1.5 Check if member is provider
 
@@ -737,8 +709,6 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 
 * `IsProviderResponse`
   * `provider` (values: `true`/`false`)
-
-A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.md)
 
 ### 3.2.1.6 List errors
 
@@ -966,8 +936,6 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 In addition, most sections also contain fields `created`, `changed`, `fetched` and `removed`, reflecting the creation, 
 change, fetch and removal (when the respective data was fetched by X-Road Catalog Collector to the DB) dates.
 
-A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.md)
-
 ### 3.2.1.8 List organization changes
 
 **Note!** Requires the `FI` profile.
@@ -1023,12 +991,10 @@ The following request fields need to be filled:
 The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 
 * `HasOrganizationChangedResponse`
-  * `changed` (values `true`/`false`)
+  * `changed` (values: `true`/`false`)
   * `changedValueList`
     * `changedValue`
-      * `name` (values e.g., `OrganizationName`, `Email`, `Address`, etc.)
- 
-A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.md)
+      * `name` (values: e.g., `OrganizationName`, `Email`, `Address`, etc.)
 
 ### 3.2.1.9 List companies
 
@@ -1229,9 +1195,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
           * `created`
           * `changed`
           * `fetched`
-          * `removed`   
-
-A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.md)
+          * `removed`
                              
 ### 3.2.1.10 List company changes
 
@@ -1288,12 +1252,10 @@ The following request fields need to be filled:
 The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 
 * `HasCompanyChangedResponse`
-  * `changed` (values `true`/`false`)
+  * `changed` (values: `true`/`false`)
   * `changedValueList`
     * `changedValue`
-      * `name` (values e.g., `Company`, `ContactDetail`, etc.)
- 
-A longer example provided in [xroad-catalog-lister](xroad-catalog-lister/README.md)
+      * `name` (values: e.g., `Company`, `ContactDetail`, etc.)
 
 ### 3.2.2 REST endpoints
 
