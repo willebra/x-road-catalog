@@ -7,15 +7,7 @@ A class diagram illustrating X-Road Catalog Lister implementation with the `defa
 
 ![Catalog Service class diagram](class_diagram.png)
 
-See also the [User Guide](../xroad_catalog_user_guide.md#license)
-
-## Build
-
-X-Road Catalog Lister can be built by running:
-
-```bash
-../gradlew clean build
-```
+See also the [User Guide](../xroad_catalog_user_guide.md)
 
 ## Profiles
 
@@ -26,6 +18,24 @@ There are four Spring Boot profiles:
   fetching additional data from a national business registry. Other country-specific profiles can be added if needed.
 * `production` - a profile used in the production deployment.
 * `sshtest` - a profile used to test SSH tunneling with X-Road Catalog.
+
+## Build
+
+X-Road Catalog Lister can be built by running:
+
+```bash
+../gradlew clean build
+```
+
+## Build RPM Packages on Non-RedHat Platform
+
+If the `default` profile is used, the `CATALOG_PROFILE` argument can be omitted.
+
+```bash
+../gradlew clean build
+docker build -t lister-rpm packages/xroad-catalog-lister/docker --build-arg CATALOG_PROFILE=<PROFILE>
+docker run -v $PWD/..:/workspace lister-rpm
+```
 
 ## Run
 
@@ -39,14 +49,4 @@ or running it from a JAR file:
 
 ```bash
 java -jar build/libs/xroad-catalog-lister.jar --spring.config.name=lister,catalogdb
-```
-
-## Build RPM Packages on Non-RedHat Platform
-
-If the `default` profile is used, the `CATALOG_PROFILE` argument can be omitted.
-
-```bash
-../gradlew clean build
-docker build -t lister-rpm packages/xroad-catalog-lister/docker --build-arg CATALOG_PROFILE=<PROFILE>
-docker run -v $PWD/..:/workspace lister-rpm
 ```

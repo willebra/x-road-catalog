@@ -12,7 +12,17 @@ The module is implemented using concurrent Akka actors:
 * `FetchOrganizationsActor` - fetches a list of public organizations from an external API and stores them to the db.
 * `FetchCompaniesActor` - fetches a list of private companies from an external API and stores them to the db.
 
-See also the [User Guide](../xroad_catalog_user_guide.md#license)
+See also the [User Guide](../xroad_catalog_user_guide.md)
+
+## Profiles
+
+There are four Spring Boot profiles:
+
+* `default` - a profile used for default operation of X-Road Catalog, without any country-specific features.
+* `FI` - an extra profile used in addition to the default profile, which has country-specific (Finland) features, e.g.,
+  fetching additional data from a national business registry. Other country-specific profiles can be added if needed.
+* `production` - a profile used in the production deployment.
+* `sshtest` - a profile used to test SSH tunneling with X-Road Catalog.
 
 ## Build
 
@@ -22,15 +32,17 @@ X-Road Catalog Collector can be built by running:
 $ ../gradlew clean build
 ```
 
-## Profiles
+## Build RPM Packages on Non-RedHat Platform
 
-There are four Spring Boot profiles:
+First make sure that `xroad-catalog-persistence` is located next to `xroad-catalog-collector`. The RPM build uses sql
+files from `xroad-catalog-persistence/src/main/sql`. If the `default` profile is used, the `CATALOG_PROFILE` argument
+can be omitted.
 
-* `default` - a profile used for default operation of X-Road Catalog, without any country-specific features.
-* `FI` - an extra profile used in addition to the default profile, which has country-specific (Finland) features, e.g.,
-fetching additional data from a national business registry. Other country-specific profiles can be added if needed.
-* `production` - a profile used in the production deployment.
-* `sshtest` - a profile used to test SSH tunneling with X-Road Catalog.
+```bash
+../gradlew clean build
+docker build -t collector-rpm packages/xroad-catalog-collector/docker --build-arg CATALOG_PROFILE=<PROFILE>
+docker run -v $PWD/..:/workspace collector-rpm
+```
 
 ## Run
 
@@ -62,20 +74,8 @@ the local machine using the local port `9000`, forward the connection using the 
 ssh -nNT -L 9000:my-security-server.com:80 my-user@my-ssh-server.com
 ```
 
-Then run the collector with profile sshtest:
+Then run the collector with profile `sshtest`:
 
 ```bash
 java -Dspring.profiles.active=sshtest -jar build/libs/xroad-catalog-collector.jar --spring.config.name=collector,catalogdb
-```
-
-## Build RPM Packages on Non-RedHat Platform
-
-First make sure that `xroad-catalog-persistence` is located next to `xroad-catalog-collector`. The RPM build uses sql 
-files from `xroad-catalog-persistence/src/main/sql`. If the `default` profile is used, the `CATALOG_PROFILE` argument 
-can be omitted.
-
-```bash
-../gradlew clean build
-docker build -t collector-rpm packages/xroad-catalog-collector/docker --build-arg CATALOG_PROFILE=<PROFILE>
-docker run -v $PWD/..:/workspace collector-rpm
 ```
