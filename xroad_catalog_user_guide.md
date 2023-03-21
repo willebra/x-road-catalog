@@ -89,7 +89,7 @@ X-Road Catalog consists of three modules:
     * Optionally, can collect information from external APIs too, e.g., a national business registry.
 - X-Road Catalog Lister
     * Provides REST and SOAP interfaces offering information collected by the collector.
-    * Can be used as an X-Road service (X-Road headers are in place)
+    * Can be used as an X-Road service (X-Road headers are in place).
 - X-Road Catalog Persistence
     * Library used to persist and read persisted data.
     * Used by the X-Road Catalog Collector and X-Road Catalog Lister modules.
@@ -306,7 +306,7 @@ More information about the [X-Road Catalog Lister](xroad-catalog-lister/README.m
 
 ### 3.2.1 SOAP endpoints
 
-The main SOAP endpoints the module  provides with the [default profile](#261-default-profile): 
+The main SOAP endpoints the module  provides with the `default` profile: 
 
 * `ListMembers` - get a list all the members the Catalog Collector has stored to the db.
 * `GetWsdl` - retrieve a WSDL description for a given service.
@@ -315,7 +315,7 @@ The main SOAP endpoints the module  provides with the [default profile](#261-def
 * `IsProvider` - check is a given member a service provider.
 * `GetErrors` - get a list of errors related to fetching data from different apis and Security Servers.
 
-In addition, some more SOAP endpoints are provided when the [FI profile](#262-fi-profile) is active:
+In addition, some more SOAP endpoints are provided when the `FI` profile is active:
 
 * `GetOrganizations` - retrieve public organization details.
 * `HasOrganizationChanged` - check have the details of a given public organisation changed.
