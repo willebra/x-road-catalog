@@ -1,6 +1,6 @@
 # X-Road Catalog User Guide
-Version: 3.1.0
-Doc. ID: XRDCAT-CONF
+Version: 4.0.0
+Doc. ID: UG-XRDCAT
 
 ---
 
@@ -22,7 +22,7 @@ Doc. ID: XRDCAT-CONF
 | 29.07.2022 | 2.0.0   | Substitute since with start and end date parameter and update related chapters | Bert Viikmäe     |
 | 04.10.2022 | 2.1.0   | Add getRest and getEndpoints descriptions                                      | Bert Viikmäe     |
 | 15.01.2023 | 3.0.0   | Restructure of the document                                                    | Bert Viikmäe     |
-| 16.03.2023 | 3.1.0   | Editorial changes                                                              | Petteri Kivimäki |
+| 22.03.2023 | 4.0.0   | Split document into X-Road Catalog Installation Guide and User Guide           | Petteri Kivimäki |
 
 ## Table of Contents <!-- omit in toc -->
 
@@ -32,43 +32,35 @@ Doc. ID: XRDCAT-CONF
 * [License](#license)
 * [1. Introduction](#1-introduction)
   * [1.1 Target Audience](#11-target-audience)
-* [2. Installation](#2-installation)
-    * [2.1 Prerequisites to Installation](#21-prerequisites-to-installation)
-    * [2.2 Installation](#22-installation)
-      * [2.2.1 Deployment diagram](#221-deployment-diagram) 
-    * [2.3 SSL](#23-ssl)
-    * [2.4 Status of services](#24-status-of-services)
-    * [2.5 Logs](#25-logs)
-* [3. X-Road Catalog](#3-x-road-catalog)
-    * [3.1 X-Road Catalog Collector](#31-x-road-catalog-collector)
-    * [3.2 X-Road Catalog Lister](#32-x-road-catalog-lister)
-        * [3.2.1 SOAP endpoints](#321-soap-endpoints)
-            * [3.2.1.1 List all members](#3211-list-all-members)
-            * [3.2.1.2 Retrieve WSDL descriptions](#3212-retrieve-wsdl-descriptions)   
-            * [3.2.1.3 Retrieve OPENAPI descriptions](#3213-retrieve-openapi-descriptions)
-            * [3.2.1.4 Get service type](#3214-get-service-type) 
-            * [3.2.1.5 Check if member is provider](#3215-check-if-member-is-provider)  
-            * [3.2.1.6 List errors](#3216-list-errors)
-            * [3.2.1.7 List organizations](#3217-list-organizations)  
-            * [3.2.1.8 List organization changes](#3218-list-organization-changes)
-            * [3.2.1.9 List companies](#3219-list-companies) 
-            * [3.2.1.10 List company changes](#32110-list-company-changes)
-        * [3.2.2 REST endpoints](#322-rest-endpoints)          
-            * [3.2.2.1 List service statistics](#3221-list-service-statistics) 
-            * [3.2.2.2 List service statistics in CSV format](#3222-list-service-statistics-in-csv-format)
-            * [3.2.2.3 List services](#3223-list-services)  
-            * [3.2.2.4 List services in CSV format](#3224-list-services-in-csv-format)  
-            * [3.2.2.5 Check heartbeat](#3225-check-heartbeat)  
-            * [3.2.2.6 List distinct service statistics](#3226-list-distinct-service-statistics)  
-            * [3.2.2.7 List errors](#3227-list-errors) 
-            * [3.2.2.8 List Security Servers](#3228-list-security-servers) 
-            * [3.2.2.9 List descriptors](#3229-list-descriptors) 
-            * [3.2.2.10 Get endpoints](#32210-get-endpoints)
-            * [3.2.2.11 Get Rest](#32211-get-rest)
-            * [3.2.2.12 Get Organization](#32212-get-organization) 
-            * [3.2.2.13 Get Organization changes](#32213-get-organization-changes)
-            * [3.2.2.14 Check organization heartbeat](#32214-check-organization-heartbeat)
-    * [3.3 X-Road Catalog Persistence](#33-x-road-catalog-persistence)
+* [2. X-Road Catalog Collector](#2-x-road-catalog-collector)
+* [3. X-Road Catalog Lister](#3-x-road-catalog-lister)
+    * [3.1 SOAP endpoints](#31-soap-endpoints)
+        * [3.1.1 List all members](#311-list-all-members)
+        * [3.1.2 Retrieve WSDL descriptions](#312-retrieve-wsdl-descriptions)   
+        * [3.1.3 Retrieve OPENAPI descriptions](#313-retrieve-openapi-descriptions)
+        * [3.1.4 Get service type](#314-get-service-type) 
+        * [3.1.5 Check if member is provider](#315-check-if-member-is-provider)  
+        * [3.1.6 List errors](#316-list-errors)
+        * [3.1.7 List organizations](#317-list-organizations)  
+        * [3.1.8 List organization changes](#318-list-organization-changes)
+        * [3.1.9 List companies](#319-list-companies) 
+        * [3.1.10 List company changes](#3110-list-company-changes)
+    * [3.2 REST endpoints](#32-rest-endpoints)          
+        * [3.2.1 List service statistics](#321-list-service-statistics) 
+        * [3.2.2 List service statistics in CSV format](#322-list-service-statistics-in-csv-format)
+        * [3.2.3 List services](#323-list-services)  
+        * [3.2.4 List services in CSV format](#324-list-services-in-csv-format)  
+        * [3.2.5 Check heartbeat](#325-check-heartbeat)  
+        * [3.2.6 List distinct service statistics](#326-list-distinct-service-statistics)  
+        * [3.2.7 List errors](#327-list-errors) 
+        * [3.2.8 List Security Servers](#328-list-security-servers) 
+        * [3.2.9 List descriptors](#329-list-descriptors) 
+        * [3.2.10 Get endpoints](#3210-get-endpoints)
+        * [3.2.11 Get Rest](#3211-get-rest)
+        * [3.2.12 Get Organization](#3212-get-organization) 
+        * [3.2.13 Get Organization changes](#3213-get-organization-changes)
+        * [3.2.14 Check organization heartbeat](#3214-check-organization-heartbeat)
+* [4. X-Road Catalog Persistence](#4-x-road-catalog-persistence)
                      
 <!-- vim-markdown-toc -->
 <!-- tocstop -->
@@ -100,211 +92,19 @@ The intended audience of this user guide are X-Road Operators responsible for ma
 Server and related services. The document is intended for readers with a good knowledge of Linux server management, 
 computer networks, and the X-Road principles.
 
-## 2. Installation
-
-## 2.1 Prerequisites to Installation
-
-Running X-Road Catalog using available RPM packages requires Red Hat Enterprise Linux (RHEL) 
-version 7 on a x86-64 platform. The software can be installed both on physical and virtualized hardware.
-
-## 2.2 Installation
-
-The installable software consists of `xroad-catalog-collector` and `xroad-catalog-lister` modules. Both are provided 
-as RPM packages. 
-
-```bash
-sudo yum install xroad-catalog-lister xroad-catalog-collector
-```
-
-Or alternatively:
-
-```bash
-rpm -i install xroad-catalog-lister xroad-catalog-collector
-```
-
-Instructions on how to build the RPM packages using Docker can be found [here](../BUILD.md).
-
-Configure the below parameters in `/etc/xroad/xroad-catalog/collector-production.properties`, especially X-Road instance 
-information and URL of Security Server.
-
-```properties
-xroad-catalog.xroad-instance=<XROAD_INSTANCE>
-xroad-catalog.member-class=<MEMBER_CLASS>
-xroad-catalog.member-code=<MEMBER_CODE>
-xroad-catalog.subsystem-code=<SUBSYSTEM_CODE>
-xroad-catalog.security-server-host=<SECURITY_SERVER_HOST>
-```
-
-In addition, configure also parameters related to behaviour of X-Road Catalog Collector: 
-
-```properties
-xroad-catalog.flush-log-time-after-hour=<ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_AFTER>
-xroad-catalog.flush-log-time-before-hour=<ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_BEFORE>
-xroad-catalog.error-log-length-in-days=<ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS>
-xroad-catalog.fetch-run-unlimited=<XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED>
-xroad-catalog.fetch-time-after-hour=<XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_AFTER>
-xroad-catalog.fetch-time-before-hour=<XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_BEFORE>
-xroad-catalog.collector-interval-min=<XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_MINUTES>
-```
-
-`ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_AFTER` is a parameter for setting the start of time interval during which the error logs in the db will be deleted
-when those exceed the amount in days set by `ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` parameter, e.g. value `18` means starting from `18:00`.
-
-`ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_BEFORE` is a parameter for setting the end of time interval during which the error logs in the db will be deleted 
-when those exceed the amount in days set by `ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` parameter, e.g. value  `23` means ending at `23:00`.
-
-`ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` is a parameter for setting the amount in days for how long the errors logs should be kept in the db, 
-e.g. value `90` means `for 90 days`.
-
-`XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` is a parameter for setting whether the X-Road Catalog Collector should try 
-to fetch data from Security Server continuously during a day or only between certain hours, e.g. value `true` means `continously`.
-
-`XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_AFTER` is a parameter for setting the start of time interval during which the X-Road Catalog Collector should try 
-to fetch data from Security Server continuously (this parameter will be ignored if the parameter `XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` is set 
-to `true`), e.g. value `18` means starting from `18:00`.
-
-`XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_BEFORE` is a parameter for setting the end of time interval during which the X-Road Catalog Collector should try 
-to fetch data from Security Server continuously (this parameter will be ignored if the parameter `XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` is set 
-to `true`), e.g. value `23` means ending at `23:00`.
-
-`XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_MINUTES` is a parameter for setting the amount of time in minutes after which the X-Road Catalog Collector 
-should start re-fetching data from Security Server, e.g. value `60` means `every 60 minutes`.
-
-Change also the database password in `/etc/xroad/xroad-catalog/catalogdb-production.properties`:
-
-```properties
-spring.datasource.password=password
-```
-And in the DB:
-```bash
-sudo -u postgres psql -U postgres -d postgres -c "alter user xroad_catalog with password 'password';"
-```
-
-Make sure that the services are enabled on boot and restart services in order to make the changes to have effect.
-```bash
-sudo systemctl enable xroad-catalog-lister
-sudo systemctl enable xroad-catalog-collector
-sudo systemctl restart xroad-catalog-lister
-sudo systemctl restart xroad-catalog-collector
-```
-### 2.2.1 Deployment diagram
-
-![X-Road Catalog production](../img/xroad_catalog_production.png)
-
-## 2.3 SSL
-
-If secure connection to the Security Server is required, add the server's cert for the JVM trust store. For example:
-
-```bash
-sudo cp cert.pem /etc/pki/ca-trust/source/anchors/
-sudo update-ca-trust extract
-```
-
-If you don't have the certificate, it can be asked as follows:
-
-```bash
-openssl s_client -showcerts -connect <SERVER_ADDRESS>:443  </dev/null
-```
-
-If accessing the `listMethods` service requires authentication, create a key and a certificate and add it to keystore file 
-`/etc/xroad/xroad-catalog/keystore` (note: replace the `<COUNTRY_CODE>` placeholder with a real country code):
-
-```bash
-sudo keytool -alias xroad-catalog -genkeypair -keystore /etc/xroad/xroad-catalog/keystore -validity 7300 -keyalg RSA -keysize 2048 -sigalg SHA256withRSA -dname C=<COUNTRY_CODE>,CN=xroad-catalog
-keytool -keystore /etc/xroad/xroad-catalog/keystore -exportcert -rfc -alias xroad-catalog > xroad-catalog.cer
-```
-
-The created `xroad-catalog.cer` file must be added to the Security Server (Through UI: Security Server Clients > SELECT SERVICE > Internal Servers > Internal TLS Certificates > ADD)
-
-The keystore password can be configured in `/etc/xroad/xroad-catalog/collector-production.properties`.
-
-```properties
-xroad-catalog.ssl-keystore-password=changeit
-```
-
-## 2.4 Status of Services
-
-This instruction expects that `xroad-catalog-collector` and `xroad-catalog-lister` are installed on the same server. It 
-is also possible to install them on different servers, but then database settings need to be set for both services. For 
-server of `xroad-catalog-lister` file `/etc/xroad/xroad-catalog/catalogdb-production.properties` must be manually created.
-
-```
-[root@ip-172-31-128-199 xroad-catalog]# service xroad-catalog-collector status
-Redirecting to /bin/systemctl status  xroad-catalog-collector.service
-● xroad-catalog-collector.service - X-Road Catalog Collector
-   Loaded: loaded (/usr/lib/systemd/system/xroad-catalog-collector.service; disabled; vendor preset: enabled)
-   Active: active (running) since Thu 2016-04-07 11:00:42 EEST; 3min 11s ago
- Main PID: 7298 (java)
-   CGroup: /system.slice/xroad-catalog-collector.service
-           └─7298 /bin/java -Dspring.profiles.active=production -jar /usr/lib/xroad-catalog/xroad-catalog-collector.jar -...
-Apr 07 11:01:12 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-collector[7298]: Hibernate: select subsystem0..._
-Apr 07 11:01:12 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-collector[7298]: Hibernate: select wsdls0_.ser...
-Apr 07 11:01:12 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-collector[7298]: Hibernate: select nextval ('...)
-Apr 07 11:01:12 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-collector[7298]: Hibernate: insert into wsdl ...)
-Apr 07 11:01:12 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-collector[7298]: 2016-04-07 11:01:12.211  INF...y
-Apr 07 11:01:13 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-collector[7298]: Hibernate: select service0_....s
-Apr 07 11:01:13 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-collector[7298]: Hibernate: select subsystem0..._
-Apr 07 11:01:13 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-collector[7298]: Hibernate: select wsdls0_.ser...
-Apr 07 11:01:13 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-collector[7298]: Hibernate: update wsdl set d...?
-Apr 07 11:01:13 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-collector[7298]: 2016-04-07 11:01:13.766  INF...y
-Hint: Some lines were ellipsized, use -l to show in full.
-```
-
-```
-[root@ip-172-31-128-199 xroad-catalog]# service xroad-catalog-lister status
-Redirecting to /bin/systemctl status  xroad-catalog-lister.service
-● xroad-catalog-lister.service - X-Road Catalog Lister
-   Loaded: loaded (/usr/lib/systemd/system/xroad-catalog-lister.service; enabled; vendor preset: enabled)
-   Active: active (running) since Thu 2016-04-07 07:06:03 EEST; 3h 58min ago
- Main PID: 763 (java)
-   CGroup: /system.slice/xroad-catalog-lister.service
-           └─763 /bin/java -Dserver.port=8070 -Dspring.profiles.active=production -jar /usr/lib/xroad-catalog/xroad-catal...
-Apr 07 11:01:11 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-lister[763]: 2016-04-07 11:01:11.084 DEBUG 76...t
-Apr 07 11:01:11 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-lister[763]: 2016-04-07 11:01:11.101 DEBUG 76...t
-Apr 07 11:01:11 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-lister[763]: 2016-04-07 11:01:11.102 DEBUG 76...l
-Apr 07 11:01:11 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-lister[763]: 2016-04-07 11:01:11.105 DEBUG 76...]
-Apr 07 11:01:11 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-lister[763]: 2016-04-07 11:01:11.105  INFO 76...s
-Apr 07 11:01:11 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-lister[763]: 2016-04-07 11:01:11.105 DEBUG 76...y
-Apr 07 11:01:11 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-lister[763]: 2016-04-07 11:01:11.600 DEBUG 76...]
-Apr 07 11:01:11 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-lister[763]: 2016-04-07 11:01:11.611 DEBUG 76...]
-Apr 07 11:01:11 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-lister[763]: 2016-04-07 11:01:11.691 DEBUG 76...t
-Apr 07 11:01:11 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-lister[763]: 2016-04-07 11:01:11.692 DEBUG 76...t
-Hint: Some lines were ellipsized, use -l to show in full.
-```
-
-## 2.5 Logs
-
-The application logs of the `xroad-catalog-collector` and `xroad-catalog-lister` can be accessed using the `journalctl`
-command:
-
-```
-$ sudo journalctl -fu xroad-catalog-collector --since="2016-04-07 10:50 --output=cat"
-$ sudo journalctl -fu xroad-catalog-lister --since="2016-04-07 10:50 --output=cat"
-```
-
-## 3. X-Road Catalog
-
-X-Road Catalog consists of three modules:
-
-- X-Road Catalog Collector - collects information from the X-Road ecosystem (possibly also from external APIs) and 
-stores it to the postgresql database.
-- X-Road Catalog Lister - provides REST and SOAP interfaces that offer information collected by the X-Road Catalog Collector module.
-- X-Road Catalog Persistence - persists the collected information. Used by the X-Road Catalog Collector and X-Road 
-Catalog Lister modules.
-
-### 3.1 X-Road Catalog Collector
+## 2. X-Road Catalog Collector
 
 The purpose of this module is to collect members, subsystems and services from the X-Road ecosystem and store them to the PostgreSQL database. 
 
 More information about the [X-Road Catalog Collector](../xroad-catalog-collector/README.md) module.
 
-### 3.2 X-Road Catalog Lister
+## 3. X-Road Catalog Lister
 
 The purpose of this module is to provide a web service which lists all the X-Road members and the services they provide together with service descriptions.
 
 More information about the [X-Road Catalog Lister](../xroad-catalog-lister/README.md) module.
 
-### 3.2.1 SOAP endpoints
+### 3.1 SOAP endpoints
 
 The main SOAP endpoints the module  provides with the `default` profile: 
 
@@ -322,7 +122,7 @@ In addition, some more SOAP endpoints are provided when the `FI` profile is acti
 * `GetCompanies` - retrieve private company details.
 * `HasCompanyChanged` - check have the details of a given private company changed.
 
-### 3.2.1.1 List all members
+### 3.1.1 List all members
 
 In order to list all members and related subsystems and services, a request in XML format has to be sent to the respective SOAP endpoint:
 
@@ -500,7 +300,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 In addition, each subsystem, service and wsdl contains also fields `created`, `changed`, `fetched` and `removed`, 
 reflecting the creation, change, fetch and removal (when a subsystem/service/wsdl was fetched by X-Road Catalog Collector to the DB) dates.
 
-### 3.2.1.2 Retrieve WSDL descriptions
+### 3.1.2 Retrieve WSDL descriptions
 
 In order to retrieve a WSDL service description, a request in XML format has to be sent to the respective SOAP endpoint:
 
@@ -547,7 +347,7 @@ In the request, the `externalId` field identifies the WSDL to be retrieved.
 
 The response of the given request is in XML format, containing the WSDL service description.
 
-### 3.2.1.3 Retrieve OPENAPI descriptions
+### 3.1.3 Retrieve OPENAPI descriptions
 
 In order to retrieve an OPENAPI service descriptions, a request in XML format has to be sent to the respective SOAP endpoint:
 
@@ -594,7 +394,7 @@ In the request, the `externalId` field identifies the OPENAPI to be retrieved.
 
 The response of the given request is in XML format, containing the OPENAPI service description.
 
-### 3.2.1.4 Get service type
+### 3.1.4 Get service type
 
 In order to retrieve service type information, a request in XML format has to be sent to the respective SOAP endpoint:
 
@@ -654,7 +454,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 * `GetServiceTypeResponse`
   * `type` (values: `REST`/`OPENAPI3`/`WSDL`)
                    
-### 3.2.1.5 Check if member is provider
+### 3.1.5 Check if member is provider
 
 In order to check if a given X-Road member (Security Server) is a provider, a request in XML format has to be sent to the respective SOAP endpoint:
 
@@ -710,7 +510,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 * `IsProviderResponse`
   * `provider` (values: `true`/`false`)
 
-### 3.2.1.6 List errors
+### 3.1.6 List errors
 
 In order to fetch information about errors in the X-Road Catalog, a request in XML format has to be sent to the respective SOAP endpoint:
 
@@ -767,7 +567,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
             * `code`
             * `created`
 
-### 3.2.1.7 List organizations
+### 3.1.7 List organizations
 
 **Note!** Requires the `FI` profile.
 
@@ -936,7 +736,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 In addition, most sections also contain fields `created`, `changed`, `fetched` and `removed`, reflecting the creation, 
 change, fetch and removal (when the respective data was fetched by X-Road Catalog Collector to the DB) dates.
 
-### 3.2.1.8 List organization changes
+### 3.1.8 List organization changes
 
 **Note!** Requires the `FI` profile.
 
@@ -996,7 +796,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
     * `changedValue`
       * `name` (values: e.g., `OrganizationName`, `Email`, `Address`, etc.)
 
-### 3.2.1.9 List companies
+### 3.1.9 List companies
 
 **Note!** Requires the `FI` profile.
 
@@ -1197,7 +997,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
           * `fetched`
           * `removed`
                              
-### 3.2.1.10 List company changes
+### 3.1.10 List company changes
 
 **Note!** Requires the `FI` profile.
 
@@ -1257,7 +1057,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
     * `changedValue`
       * `name` (values: e.g., `Company`, `ContactDetail`, etc.)
 
-### 3.2.2 REST endpoints
+### 2.2.2 REST endpoints
 
 The main endpoints provided by the default profile:
 
@@ -1280,7 +1080,7 @@ In addition, some more REST endpoints are provided when the `FI` profile is acti
 * `organizationHeartbeat` - request the heartbeat of organization and companies of X-Road Catalog.
 
 
-### 3.2.2.1 List service statistics
+### 3.2.1 List service statistics
 
 In order to fetch information about service statistics in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
@@ -1334,7 +1134,7 @@ The response has the following fields:
     * `numberOfRestServices`
     * `numberOfOpenApiServices`
 
-### 3.2.2.2 List service statistics in CSV format
+### 3.2.2 List service statistics in CSV format
 
 In order to fetch information about service statistics in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
@@ -1356,7 +1156,7 @@ Date,Number of REST services,Number of SOAP services,Number of OpenApi services
 2022-07-02T00:00,0,0,0,0
 ```
 
-### 3.2.2.3 List services
+### 3.2.3 List services
 
 In order to fetch information about services in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
@@ -1548,7 +1348,7 @@ The response has the following fields:
     * `memberClass`
     * `memberCode`
 
-### 3.2.2.4 List services in CSV format
+### 3.2.4 List services in CSV format
 
 In order to fetch information about services in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
@@ -1578,7 +1378,7 @@ DEV,GOV,1234,SS1,SS1,,,,,,,,
 DEV,GOV,1234,ss4,ss4,,,,,,,,
 ```
 
-### 3.2.2.5 Check heartbeat
+### 3.2.5 Check heartbeat
 
 In order to fetch X-Road Catalog heartbeat information, an HTTP request has to be sent to a respective REST endpoint:
 
@@ -1621,7 +1421,7 @@ The response has the following fields:
     * `wsdlsLastFetched`
     * `openapisLastFetched`
 
-### 3.2.2.6 List distinct service statistics
+### 3.2.6 List distinct service statistics
 
 In order to fetch information about distinct service statistics in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
@@ -1759,7 +1559,7 @@ The response has the following fields:
     * `created`
     * `numberOfDistinctServices`
 
-### 3.2.2.7 List errors
+### 3.2.7 List errors
 
 Requests
 
@@ -2091,7 +1891,7 @@ The response has the following fields:
     * `serverCode`
     * `xroadInstance`
 
-### 3.2.2.8 List Security Servers
+### 3.2.8 List Security Servers
 
 Request
 
@@ -2175,7 +1975,7 @@ The **clients** property provides a list of clients using the Security Server, w
 when their `subsystemCode` is `null`.
 
 
-### 3.2.2.9 List descriptors
+### 3.2.9 List descriptors
 
 Request
 
@@ -2255,7 +2055,7 @@ The **email** property is a list consisting of name of a contact person and thei
 In the current implementation, the property contains default values, because X-Road currently does not provide such 
 information, but the fields are still required for the X-Road Metrics to operate correctly.
 
-### 3.2.2.10 Get endpoints
+### 3.2.10 Get endpoints
 
 Request
 
@@ -2312,7 +2112,7 @@ The response has the following fields:
     * `method`
     * `path`
 
-### 3.2.2.11 Get Rest
+### 3.2.11 Get Rest
 
 Request
 
@@ -2370,7 +2170,7 @@ The response has the following fields:
     * `method`
     * `path`
 
-### 3.2.2.12 Get Organization
+### 3.2.12 Get Organization
 
 **Note!** Requires the `FI` profile.
 
@@ -2687,7 +2487,7 @@ The **organizationData** property holds values for different data related to org
 The **companyData** property holds values for different data related to company fetched from another external API in case 
 the organization with the given `businessCode` was not found among the data retrieved from the first API.
 
-### 3.2.2.13 Get Organization changes
+### 3.2.13 Get Organization changes
 
 **Note!** Requires the `FI` profile.
 
@@ -2851,7 +2651,7 @@ The **changedValueList** property is a list of changed data fields.
 The **name** property is the name of the data field which has changes.
 
 
-### 3.2.2.14 Check organization heartbeat
+### 3.2.14 Check organization heartbeat
 
 **Note!** Requires the `FI` profile.
 
@@ -2890,7 +2690,7 @@ The response has the following fields:
     * `organizationsLastFetched`
     * `companiesLastFetched`
 
-### 3.3 X-Road Catalog Persistence
+### 4. X-Road Catalog Persistence
 
 The purpose of the module is to persist and read persisted data. Used by the X-Road Catalog Collector and X-Road 
 Catalog Lister modules.
