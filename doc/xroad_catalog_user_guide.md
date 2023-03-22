@@ -122,7 +122,7 @@ Or alternatively:
 rpm -i install xroad-catalog-lister xroad-catalog-collector
 ```
 
-Instructions on how to build the RPM packages using Docker can be found [here](BUILD.md).
+Instructions on how to build the RPM packages using Docker can be found [here](../BUILD.md).
 
 Configure the below parameters in `/etc/xroad/xroad-catalog/collector-production.properties`, especially X-Road instance 
 information and URL of Security Server.
@@ -189,7 +189,7 @@ sudo systemctl restart xroad-catalog-collector
 ```
 ### 2.2.1 Deployment diagram
 
-![X-Road Catalog production](xroad_catalog_production.png)
+![X-Road Catalog production](../img/xroad_catalog_production.png)
 
 ## 2.3 SSL
 
@@ -296,13 +296,13 @@ Catalog Lister modules.
 
 The purpose of this module is to collect members, subsystems and services from the X-Road ecosystem and store them to the PostgreSQL database. 
 
-More information about the [X-Road Catalog Collector](xroad-catalog-collector/README.md) module.
+More information about the [X-Road Catalog Collector](../xroad-catalog-collector/README.md) module.
 
 ### 3.2 X-Road Catalog Lister
 
 The purpose of this module is to provide a web service which lists all the X-Road members and the services they provide together with service descriptions.
 
-More information about the [X-Road Catalog Lister](xroad-catalog-lister/README.md) module.
+More information about the [X-Road Catalog Lister](../xroad-catalog-lister/README.md) module.
 
 ### 3.2.1 SOAP endpoints
 
@@ -2895,4 +2895,4 @@ The response has the following fields:
 The purpose of the module is to persist and read persisted data. Used by the X-Road Catalog Collector and X-Road 
 Catalog Lister modules.
 
-More information about the [X-Road Catalog Persistence](xroad-catalog-persistence/README.md) module.
+More information about the [X-Road Catalog Persistence](../xroad-catalog-persistence/README.md) module.

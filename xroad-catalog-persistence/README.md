@@ -4,7 +4,7 @@ The purpose of this module is to persist and read persisted data. The module is 
 
 1. A class diagram illustrating X-Road Catalog Persistence with the `default` and `FI` profiles:
 
-![Class diagram](class_diagram.png)
+![Class diagram](img/class_diagram.png)
 
 See also the [User Guide](../xroad_catalog_user_guide.md)
 

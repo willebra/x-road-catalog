@@ -5,7 +5,7 @@ together with services descriptions.
 
 A class diagram illustrating X-Road Catalog Lister implementation with the `default` and `FI` profiles:
 
-![Catalog Service class diagram](class_diagram.png)
+![Catalog Service class diagram](img/class_diagram.png)
 
 See also the [User Guide](../xroad_catalog_user_guide.md)
 
