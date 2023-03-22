@@ -50,11 +50,15 @@ The X-Road Catalog software consists of three modules:
 
 **How to build X-Road Catalog?**
 
-See instructions in [src/BUILD.md](src/BUILD.md).
+See instructions in [BUILD.md](BUILD.md).
 
 **How to install and configure X-Road Catalog?**
 
-See the [X-Road Catalog User Guide](doc/xroad_catalog_installation_guide.md).
+See the [X-Road Catalog Installation Guide](doc/xroad_catalog_installation_guide.md).
+
+**How to use X-Road Catalog?**
+
+See the [X-Road Catalog User Guide](doc/xroad_catalog_user_guide.md).
 
 ## How to contribute?
 
