@@ -54,8 +54,7 @@ See instructions in [src/BUILD.md](src/BUILD.md).
 
 **How to install and configure X-Road Catalog?**
 
-See the [X-Road Catalog User Guide](doc/xroad_catalog_user_guide.md).
-
+See the [X-Road Catalog User Guide](doc/xroad_catalog_installation_guide.md).
 
 ## How to contribute?
 

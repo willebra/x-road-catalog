@@ -6,7 +6,8 @@ The purpose of this module is to persist and read persisted data. The module is 
 
 ![Class diagram](img/class_diagram.png)
 
-See also the [User Guide](../xroad_catalog_user_guide.md)
+See also the [Installation Guide](../doc/xroad_catalog_installation_guide.md) and
+[User Guide](../doc/xroad_catalog_user_guide.md).
 
 ## Profiles
 

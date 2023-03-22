@@ -7,7 +7,8 @@ A class diagram illustrating X-Road Catalog Lister implementation with the `defa
 
 ![Catalog Service class diagram](img/class_diagram.png)
 
-See also the [User Guide](../xroad_catalog_user_guide.md)
+See also the [Installation Guide](../doc/xroad_catalog_installation_guide.md) and
+[User Guide](../doc/xroad_catalog_user_guide.md).
 
 ## Profiles
 

@@ -12,7 +12,8 @@ The module is implemented using concurrent Akka actors:
 * `FetchOrganizationsActor` - fetches a list of public organizations from an external API and stores them to the db.
 * `FetchCompaniesActor` - fetches a list of private companies from an external API and stores them to the db.
 
-See also the [User Guide](../xroad_catalog_user_guide.md)
+See also the [Installation Guide](../doc/xroad_catalog_installation_guide.md) and
+[User Guide](../doc/xroad_catalog_user_guide.md).
 
 ## Profiles
 
