@@ -106,7 +106,7 @@ More information about the [X-Road Catalog Lister](../xroad-catalog-lister/READM
 
 ### 3.1 SOAP endpoints
 
-The main SOAP endpoints the module  provides with the `default` profile: 
+The main SOAP endpoints the module  provides with the `default` [profile](../BUILD.md#profiles): 
 
 * `ListMembers` - get a list all the members the Catalog Collector has stored to the db.
 * `GetWsdl` - retrieve a WSDL description for a given service.
@@ -115,7 +115,7 @@ The main SOAP endpoints the module  provides with the `default` profile:
 * `IsProvider` - check is a given member a service provider.
 * `GetErrors` - get a list of errors related to fetching data from different apis and Security Servers.
 
-In addition, some more SOAP endpoints are provided when the `FI` profile is active:
+In addition, some more SOAP endpoints are provided when the `FI` [profile](../BUILD.md#profiles) is active:
 
 * `GetOrganizations` - retrieve public organization details.
 * `HasOrganizationChanged` - check have the details of a given public organisation changed.
@@ -569,7 +569,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 
 ### 3.1.7 List organizations
 
-**Note!** Requires the `FI` profile.
+**Note!** Requires the `FI` [profile](../BUILD.md#profiles).
 
 In order to fetch information about organizations, a request in XML format has to be sent to the respective SOAP endpoint:
 
@@ -738,7 +738,7 @@ change, fetch and removal (when the respective data was fetched by X-Road Catalo
 
 ### 3.1.8 List organization changes
 
-**Note!** Requires the `FI` profile.
+**Note!** Requires the `FI` [profile](../BUILD.md#profiles).
 
 In order to fetch information about changed organization fields, a request in XML format has to be sent to the respective SOAP endpoint:
 
@@ -798,7 +798,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 
 ### 3.1.9 List companies
 
-**Note!** Requires the `FI` profile.
+**Note!** Requires the `FI` [profile](../BUILD.md#profiles).
 
 In order to fetch information about companies, a request in XML format has to be sent to the respective SOAP endpoint:
 
@@ -999,7 +999,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
                              
 ### 3.1.10 List company changes
 
-**Note!** Requires the `FI` profile.
+**Note!** Requires the `FI` [profile](../BUILD.md#profiles).
 
 In order to fetch information about changed company fields, a request in XML format has to be sent to the respective SOAP endpoint:
 
@@ -1059,7 +1059,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 
 ### 2.2.2 REST endpoints
 
-The main endpoints provided by the default profile:
+The main endpoints provided by the default [profile](../BUILD.md#profiles):
 
 * `getServiceStatistics` - request a list of statistics, consisting of numbers of SOAP/REST services over time.
 * `getServiceStatisticsCSV` - request a list of statistics in CSV format, consisting of numbers of SOAP/REST services over time.
@@ -1073,7 +1073,7 @@ The main endpoints provided by the default profile:
 * `getRest` - request a list of endpoints for a REST type of service.
 * `getEndpoints` - request a list of endpoints for a `REST` or `OPENAPI3` type of service.
 
-In addition, some more REST endpoints are provided when the `FI` profile is active:
+In addition, some more REST endpoints are provided when the `FI` [profile](../BUILD.md#profiles) is active:
 
 * `getOrganization` - list organization/company data.
 * `getOrganizationChanges` - request whether given organization/company has some of its details changed.
@@ -2172,7 +2172,7 @@ The response has the following fields:
 
 ### 3.2.12 Get Organization
 
-**Note!** Requires the `FI` profile.
+**Note!** Requires the `FI` [profile](../BUILD.md#profiles).
 
 Request:
 ```bash
@@ -2489,7 +2489,7 @@ the organization with the given `businessCode` was not found among the data retr
 
 ### 3.2.13 Get Organization changes
 
-**Note!** Requires the `FI` profile.
+**Note!** Requires the `FI` [profile](../BUILD.md#profiles).
 
 Request
 
@@ -2653,7 +2653,7 @@ The **name** property is the name of the data field which has changes.
 
 ### 3.2.14 Check organization heartbeat
 
-**Note!** Requires the `FI` profile.
+**Note!** Requires the `FI` [profile](../BUILD.md#profiles).
 
 In order to fetch X-Road Catalog organization heartbeat information, an HTTP request has to be sent to a respective REST endpoint:
 
