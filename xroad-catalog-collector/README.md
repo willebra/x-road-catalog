@@ -15,16 +15,6 @@ The module is implemented using concurrent Akka actors:
 See also the [Installation Guide](../doc/xroad_catalog_installation_guide.md) and
 [User Guide](../doc/xroad_catalog_user_guide.md).
 
-## Profiles
-
-There are four Spring Boot profiles:
-
-* `default` - a profile used for default operation of X-Road Catalog, without any country-specific features.
-* `FI` - an extra profile used in addition to the default profile, which has country-specific (Finland) features, e.g.,
-  fetching additional data from a national business registry. Other country-specific profiles can be added if needed.
-* `production` - a profile used in the production deployment.
-* `sshtest` - a profile used to test SSH tunneling with X-Road Catalog.
-
 ## Build
 
 X-Road Catalog Collector can be built by running:
@@ -37,7 +27,7 @@ $ ../gradlew clean build
 
 First make sure that `xroad-catalog-persistence` is located next to `xroad-catalog-collector`. The RPM build uses sql
 files from `xroad-catalog-persistence/src/main/sql`. If the `default` profile is used, the `CATALOG_PROFILE` argument
-can be omitted.
+can be omitted. More information about profiles is available in the [Build](../BUILD.md#profiles) document.
 
 ```bash
 ../gradlew clean build

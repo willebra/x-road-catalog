@@ -9,16 +9,6 @@ The purpose of this module is to persist and read persisted data. The module is 
 See also the [Installation Guide](../doc/xroad_catalog_installation_guide.md) and
 [User Guide](../doc/xroad_catalog_user_guide.md).
 
-## Profiles
-
-There are four Spring Boot profiles:
-
-* `default` - a profile used for default operation of X-Road Catalog, without any country-specific features.
-* `FI` - an extra profile used in addition to the default profile, which has country-specific (Finland) features, e.g.,
-  fetching additional data from a national business registry. Other country-specific profiles can be added if needed.
-* `production` - a profile used in the production deployment.
-* `sshtest` - a profile used to test SSH tunneling with X-Road Catalog.
-
 ## Create database
 
 The database required for X-Road Catalog can be created with the following:
@@ -27,7 +17,8 @@ The database required for X-Road Catalog can be created with the following:
 sudo -u postgres psql --file=src/main/sql/init_database.sql
 ```
 
-The command for creating the database tables depends on the profile (`default` or `FI`) that is used:
+The command for creating the database tables depends on the profile (`default` or `FI`) that is used. More information 
+about profiles is available in the [Build](../BUILD.md#profiles) document.
 
 - When the `default` profile is used:
   ```bash
