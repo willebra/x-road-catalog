@@ -27,7 +27,7 @@ $ ../gradlew clean build
 
 First make sure that `xroad-catalog-persistence` is located next to `xroad-catalog-collector`. The RPM build uses sql
 files from `xroad-catalog-persistence/src/main/sql`. If the `default` profile is used, the `CATALOG_PROFILE` argument
-can be omitted. More information about profiles is available in the [Build](../BUILD.md#profiles) document.
+can be omitted. More information about profiles is available in the [build instructions](../BUILD.md#profiles).
 
 ```bash
 ../gradlew clean build

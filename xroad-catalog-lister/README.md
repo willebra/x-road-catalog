@@ -21,7 +21,7 @@ X-Road Catalog Lister can be built by running:
 ## Build RPM Packages on Non-RedHat Platform
 
 If the `default` profile is used, the `CATALOG_PROFILE` argument can be omitted. More information about profiles is 
-available in the [Build](../BUILD.md#profiles) document.
+available in the [build instructions](../BUILD.md#profiles).
 
 ```bash
 ../gradlew clean build

@@ -18,7 +18,7 @@ sudo -u postgres psql --file=src/main/sql/init_database.sql
 ```
 
 The command for creating the database tables depends on the profile (`default` or `FI`) that is used. More information 
-about profiles is available in the [Build](../BUILD.md#profiles) document.
+about profiles is available in the [build instructions](../BUILD.md#profiles).
 
 - When the `default` profile is used:
   ```bash
