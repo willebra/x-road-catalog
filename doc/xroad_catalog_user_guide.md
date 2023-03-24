@@ -398,7 +398,9 @@ The response of the given request is in XML format, containing the OPENAPI servi
 
 In order to retrieve service type information, a request in XML format has to be sent to the respective SOAP endpoint:
 
-``` $ curl -k -d @GetServiceTypeRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetServiceType ```
+```bash
+curl -k -d @GetServiceTypeRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetServiceType
+```
 
 **Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
 
@@ -635,7 +637,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
         	* `fetched`
         	* `removed`
         * `organizationDescriptions`
-          * organizationDescription`
+          * `organizationDescription`
             * `language`
             * `type`
             * `value`
@@ -1161,7 +1163,7 @@ Date,Number of REST services,Number of SOAP services,Number of OpenApi services
 In order to fetch information about services in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/getListOfServices?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json
+curl "http://<SERVER_ADDRESS>:8080/api/getListOfServices?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
 ```
 
 The required request parameters are:
@@ -1362,9 +1364,9 @@ The required request parameters are:
 * `START_DATE` - an optional parameter(a string in format `YYYY-MM-DD`), if not used, today's date will be assumed.
 * `END_DATE` - an optional parameter(a string in format `YYYY-MM-DD`), if not used, today's date will be assumed.
 
-Response is a file ```list_of_services.csv``` with the following content:
+Response is a file `list_of_services.csv` with the following content:
 
-```list_of_services.csv file with content:
+```csv
 Date,XRoad instance,Member class,Member code,Member name,Member created,Subsystem code,Subsystem created,Subsystem active,Service code,Service version,Service created,Service active
 2021-08-24T00:00,,,,,,,,,,,,
 "",DEV,COM,222,ACME,2021-08-24T16:20:26.830,FRUIT,2022-02-03T14:10:25.712,true,,,,

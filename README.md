@@ -62,11 +62,11 @@ See the [X-Road Catalog User Guide](doc/xroad_catalog_user_guide.md).
 
 ## How to contribute?
 
-[Sign up](https://jira.niis.org/secure/Signup!default.jspa) for an account and
-get access to the [X-Road Service Desk](https://jira.niis.org/servicedesk/customer/portal/1).
+[Sign up](https://id.atlassian.com/signup) for an account and
+get access to the [X-Road Service Desk](https://nordic-institute.atlassian.net/servicedesk/customer/portal/4).
 
 Submit a pull request to [X-Road Catalog source code Github repository](https://github.com/nordic-institute/X-Road-Catalog)
-or an enhancement request to the [X-Road Service Desk](https://jira.niis.org/servicedesk/customer/portal/1).
+or an enhancement request to the [X-Road Service Desk](https://nordic-institute.atlassian.net/servicedesk/customer/portal/4).
 
 When opening a pull request, please provide a signed Contributor Licence Agreement (CLA). More information can be found 
 [here](https://github.com/nordic-institute/X-Road/blob/develop/CONTRIBUTING.md#legal-notice).

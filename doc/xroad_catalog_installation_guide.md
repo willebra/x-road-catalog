@@ -183,12 +183,16 @@ xroad-catalog.ssl-keystore-password=changeit
 
 ## 2.6 Post-Installation Checks
 
-This instruction expects that `xroad-catalog-collector` and `xroad-catalog-lister` are installed on the same server. It
-is also possible to install them on different servers, but then database settings need to be set for both services. For
-server of `xroad-catalog-lister` file `/etc/xroad/xroad-catalog/catalogdb-production.properties` must be manually created.
+This instruction expects that `xroad-catalog-collector` and `xroad-catalog-lister` are installed on the same host. It
+is also possible to install them on different hosts, but then database settings need to be set for both services. For the 
+`xroad-catalog-lister` host, the file `/etc/xroad/xroad-catalog/catalogdb-production.properties` must be manually created.
 
+**X-Road Catalog Collector**
+
+```bash
+sudo service xroad-catalog-collector status
 ```
-[root@ip-172-31-128-199 xroad-catalog]# service xroad-catalog-collector status
+```bash
 Redirecting to /bin/systemctl status  xroad-catalog-collector.service
 ● xroad-catalog-collector.service - X-Road Catalog Collector
    Loaded: loaded (/usr/lib/systemd/system/xroad-catalog-collector.service; disabled; vendor preset: enabled)
@@ -209,8 +213,12 @@ Apr 07 11:01:13 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-colle
 Hint: Some lines were ellipsized, use -l to show in full.
 ```
 
+**X-Road Catalog Lister**
+
+```bash
+sudo service xroad-catalog-lister status
 ```
-[root@ip-172-31-128-199 xroad-catalog]# service xroad-catalog-lister status
+```bash
 Redirecting to /bin/systemctl status  xroad-catalog-lister.service
 ● xroad-catalog-lister.service - X-Road Catalog Lister
    Loaded: loaded (/usr/lib/systemd/system/xroad-catalog-lister.service; enabled; vendor preset: enabled)
@@ -236,7 +244,7 @@ Hint: Some lines were ellipsized, use -l to show in full.
 The application logs of the `xroad-catalog-collector` and `xroad-catalog-lister` can be accessed using the `journalctl`
 command:
 
-```
-$ sudo journalctl -fu xroad-catalog-collector --since="2016-04-07 10:50 --output=cat"
-$ sudo journalctl -fu xroad-catalog-lister --since="2016-04-07 10:50 --output=cat"
+```bash
+sudo journalctl -fu xroad-catalog-collector --since="2016-04-07 10:50 --output=cat"
+sudo journalctl -fu xroad-catalog-lister --since="2016-04-07 10:50 --output=cat"
 ```

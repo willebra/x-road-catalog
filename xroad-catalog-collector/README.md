@@ -6,9 +6,9 @@ a database.
 The module is implemented using concurrent Akka actors: 
 
 * `FetchWsdlActor` - fetches WSDL descriptions of SOAP services from the X-Road instance and stores them to the db.
-* `FetchOpenApiActor` - fetches OpenAPI descriptions of Rest services from the XRoad instance and stores them to the db.
-* `ListClientsActor` - fetches a list of clients from the XRoad instance and stores them to the db.
-* `ListMethodsActor` - fetches a list of services from the XRoad instance and stores them to the db.
+* `FetchOpenApiActor` - fetches OpenAPI descriptions of Rest services from the X-Road instance and stores them to the db.
+* `ListClientsActor` - fetches a list of clients from the X-Road instance and stores them to the db.
+* `ListMethodsActor` - fetches a list of services from the X-Road instance and stores them to the db.
 * `FetchOrganizationsActor` - fetches a list of public organizations from an external API and stores them to the db.
 * `FetchCompaniesActor` - fetches a list of private companies from an external API and stores them to the db.
 
