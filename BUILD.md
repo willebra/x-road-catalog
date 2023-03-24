@@ -60,13 +60,15 @@ profiles:
 
 * `default` - a profile used for default operation of X-Road Catalog, without any country-specific features.
   * The default profile can be set with `spring.profiles.active=`.
-* `FI` - an extra profile used in addition to the default profile, which has country-specific (Finland) features, e.g.,
+* `fi` - an extra profile used in addition to the default profile, which has country-specific (Finland) features, e.g.,
   fetching additional data from a national business registry. Other country-specific profiles can be added if needed.
-  * The profile can be set with `spring.profiles.active=FI`.
+  * The profile can be set with `spring.profiles.active=fi`.
 * `production` - a profile used in the production deployment.
   * The profile can be set with `spring.profiles.active=production`.
 * `sshtest` - a profile used to test SSH tunneling with X-Road Catalog.
   * The profile can be set with `spring.profiles.active=sshtest`.
+
+Multiple profiles can be activated at the same time by separating them with a comma, e.g., `spring.profiles.active=production,fi`.
 
 X-Road Catalog supports adding new profiles. For example, new country-specific features should be added by creating a
 new country-specific profile.
