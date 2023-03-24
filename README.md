@@ -9,9 +9,8 @@ This repository contains information about the X-Road Catalog, its source code, 
 
 ## Introduction to X-Road Catalog
 
-X-Road Catalog is an [X-Road](https://github.com/nordic-institute/X-Road/) extension that collects information, more 
-specifically members, subsystems and services, from an X-Road ecosystem and provides a REST and SOAP interfaces to read 
-the data.
+X-Road Catalog is an [X-Road](https://github.com/nordic-institute/X-Road/) extension that collects information on
+members, subsystems and services from an X-Road ecosystem and provides a REST and SOAP interfaces to access the data.
 
 X-Road Catalog can be used together with an additional API Catalog component - a web portal that contains descriptions of all the 
 services available in the ecosystem. The primary purpose of the API Catalog is to provide a user-friendly channel to 
@@ -36,48 +35,64 @@ pricing information, SLAs, etc.
 
 The X-Road Catalog software consists of three modules:
 
-- [xroad-catalog-collector](xroad-catalog-collector/README.md)
+- [X-Road Catalog Collector](xroad-catalog-collector/README.md)
   * Collects information from the X-Road ecosystem (possibly also from external APIs) and stores it to the postgresql database. 
   * Implemented using concurrent Akka actors. 
-- [xroad-catalog-lister](xroad-catalog-lister/README.md)
-  * SOAP and REST interfaces that offer information collected by the Collector. 
+- [X-Road Catalog Lister](xroad-catalog-lister/README.md)
+  * Provides REST and SOAP interfaces that offer information collected by the Collector. 
   * Can be used as an X-Road service (X-Road headers are in place).
-- [xroad-catalog-persistence](xroad-catalog-persistence/README.md)
-  * Library used to persist and read persisted data. Used by the `xroad-catalog-collector` and `xroad-catalog-lister` modules.
+- [X-Road Catalog Persistence](xroad-catalog-persistence/README.md)
+  * Library used to persist and read persisted data. Used by the X-Road Catalog Collector and X-Road Catalog Lister modules.
   
 ![X-Road Catalog overview](img/architecture.png)
 
-## Version management
+## Installation
 
-For versioning, [GitHub Flow](https://guides.github.com/introduction/flow/) is used with the following principles:
+**How to build X-Road Catalog?**
 
-* Anything in the master branch is deployable.
-* To work on something new, create a branch off from master and given a descriptive name(e.g., `new-oauth2-scopes`).
-* Commit to that branch locally and regularly push your work to the same named branch on the server.
-* When you need feedback or help, or you think the branch is ready for merging, open a pull request.
-* After someone else has reviewed and signed off on the feature, you can merge it into master.
-* Once it is merged and pushed to master, you can and should deploy immediately.
+See instructions in [BUILD.md](BUILD.md).
 
-## Tools
+**How to install and configure X-Road Catalog?**
 
-Running the X-Road Catalog software requires Linux (Ubuntu or RHEL). If you are using some other operating system 
-(e.g. Windows or macOS), the easiest option is to first install Ubuntu 20.04 or RHEL 7.0 into a virtual machine.
+See the [X-Road Catalog Installation Guide](doc/xroad_catalog_installation_guide.md).
 
-*Required for building*
-* OpenJDK / JDK version 11
-* Gradle
+**How to use X-Road Catalog?**
 
-*Recommended for development environment*
-* Docker (for deb/rpm packaging)
-* [LXD](https://linuxcontainers.org/lxd/)
-  * for setting up a local X-Road instance
-* Ansible
-  * for automating the X-Road instance installation
+See the [X-Road Catalog User Guide](doc/xroad_catalog_user_guide.md).
 
-The development environment should have at least 8GB of memory and 20GB of free disk space (applies to a virtual 
-machine as well), especially if you set up a local X-Road instance.
+## How to contribute?
+
+[Sign up](https://id.atlassian.com/signup) for an account and
+get access to the [X-Road Service Desk](https://nordic-institute.atlassian.net/servicedesk/customer/portal/4).
+
+Submit a pull request to [X-Road Catalog source code Github repository](https://github.com/nordic-institute/X-Road-Catalog)
+or an enhancement request to the [X-Road Service Desk](https://nordic-institute.atlassian.net/servicedesk/customer/portal/4).
+
+When opening a pull request, please provide a signed Contributor Licence Agreement (CLA). More information can be found 
+[here](https://github.com/nordic-institute/X-Road/blob/develop/CONTRIBUTING.md#legal-notice).
+
+## Support disclaimer
+
+The following activities, among others, are undertaken by the
+[Nordic Institute for Interoperability Solutions (NIIS)](https://www.niis.org/)
+with regard to X-Road Catalog:
+
+* management, development, verification, and audit of the source code
+* administration of documentation
+* administration of business and technical requirements
+* conducting development
+* developing and implementing principles of licensing and distribution
+* providing second-line support for the NIIS members
+* international cooperation.
+
+[X-Road Technology Partners](https://x-road.global/xroad-technology-partners) are enterprises providing X-Road consultation 
+services, e.g. deploying independent X-Road instances, developing X-Road extensions and X-Road-compatible services, 
+integrating informations systems with X-Road etc.
+
+No support for X-Road Catalog deployment is provided here.
 
 ## Credits
 
 * X-Road Catalog was originally developed by the [Finnish Digital Agency](https://dvv.fi/en) during 2016-2023.
-* In 2023 it was agreed that [Nordic Institute for Interoperability Solutions (NIIS)](https://www.niis.org/) takes maintenance responsibility.
+* In 2023 it was agreed that [Nordic Institute for Interoperability Solutions (NIIS)](https://www.niis.org/) takes 
+maintenance responsibility.
