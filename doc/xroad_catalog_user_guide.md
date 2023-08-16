@@ -1,5 +1,5 @@
 # X-Road Catalog User Guide
-Version: 4.0.0
+Version: 4.1.0
 Doc. ID: UG-XRDCAT
 
 ---
@@ -23,6 +23,7 @@ Doc. ID: UG-XRDCAT
 | 04.10.2022 | 2.1.0   | Add getRest and getEndpoints descriptions                                      | Bert Viikmäe     |
 | 15.01.2023 | 3.0.0   | Restructure of the document                                                    | Bert Viikmäe     |
 | 22.03.2023 | 4.0.0   | Split document into X-Road Catalog Installation Guide and User Guide           | Petteri Kivimäki |
+| 16.08.2023 | 4.1.0   | Update Catalog Lister port number from `8080` to `8070`                        | Petteri Kivimäki |
 
 ## Table of Contents <!-- omit in toc -->
 

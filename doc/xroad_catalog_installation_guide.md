@@ -1,13 +1,14 @@
 # X-Road Catalog Installation Guide
-Version: 1.0.0
+Version: 1.1.0
 Doc. ID: IG-XRDCAT
 
 ---
 
 ## Version history <!-- omit in toc -->
-| Date       | Version | Description                                                                    | Author           |
-|------------|---------|--------------------------------------------------------------------------------|------------------|
-| 22.03.2023 | 1.0.0   | Export installation-related parts from the X-Road Catalog User Guide           | Petteri Kivimäki |
+| Date       | Version | Description                                                           | Author           |
+|------------|---------|-----------------------------------------------------------------------|------------------|
+| 22.03.2023 | 1.0.0   | Export installation-related parts from the X-Road Catalog User Guide  | Petteri Kivimäki |
+| 16.08.2023 | 1.1.0   | Add instruction to install and configure the `xroad-conflient` module | Petteri Kivimäki |
 
 ## Table of Contents <!-- omit in toc -->
 
@@ -16,16 +17,16 @@ Doc. ID: IG-XRDCAT
 
 * [License](#license)
 * [1. Introduction](#1-introduction)
-    * [1.1 Target Audience](#11-target-audience)
+  * [1.1 Target Audience](#11-target-audience)
 * [2. Installation](#2-installation)
-    * [2.1 Prerequisites to Installation](#21-prerequisites-to-installation)
-    * [2.2 Deployment Diagram](#22-deployment-diagram)
-    * [2.3 Installation](#23-installation)
+  * [2.1 Prerequisites to Installation](#21-prerequisites-to-installation)
+  * [2.2 Deployment Diagram](#22-deployment-diagram)
+  * [2.3 Installation](#23-installation)
     * [2.3.1 Install X-Road Configuration Client](#231-install-x-road-configuration-client)
-    * [2.4 Initial Configuration](#24-initial-configuration)
-    * [2.5 SSL (optional)](#25-ssl-optional)
-    * [2.6 Post-Installation Checks](#26-post-installation-checks)
-    * [2.7 Logs](#27-logs)
+  * [2.4 Initial Configuration](#24-initial-configuration)
+  * [2.5 SSL (optional)](#25-ssl-optional)
+  * [2.6 Post-Installation Checks](#26-post-installation-checks)
+  * [2.7 Logs](#27-logs)
 
 <!-- vim-markdown-toc -->
 <!-- tocstop -->
