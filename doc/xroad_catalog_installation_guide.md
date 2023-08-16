@@ -159,6 +159,8 @@ xroad-catalog.fetch-time-before-hour=<XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_BEF
 xroad-catalog.collector-interval-min=<XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_MINUTES>
 ```
 
+The parameters are explained in the table below.
+
 | Parameter | Description                                                                                                                                                                                                                                         |
 |-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_AFTER` | A parameter for setting the start of time interval during which the error logs in the db will be deleted when those exceed the amount in days set by `ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` parameter, e.g. value `18` means starting from `18:00`. |
