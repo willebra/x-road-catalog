@@ -177,7 +177,7 @@ The value must point to the `/etc/xroad/globalconf/<INSTANCE_IDENTIFIER>/shared-
 xroad-catalog.shared-params-file=/etc/xroad/globalconf/<INSTANCE_IDENTIFIER>/shared-params.xml
 ```
 
-Grant the `xroad-catalog` user sufficient permissions to the `/etc/xroad/globalconf/` directory:
+Add the `xroad-catalog` user to the `xroad` group:
 
 ```bash
 sudo usermod -a -G xroad xroad-catalog
