@@ -65,8 +65,9 @@ computer networks, and the X-Road principles.
 Running X-Road Catalog using available RPM packages requires Red Hat Enterprise Linux (RHEL)
 version 8 on a x86-64 platform. The software can be installed both on physical and virtualized hardware.
 
-The installation requires that the X-Road Catalog Lister is installed on the same host with the X-Road 
-`xroad-confclient` module. Also, the X-Road Catalog Lister must be able to access the 
+The installation requires that the X-Road Catalog Lister is installed on the same host with the [X-Road Configuration 
+Client](https://docs.x-road.global/Architecture/arc-ss_x-road_security_server_architecture.html#33-xroad-confclient) 
+(`xroad-confclient`) module. Also, the X-Road Catalog Lister must be able to access the 
 `/etc/xroad/globalconf/<INSTANCE_IDENTIFIER>/shared-params.xml` configuration file.
 
 ## 2.2 Deployment Diagram
