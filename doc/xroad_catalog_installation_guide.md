@@ -21,6 +21,7 @@ Doc. ID: IG-XRDCAT
     * [2.1 Prerequisites to Installation](#21-prerequisites-to-installation)
     * [2.2 Deployment Diagram](#22-deployment-diagram)
     * [2.3 Installation](#23-installation)
+    * [2.3.1 Install X-Road Configuration Client](#231-install-x-road-configuration-client)
     * [2.4 Initial Configuration](#24-initial-configuration)
     * [2.5 SSL (optional)](#25-ssl-optional)
     * [2.6 Post-Installation Checks](#26-post-installation-checks)
@@ -63,6 +64,10 @@ computer networks, and the X-Road principles.
 Running X-Road Catalog using available RPM packages requires Red Hat Enterprise Linux (RHEL)
 version 8 on a x86-64 platform. The software can be installed both on physical and virtualized hardware.
 
+The installation requires that the X-Road Catalog Lister is installed on the same host with the X-Road 
+`xroad-confclient` module. Also, the X-Road Catalog Lister must be able to access the 
+`/etc/xroad/globalconf/<INSTANCE_IDENTIFIER>/shared-params.xml` configuration file.
+
 ## 2.2 Deployment Diagram
 
 ![X-Road Catalog production](../img/xroad_catalog_production.png)
@@ -83,6 +88,49 @@ rpm -i install xroad-catalog-lister xroad-catalog-collector
 ```
 
 Instructions on how to build the RPM packages using Docker can be found [here](../BUILD.md).
+
+## 2.3.1 Install X-Road Configuration Client
+
+If the X-Road Catalog Lister is not installed on the same host with a Security Server, the X-Road Configuration Client
+(`xroad-confclient`) module must be installed manually.
+
+Add X-Road package repository and Extra Packages for Enterprise Linux (EPEL) repository:
+
+```bash
+sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+sudo yum-config-manager --add-repo https://artifactory.niis.org/xroad-release-rpm/rhel/8/current
+```
+
+The following packages are fetched from EPEL: `crudini`, and `rlwrap`.
+
+Add the X-Road repository’s signing key to the list of trusted keys:
+
+```bash
+sudo rpm --import https://artifactory.niis.org/api/gpg/key/public
+```
+
+Install the `xroad-confclient` module:
+
+```bash
+sudo yum install xroad-confclient
+```
+
+Copy the X-Road ecosystem configuration anchor to `/etc/xroad/configuration-anchor.xml`. Make sure that the `xroad` user 
+is the owner of the file with sufficient permissions:
+
+```bash
+sudo chown xroad:xroad /etc/xroad/configuration-anchor.xml
+sudo chmod 660 /etc/xroad/configuration-anchor.xml
+```
+
+Make sure that the `xroad-confclient` service is enabled on boot and start the service:
+
+```bash
+sudo systemctl enable xroad-confclient
+sudo systemctl start xroad-confclient
+```
+
+The application log of the `xroad-confclient` module is available in `/var/log/xroad/configuration_client.log`.
 
 ## 2.4 Initial Configuration
 
@@ -109,28 +157,29 @@ xroad-catalog.fetch-time-before-hour=<XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_BEF
 xroad-catalog.collector-interval-min=<XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_MINUTES>
 ```
 
-`ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_AFTER` is a parameter for setting the start of time interval during which the error logs in the db will be deleted
-when those exceed the amount in days set by `ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` parameter, e.g. value `18` means starting from `18:00`.
+| Parameter | Description                                                                                                                                                                                                                                         |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_AFTER` | A parameter for setting the start of time interval during which the error logs in the db will be deleted when those exceed the amount in days set by `ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` parameter, e.g. value `18` means starting from `18:00`. |
+| `ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_AFTER` | A parameter for setting the start of time interval during which the error logs in the db will be deleted when those exceed the amount in days set by `ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` parameter, e.g. value `18` means starting from `18:00`. |
+|`ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_BEFORE` | A parameter for setting the end of time interval during which the error logs in the db will be deleted when those exceed the amount in days set by `ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` parameter, e.g. value  `23` means ending at `23:00`. |
+| `ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` | A parameter for setting the amount in days for how long the errors logs should be kept in the db, e.g. value `90` means `for 90 days`. |
+| `XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` | A parameter for setting whether the X-Road Catalog Collector should try to fetch data from Security Server continuously during a day or only between certain hours, e.g. value `true` means `continously`. |
+| `XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_AFTER` | A parameter for setting the start of time interval during which the X-Road Catalog Collector should try to fetch data from Security Server continuously (this parameter will be ignored if the parameter `XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` is set to `true`), e.g. value `18` means starting from `18:00`. |
+| `XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_BEFORE` | A parameter for setting the end of time interval during which the X-Road Catalog Collector should try to fetch data from Security Server continuously (this parameter will be ignored if the parameter `XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` is set to `true`), e.g. value `23` means ending at `23:00`. |
+| `XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_MINUTES` | A parameter for setting the amount of time in minutes after which the X-Road Catalog Collector should start re-fetching data from Security Server, e.g. value `60` means `every 60 minutes`. |
 
-`ERROR_LOGS_FLUSH_IN_DB_TIME_INTERVAL_BEFORE` is a parameter for setting the end of time interval during which the error logs in the db will be deleted
-when those exceed the amount in days set by `ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` parameter, e.g. value  `23` means ending at `23:00`.
+In addition, update the `xroad-catalog.shared-params-file` property value in `/etc/xroad/xroad-catalog/lister-production.properties`.
+The value must point to the `/etc/xroad/globalconf/<INSTANCE_IDENTIFIER>/shared-params.xml` configuration file:
 
-`ERROR_LOGS_KEPT_IN_DB_LENGTH_IN_DAYS` is a parameter for setting the amount in days for how long the errors logs should be kept in the db,
-e.g. value `90` means `for 90 days`.
+```properties
+xroad-catalog.shared-params-file=/etc/xroad/globalconf/<INSTANCE_IDENTIFIER>/shared-params.xml
+```
 
-`XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` is a parameter for setting whether the X-Road Catalog Collector should try
-to fetch data from Security Server continuously during a day or only between certain hours, e.g. value `true` means `continously`.
+Grant the `xroad-catalog` user sufficient permissions to the `/etc/xroad/globalconf/` directory:
 
-`XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_AFTER` is a parameter for setting the start of time interval during which the X-Road Catalog Collector should try
-to fetch data from Security Server continuously (this parameter will be ignored if the parameter `XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` is set
-to `true`), e.g. value `18` means starting from `18:00`.
-
-`XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_BEFORE` is a parameter for setting the end of time interval during which the X-Road Catalog Collector should try
-to fetch data from Security Server continuously (this parameter will be ignored if the parameter `XROAD_CATALOG_COLLECTOR_FETCH_UNLIMITED` is set
-to `true`), e.g. value `23` means ending at `23:00`.
-
-`XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_MINUTES` is a parameter for setting the amount of time in minutes after which the X-Road Catalog Collector
-should start re-fetching data from Security Server, e.g. value `60` means `every 60 minutes`.
+```bash
+sudo chown -R xroad:xroad-catalog /etc/xroad/globalconf/
+```
 
 Change also the database password in `/etc/xroad/xroad-catalog/catalogdb-production.properties`:
 
@@ -142,7 +191,7 @@ And in the DB:
 sudo -u postgres psql -U postgres -d postgres -c "alter user xroad_catalog with password 'password';"
 ```
 
-Make sure that the services are enabled on boot and restart services in order to make the changes to have effect.
+Make sure that the X-Road Catalog services are enabled on boot and restart services in order to make the changes to have effect:
 ```bash
 sudo systemctl enable xroad-catalog-lister
 sudo systemctl enable xroad-catalog-collector
