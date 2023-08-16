@@ -22,7 +22,7 @@ Doc. ID: IG-XRDCAT
   * [2.1 Prerequisites to Installation](#21-prerequisites-to-installation)
   * [2.2 Deployment Diagram](#22-deployment-diagram)
   * [2.3 Installation](#23-installation)
-    * [2.3.1 Install X-Road Configuration Client](#231-install-x-road-configuration-client)
+    * [2.3.1 Installation of X-Road Configuration Client](#231-installation-of-x-road-configuration-client)
   * [2.4 Initial Configuration](#24-initial-configuration)
   * [2.5 SSL (optional)](#25-ssl-optional)
   * [2.6 Post-Installation Checks](#26-post-installation-checks)
@@ -91,7 +91,7 @@ rpm -i install xroad-catalog-lister xroad-catalog-collector
 
 Instructions on how to build the RPM packages using Docker can be found [here](../BUILD.md).
 
-## 2.3.1 Install X-Road Configuration Client
+## 2.3.1 Installation of X-Road Configuration Client
 
 If the X-Road Catalog Lister is not installed on the same host with a Security Server, the X-Road Configuration Client
 (`xroad-confclient`) module must be installed manually.
