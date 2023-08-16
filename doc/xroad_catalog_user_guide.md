@@ -127,7 +127,7 @@ In addition, some more SOAP endpoints are provided when the `fi` [profile](../BU
 In order to list all members and related subsystems and services, a request in XML format has to be sent to the respective SOAP endpoint:
 
 ```bash
-curl -k -d @servicerequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/ListMembers
+curl -k -d @servicerequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8070/ws/ListMembers
 ```
 
 **Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
@@ -305,7 +305,7 @@ reflecting the creation, change, fetch and removal (when a subsystem/service/wsd
 In order to retrieve a WSDL service description, a request in XML format has to be sent to the respective SOAP endpoint:
 
 ```bash
-curl -k -d @wsdlrequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetWsdl
+curl -k -d @wsdlrequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8070/ws/GetWsdl
 ```
 
 **Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
@@ -352,7 +352,7 @@ The response of the given request is in XML format, containing the WSDL service 
 In order to retrieve an OPENAPI service descriptions, a request in XML format has to be sent to the respective SOAP endpoint:
 
 ```bash
-curl -k -d @openapirequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetOpenAPI
+curl -k -d @openapirequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8070/ws/GetOpenAPI
 ```
 
 **Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
@@ -399,7 +399,7 @@ The response of the given request is in XML format, containing the OPENAPI servi
 In order to retrieve service type information, a request in XML format has to be sent to the respective SOAP endpoint:
 
 ```bash
-curl -k -d @GetServiceTypeRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetServiceType
+curl -k -d @GetServiceTypeRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8070/ws/GetServiceType
 ```
 
 **Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
@@ -461,7 +461,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 In order to check if a given X-Road member (Security Server) is a provider, a request in XML format has to be sent to the respective SOAP endpoint:
 
 ```bash
-curl -k -d @IsProviderRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/IsProvider
+curl -k -d @IsProviderRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8070/ws/IsProvider
 ```
 
 **Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
@@ -517,7 +517,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 In order to fetch information about errors in the X-Road Catalog, a request in XML format has to be sent to the respective SOAP endpoint:
 
 ```bash
-curl -k -d @GetErrorsRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetErrors
+curl -k -d @GetErrorsRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8070/ws/GetErrors
 ```
 
 **Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
@@ -576,7 +576,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 In order to fetch information about organizations, a request in XML format has to be sent to the respective SOAP endpoint:
 
 ```bash
-curl -k -d @GetOrganizationsRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetOrganizations
+curl -k -d @GetOrganizationsRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8070/ws/GetOrganizations
 ```
 
 **Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
@@ -745,7 +745,7 @@ change, fetch and removal (when the respective data was fetched by X-Road Catalo
 In order to fetch information about changed organization fields, a request in XML format has to be sent to the respective SOAP endpoint:
 
 ```bash
-curl -k -d @HasOrganizationChangedRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/HasOrganizationChanged
+curl -k -d @HasOrganizationChangedRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8070/ws/HasOrganizationChanged
 ```
 
 **Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
@@ -805,7 +805,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 In order to fetch information about companies, a request in XML format has to be sent to the respective SOAP endpoint:
 
 ```bash
-curl -k -d @GetCompaniesRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/GetCompanies
+curl -k -d @GetCompaniesRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8070/ws/GetCompanies
 ```
 
 **Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
@@ -1006,7 +1006,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
 In order to fetch information about changed company fields, a request in XML format has to be sent to the respective SOAP endpoint:
 
 ```bash
-curl -k -d @HasCompanyChangedRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8080/ws/HasCompanyChanged
+curl -k -d @HasCompanyChangedRequest.xml --header "Content-Type: text/xml" -X POST http://<SERVER_ADDRESS>:8070/ws/HasCompanyChanged
 ```
 
 **Note!** Replace the `SERVER_ADDRESS` placeholder with the server address on which the X-Road Catalog Lister is running on, e.g., `localhost`.
@@ -1059,7 +1059,7 @@ The XML response has a `<SOAP-ENV:Body>` element with the following structure:
     * `changedValue`
       * `name` (values: e.g., `Company`, `ContactDetail`, etc.)
 
-### 2.2.2 REST endpoints
+## 3.2 REST endpoints
 
 The main endpoints provided by the default [profile](../BUILD.md#profiles):
 
@@ -1087,7 +1087,7 @@ In addition, some more REST endpoints are provided when the `fi` [profile](../BU
 In order to fetch information about service statistics in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/getServiceStatistics?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/getServiceStatistics?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
 ```
 
 The required request parameters are:
@@ -1141,7 +1141,7 @@ The response has the following fields:
 In order to fetch information about service statistics in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/getServiceStatisticsCSV?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: text/csv" --output service_statistics.csv
+curl "http://<SERVER_ADDRESS>:8070/api/getServiceStatisticsCSV?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: text/csv" --output service_statistics.csv
 ```
 
 The required request parameters are:
@@ -1163,7 +1163,7 @@ Date,Number of REST services,Number of SOAP services,Number of OpenApi services
 In order to fetch information about services in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/getListOfServices?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/getListOfServices?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
 ```
 
 The required request parameters are:
@@ -1355,7 +1355,7 @@ The response has the following fields:
 In order to fetch information about services in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/getListOfServicesCSV?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: text/csv" --output list_of_services.csv
+curl "http://<SERVER_ADDRESS>:8070/api/getListOfServicesCSV?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: text/csv" --output list_of_services.csv
 ```
 
 The required request parameters are:
@@ -1385,7 +1385,7 @@ DEV,GOV,1234,ss4,ss4,,,,,,,,
 In order to fetch X-Road Catalog heartbeat information, an HTTP request has to be sent to a respective REST endpoint:
 
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/heartbeat" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/heartbeat" -H "Content-Type: application/json"
 ```
 
 The required request parameters are:
@@ -1428,7 +1428,7 @@ The response has the following fields:
 In order to fetch information about distinct service statistics in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/getDistinctServiceStatistics?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/getDistinctServiceStatistics?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
 ```
 
 The required request parameters are:
@@ -1567,52 +1567,52 @@ Requests
 
 List errors for a given subsystem:
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/listErrors/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
 ```
 
 List errors for a given member:
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/listErrors/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
 ```
 
 List errors for a given member class:
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/listErrors/<INSTANCE>/<MEMBER_CLASS>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
 ```
 
 List errors for a given instance:
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/listErrors/<INSTANCE>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
 ```
 
 List errors for all the instances and members:
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/listErrors?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/listErrors?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
 ```
 
 List errors for a given subsystem with pagination:
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/listErrors/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json"
 ```
 
 List errors for a given member with pagination:
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/listErrors/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json"
 ```
 
 List errors for a given member class with pagination:
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>/<MEMBER_CLASS>?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/listErrors/<INSTANCE>/<MEMBER_CLASS>?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json"
 ```
 
 List errors for a given instance with pagination:
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/listErrors/<INSTANCE>?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/listErrors/<INSTANCE>?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json"
 ```
 
 List errors for all the instances and members with pagination:
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/listErrors?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/listErrors?startDate=<START_DATE>&endDate=<END_DATE>&page=<PAGE_NUMBER>&limit=<NO_OF_ERRORS_PER_PAGE>" -H "Content-Type: application/json"
 ```
 
 Example request:
@@ -1898,7 +1898,7 @@ The response has the following fields:
 Request
 
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/listSecurityServers" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/listSecurityServers" -H "Content-Type: application/json"
 ```
 
 The required request parameters are:
@@ -1982,7 +1982,7 @@ when their `subsystemCode` is `null`.
 Request
 
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/listDescriptors" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/listDescriptors" -H "Content-Type: application/json"
 ```
 
 The required parameters are:
@@ -2062,7 +2062,7 @@ information, but the fields are still required for the X-Road Metrics to operate
 Request
 
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/getEndpoints/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>/<SERVICE_CODE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/getEndpoints/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>/<SERVICE_CODE>" -H "Content-Type: application/json"
 ```
 
 The required parameters are:
@@ -2076,7 +2076,7 @@ The required parameters are:
 
 Example request:
 ```bash
-curl "http://localhost:8080/api/getEndpoints/DEV/GOV/1234/TEST/CATALOG_HEARTBEAT" -H "Content-Type: application/json"
+curl "http://localhost:8070/api/getEndpoints/DEV/GOV/1234/TEST/CATALOG_HEARTBEAT" -H "Content-Type: application/json"
 ```
 
 Response:
@@ -2119,7 +2119,7 @@ The response has the following fields:
 Request
 
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/getRest/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>/<SERVICE_CODE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/getRest/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>/<SERVICE_CODE>" -H "Content-Type: application/json"
 ```
 
 The required request parameters are:
@@ -2133,7 +2133,7 @@ The required request parameters are:
 
 Example request:
 ```bash
-curl "http://localhost:8080/api/getRest/DEV/GOV/1234/TEST/CATALOG_HEARTBEAT" -H "Content-Type: application/json"
+curl "http://localhost:8070/api/getRest/DEV/GOV/1234/TEST/CATALOG_HEARTBEAT" -H "Content-Type: application/json"
 ```
 
 Response:
@@ -2178,7 +2178,7 @@ The response has the following fields:
 
 Request:
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/getOrganization/<BUSINESS_CODE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/getOrganization/<BUSINESS_CODE>" -H "Content-Type: application/json"
 ```
 
 The required request parameters are:
@@ -2188,7 +2188,7 @@ The required request parameters are:
 
 Example request:
 ```bash
-curl "http://localhost:8080/api/getOrganization/0130729-0" -H "Content-Type: application/json"
+curl "http://localhost:8070/api/getOrganization/0130729-0" -H "Content-Type: application/json"
 ```
 
 Response:
@@ -2496,7 +2496,7 @@ the organization with the given `businessCode` was not found among the data retr
 Request
 
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/getOrganizationChanges/<BUSINESS_CODE>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/getOrganizationChanges/<BUSINESS_CODE>?startDate=<START_DATE>&endDate=<END_DATE>" -H "Content-Type: application/json"
 ```
 
 The required request parameters are:
@@ -2508,7 +2508,7 @@ The required request parameters are:
 
 Example request:
 ```bash
-curl "http://localhost:8080/api/getOrganizationChanges/0130729-0?startDate=2021-08-24&endDate=2021-08-25" -H "Content-Type: application/json"
+curl "http://localhost:8070/api/getOrganizationChanges/0130729-0?startDate=2021-08-24&endDate=2021-08-25" -H "Content-Type: application/json"
 ```
 
 Response:
@@ -2660,7 +2660,7 @@ The **name** property is the name of the data field which has changes.
 In order to fetch X-Road Catalog organization heartbeat information, an HTTP request has to be sent to a respective REST endpoint:
 
 ```bash
-curl "http://<SERVER_ADDRESS>:8080/api/organizationHeartbeat" -H "Content-Type: application/json"
+curl "http://<SERVER_ADDRESS>:8070/api/organizationHeartbeat" -H "Content-Type: application/json"
 ```
 
 The required request parameters are:
