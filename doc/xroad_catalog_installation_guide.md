@@ -61,7 +61,7 @@ computer networks, and the X-Road principles.
 ## 2.1 Prerequisites to Installation
 
 Running X-Road Catalog using available RPM packages requires Red Hat Enterprise Linux (RHEL)
-version 7 on a x86-64 platform. The software can be installed both on physical and virtualized hardware.
+version 8 on a x86-64 platform. The software can be installed both on physical and virtualized hardware.
 
 ## 2.2 Deployment Diagram
 
@@ -245,6 +245,6 @@ The application logs of the `xroad-catalog-collector` and `xroad-catalog-lister`
 command:
 
 ```bash
-sudo journalctl -fu xroad-catalog-collector --since="2016-04-07 10:50 --output=cat"
-sudo journalctl -fu xroad-catalog-lister --since="2016-04-07 10:50 --output=cat"
+sudo journalctl -fu xroad-catalog-collector --since="2023-08-16 06:00:00" --output=cat
+sudo journalctl -fu xroad-catalog-lister --since="2023-08-16 06:00:00" --output=cat
 ```
