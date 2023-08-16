@@ -180,7 +180,7 @@ xroad-catalog.shared-params-file=/etc/xroad/globalconf/<INSTANCE_IDENTIFIER>/sha
 Grant the `xroad-catalog` user sufficient permissions to the `/etc/xroad/globalconf/` directory:
 
 ```bash
-sudo chown -R xroad:xroad-catalog /etc/xroad/globalconf/
+sudo usermod -a -G xroad xroad-catalog
 ```
 
 Change also the database password in `/etc/xroad/xroad-catalog/catalogdb-production.properties`:
