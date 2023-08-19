@@ -88,6 +88,7 @@ public class SharedParamsParserTests {
         assertEquals("NIIS", list.getSecurityServerDataList().get(3).getOwner().getName());
         assertEquals("ORG", list.getSecurityServerDataList().get(3).getOwner().getMemberClass());
         assertEquals("2908758-4", list.getSecurityServerDataList().get(3).getOwner().getMemberCode());
+        assertEquals(null, list.getSecurityServerDataList().get(3).getOwner().getSubsystemCode());
 
         assertEquals(0, list.getSecurityServerDataList().get(3).getClients().size());
     }
