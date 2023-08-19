@@ -14,13 +14,9 @@ package fi.vrk.xroad.catalog.lister;
 
 import fi.vrk.xroad.catalog.persistence.dto.SecurityServerDataList;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest(classes = ListerApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles({"default","fi"})
 public class SharedParamsParserTests {
 
     @Test
