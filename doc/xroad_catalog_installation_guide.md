@@ -243,10 +243,9 @@ is also possible to install them on different hosts, but then database settings 
 **X-Road Catalog Collector**
 
 ```bash
-sudo service xroad-catalog-collector status
+sudo systemctl status xroad-catalog-collector
 ```
 ```bash
-Redirecting to /bin/systemctl status  xroad-catalog-collector.service
 ● xroad-catalog-collector.service - X-Road Catalog Collector
    Loaded: loaded (/usr/lib/systemd/system/xroad-catalog-collector.service; disabled; vendor preset: enabled)
    Active: active (running) since Thu 2016-04-07 11:00:42 EEST; 3min 11s ago
@@ -269,10 +268,9 @@ Hint: Some lines were ellipsized, use -l to show in full.
 **X-Road Catalog Lister**
 
 ```bash
-sudo service xroad-catalog-lister status
+sudo systemctl status xroad-catalog-lister
 ```
 ```bash
-Redirecting to /bin/systemctl status  xroad-catalog-lister.service
 ● xroad-catalog-lister.service - X-Road Catalog Lister
    Loaded: loaded (/usr/lib/systemd/system/xroad-catalog-lister.service; enabled; vendor preset: enabled)
    Active: active (running) since Thu 2016-04-07 07:06:03 EEST; 3h 58min ago
