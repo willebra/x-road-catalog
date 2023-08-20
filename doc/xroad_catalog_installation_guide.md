@@ -197,6 +197,7 @@ sudo -u postgres psql -U postgres -d postgres -c "alter user xroad_catalog with 
 
 Make sure that the X-Road Catalog services are enabled on boot and restart services in order to make the changes to have effect:
 ```bash
+sudo systemctl enable postgresql 
 sudo systemctl enable xroad-catalog-lister
 sudo systemctl enable xroad-catalog-collector
 sudo systemctl restart xroad-catalog-lister
