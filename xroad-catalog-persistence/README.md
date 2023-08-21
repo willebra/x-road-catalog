@@ -2,7 +2,7 @@
 
 The purpose of this module is to persist and read persisted data. The module is used by the Collector and Lister modules.
 
-1. A class diagram illustrating X-Road Catalog Persistence with the `default` and `FI` profiles:
+A class diagram illustrating X-Road Catalog Persistence with the `default` and `FI` profiles:
 
 ![Class diagram](img/class_diagram.png)
 
