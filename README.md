@@ -63,7 +63,8 @@ See the [X-Road Catalog User Guide](doc/xroad_catalog_user_guide.md).
 ## How to contribute?
 
 [Sign up](https://id.atlassian.com/signup) for an account and
-get access to the [X-Road Service Desk](https://nordic-institute.atlassian.net/servicedesk/customer/portal/4).
+get access to the [X-Road Service Desk](https://nordic-institute.atlassian.net/servicedesk/customer/portal/4) and 
+[X-Road Catalog Backlog](https://nordic-institute.atlassian.net/jira/software/c/projects/XRDCAT/issues).
 
 Submit a pull request to [X-Road Catalog source code Github repository](https://github.com/nordic-institute/X-Road-Catalog)
 or an enhancement request to the [X-Road Service Desk](https://nordic-institute.atlassian.net/servicedesk/customer/portal/4).
