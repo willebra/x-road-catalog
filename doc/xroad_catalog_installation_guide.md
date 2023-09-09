@@ -114,7 +114,7 @@ Instructions on how to build the RPM packages using Docker can be found [here](.
 
 ## 2.4.1 Complete the Installation of X-Road Configuration Client
 
-**Note:** The configuration steps in section 2.4.1 are needed only if the X-Road Catalog Lister is not installed on the
+**Note:** The configuration steps described in section 2.4.1 are needed only if the X-Road Catalog Lister is not installed on the
 same host with a Security Server
 
 If the X-Road Catalog Lister is not installed on the same host with a Security Server, the X-Road Configuration Client
@@ -177,7 +177,7 @@ The parameters are explained in the table below.
 | `XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_MINUTES` | A parameter for setting the amount of time in minutes after which the X-Road Catalog Collector should start re-fetching data from Security Server, e.g. value `60` means `every 60 minutes`. |
 
 In addition, update the `xroad-catalog.shared-params-file` property value in `/etc/xroad/xroad-catalog/lister-production.properties`.
-The value must point to the `/etc/xroad/globalconf/<INSTANCE_IDENTIFIER>/shared-params.xml` configuration file:
+The value must point to the `/etc/xroad/globalconf/<INSTANCE_IDENTIFIER>/shared-params.xml` X-Road global configuration file:
 
 ```properties
 xroad-catalog.shared-params-file=/etc/xroad/globalconf/<INSTANCE_IDENTIFIER>/shared-params.xml
