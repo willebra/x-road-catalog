@@ -55,7 +55,7 @@ if ! id xroad-catalog > /dev/null 2>&1 ; then
     adduser --system --no-create-home --shell /bin/false xroad-catalog
 fi
 
-%post
+%post -p /bin/bash
 %systemd_post %{name}.service
 
 if ! id -nG "xroad-catalog" | grep -qw "xroad"; then
