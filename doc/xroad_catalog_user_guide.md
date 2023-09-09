@@ -1,5 +1,5 @@
 # X-Road Catalog User Guide
-Version: 4.1.0
+Version: 4.2.0
 Doc. ID: UG-XRDCAT
 
 ---
@@ -24,6 +24,7 @@ Doc. ID: UG-XRDCAT
 | 15.01.2023 | 3.0.0   | Restructure of the document                                                    | Bert Viikmäe     |
 | 22.03.2023 | 4.0.0   | Split document into X-Road Catalog Installation Guide and User Guide           | Petteri Kivimäki |
 | 16.08.2023 | 4.1.0   | Update Catalog Lister port number from `8080` to `8070`                        | Petteri Kivimäki |
+| 09.09.2023 | 4.2.0   | Update REST endpoint descriptions                                              | Petteri Kivimäki |
 
 ## Table of Contents <!-- omit in toc -->
 
@@ -1102,25 +1103,13 @@ Response in JSON:
 {
    "serviceStatisticsList":[
       {
-         "created":[
-            2022,
-            7,
-            1,
-            0,
-            0
-         ],
+         "created": "2022-07-01T00:00:00",
          "numberOfSoapServices":0,
          "numberOfRestServices":0,
          "numberOfOpenApiServices":0
       },
       {
-         "created":[
-            2022,
-            7,
-            2,
-            0,
-            0
-         ],
+         "created": "2022-07-02T00:00:00",
          "numberOfSoapServices":0,
          "numberOfRestServices":0,
          "numberOfOpenApiServices":0
@@ -1179,39 +1168,17 @@ Response in JSON:
 {
    "memberData":[
       {
-         "date":[
-            2021,
-            8,
-            24,
-            0,
-            0
-         ],
+         "date": "2021-08-24T00:00:00",
          "memberDataList":[
             {
-               "created":[
-                  2021,
-                  8,
-                  24,
-                  16,
-                  20,
-                  26,
-                  830000000
-               ],
+               "created": "2021-08-24T16:20:26",
                "memberClass":"COM",
                "memberCode":"222",
                "name":"ACME",
                "provider":false,
                "subsystemList":[
                   {
-                     "created":[
-                        2022,
-                        2,
-                        3,
-                        14,
-                        10,
-                        25,
-                        712000000
-                     ],
+                     "created": "2022-02-03T14:10:25",
                      "subsystemCode":"FRUIT",
                      "active":true,
                      "serviceList":[
@@ -1222,15 +1189,7 @@ Response in JSON:
                "xroadInstance":"DEV"
             },
             {
-               "created":[
-                  2021,
-                  8,
-                  24,
-                  16,
-                  20,
-                  26,
-                  830000000
-               ],
+               "created": "2021-08-24T16:20:26",
                "memberClass":"COM",
                "memberCode":"12345",
                "name":"Company",
@@ -1243,39 +1202,17 @@ Response in JSON:
          ]
       },
       {
-         "date":[
-            2021,
-            8,
-            25,
-            0,
-            0
-         ],
+         "date": "2021-08-25T00:00:00",
          "memberDataList":[
             {
-               "created":[
-                  2021,
-                  8,
-                  24,
-                  16,
-                  20,
-                  26,
-                  830000000
-               ],
+               "created": "2021-08-24T16:20:26",
                "memberClass":"COM",
                "memberCode":"222",
                "name":"ACME",
                "provider":false,
                "subsystemList":[
                   {
-                     "created":[
-                        2022,
-                        2,
-                        3,
-                        14,
-                        10,
-                        25,
-                        712000000
-                     ],
+                     "created": "2021-02-03T14:10:25",
                      "subsystemCode":"FRUIT",
                      "active":true,
                      "serviceList":[
@@ -1286,15 +1223,7 @@ Response in JSON:
                "xroadInstance":"DEV"
             },
             {
-               "created":[
-                  2021,
-                  8,
-                  24,
-                  16,
-                  20,
-                  26,
-                  830000000
-               ],
+               "created": "2021-08-24T16:20:26",
                "memberClass":"COM",
                "memberCode":"12345",
                "name":"Company",
@@ -1443,113 +1372,47 @@ Response in JSON:
 {
    "distinctServiceStatisticsList":[
       {
-         "created":[
-            2020,
-            11,
-            20,
-            0,
-            0
-         ],
+         "created": "2020-11-20T00:00:00",
          "numberOfDistinctServices":3
       },
       {
-         "created":[
-            2020,
-            11,
-            21,
-            0,
-            0
-         ],
+         "created": "2020-11-21T00:00:00",
          "numberOfDistinctServices":3
       },
       {
-         "created":[
-            2020,
-            11,
-            22,
-            0,
-            0
-         ],
+         "created": "2020-11-22T00:00:00",
          "numberOfDistinctServices":3
       },
       {
-         "created":[
-            2020,
-            11,
-            23,
-            0,
-            0
-         ],
+         "created": "2020-11-23T00:00:00",
          "numberOfDistinctServices":3
       },
       {
-         "created":[
-            2020,
-            11,
-            24,
-            0,
-            0
-         ],
+         "created": "2020-11-24T00:00:00",
          "numberOfDistinctServices":3
       },
       {
-         "created":[
-            2020,
-            11,
-            25,
-            0,
-            0
-         ],
+         "created": "2020-11-25T00:00:00",
          "numberOfDistinctServices":3
       },
       {
-         "created":[
-            2020,
-            11,
-            26,
-            0,
-            0
-         ],
+         "created": "2020-11-26T00:00:00",
          "numberOfDistinctServices":3
       },
       {
-         "created":[
-            2020,
-            11,
-            27,
-            0,
-            0
-         ],
+         "created": "2020-11-27T00:00:00",
          "numberOfDistinctServices":3
       },
       {
-         "created":[
-            2020,
-            11,
-            28,
-            0,
-            0
-         ],
+         "created": "2020-11-28T00:00:00",
          "numberOfDistinctServices":3
       },
       {
-         "created":[
-            2020,
-            11,
-            29,
-            0,
-            0
-         ],
+         "created": "2020-11-29T00:00:00",
          "numberOfDistinctServices":3
       },
       {
-         "created":[
-            2020,
-            11,
-            30,
-            0,
-            0
-         ],
+         "created": "2020-11-30T00:00:00",
          "numberOfDistinctServices":3
       }
    ]
@@ -1564,7 +1427,7 @@ The response has the following fields:
 
 ### 3.2.7 List errors
 
-Requests
+In order to fetch information about errors during data harvesting in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
 List errors for a given subsystem:
 ```bash
@@ -1644,15 +1507,7 @@ Response in JSON:
          "id":38,
          "message":"Fetch of REST services failed(url: http://ss3/r1/DEV/GOV/1234/TEST/listMethods): 500 Server Error",
          "code":"500",
-         "created":[
-            2021,
-            8,
-            24,
-            16,
-            21,
-            13,
-            114000000
-         ],
+         "created": "2020-08-24T16:21:13",
          "memberClass":"GOV",
          "memberCode":"1234",
          "subsystemCode":"TEST",
@@ -1667,15 +1522,7 @@ Response in JSON:
          "id":39,
          "message":"Fetch of REST services failed(url: http://ss3/r1/DEV/GOV/1234/TESTCLIENT/listMethods): 500 Server Error",
          "code":"500",
-         "created":[
-            2021,
-            8,
-            24,
-            16,
-            21,
-            13,
-            114000000
-         ],
+         "created": "2020-08-24T16:21:13",
          "memberClass":"GOV",
          "memberCode":"1234",
          "subsystemCode":"TESTCLIENT",
@@ -1690,15 +1537,7 @@ Response in JSON:
          "id":40,
          "message":"Fetch of REST services failed(url: http://ss3/r1/DEV/GOV/1234/MASTER/listMethods): 500 Server Error",
          "code":"500",
-         "created":[
-            2021,
-            8,
-            24,
-            16,
-            21,
-            13,
-            114000000
-         ],
+         "created": "2020-08-24T16:21:13",
          "memberClass":"GOV",
          "memberCode":"1234",
          "subsystemCode":"MASTER",
@@ -1713,15 +1552,7 @@ Response in JSON:
          "id":41,
          "message":"Fetch of REST services failed(url: http://ss3/r1/DEV/GOV/1234/MANAGEMENT/listMethods): 500 Server Error",
          "code":"500",
-         "created":[
-            2021,
-            8,
-            24,
-            16,
-            31,
-            39,
-            548000000
-         ],
+         "created": "2020-08-24T16:31:39",
          "memberClass":"GOV",
          "memberCode":"1234",
          "subsystemCode":"MANAGEMENT",
@@ -1736,15 +1567,7 @@ Response in JSON:
          "id":42,
          "message":"Fetch of REST services failed(url: http://ss3/r1/DEV/GOV/1234/TESTCLIENT/listMethods): 500 Server Error",
          "code":"500",
-         "created":[
-            2021,
-            8,
-            24,
-            16,
-            31,
-            39,
-            551000000
-         ],
+         "created": "2020-08-24T16:31:39",
          "memberClass":"GOV",
          "memberCode":"1234",
          "subsystemCode":"TESTCLIENT",
@@ -1759,15 +1582,7 @@ Response in JSON:
          "id":43,
          "message":"Fetch of REST services failed(url: http://ss3/r1/DEV/GOV/1234/MANAGEMENT/listMethods): 500 Server Error",
          "code":"500",
-         "created":[
-            2021,
-            8,
-            24,
-            16,
-            34,
-            46,
-            378000000
-         ],
+         "created": "2020-08-24T16:34:46",
          "memberClass":"GOV",
          "memberCode":"1234",
          "subsystemCode":"MANAGEMENT",
@@ -1782,15 +1597,7 @@ Response in JSON:
          "id":44,
          "message":"Fetch of REST services failed(url: http://ss3/r1/DEV/GOV/1234/TESTCLIENT/listMethods): 500 Server Error",
          "code":"500",
-         "created":[
-            2021,
-            8,
-            24,
-            16,
-            34,
-            46,
-            384000000
-         ],
+         "created": "2020-08-24T16:34:46",
          "memberClass":"GOV",
          "memberCode":"1234",
          "subsystemCode":"TESTCLIENT",
@@ -1805,15 +1612,7 @@ Response in JSON:
          "id":45,
          "message":"Fetch of REST services failed(url: http://ss3/r1/DEV/GOV/1234/TESTCLIENT/listMethods): 500 Server Error",
          "code":"500",
-         "created":[
-            2021,
-            8,
-            24,
-            16,
-            36,
-            25,
-            490000000
-         ],
+         "created": "2020-08-24T16:36:25",
          "memberClass":"GOV",
          "memberCode":"1234",
          "subsystemCode":"TESTCLIENT",
@@ -1828,15 +1627,7 @@ Response in JSON:
          "id":46,
          "message":"Fetch of REST services failed(url: http://ss3/r1/DEV/GOV/1234/TESTCLIENT/listMethods): 500 Server Error",
          "code":"500",
-         "created":[
-            2021,
-            8,
-            24,
-            16,
-            39,
-            30,
-            845000000
-         ],
+         "created": "2020-08-24T16:39:30",
          "memberClass":"GOV",
          "memberCode":"1234",
          "subsystemCode":"TESTCLIENT",
@@ -1851,15 +1642,7 @@ Response in JSON:
          "id":47,
          "message":"Fetch of REST services failed(url: http://ss1/r1/DEV/GOV/1234/TESTCLIENT/listMethods): 500 Server Error",
          "code":"500",
-         "created":[
-            2021,
-            8,
-            24,
-            16,
-            41,
-            34,
-            622000000
-         ],
+         "created": "2020-08-24T16:41:34",
          "memberClass":"GOV",
          "memberCode":"1234",
          "subsystemCode":"TESTCLIENT",
@@ -1896,7 +1679,7 @@ The response has the following fields:
 
 ### 3.2.8 List Security Servers
 
-Request
+In order to fetch information about Security Servers in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
 ```bash
 curl "http://<SERVER_ADDRESS>:8070/api/listSecurityServers" -H "Content-Type: application/json"
@@ -1980,7 +1763,7 @@ when their `subsystemCode` is `null`.
 
 ### 3.2.9 List descriptors
 
-Request
+In order to fetch information about subsystem descriptions in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
 ```bash
 curl "http://<SERVER_ADDRESS>:8070/api/listDescriptors" -H "Content-Type: application/json"
@@ -2060,7 +1843,8 @@ information, but the fields are still required for the X-Road Metrics to operate
 
 ### 3.2.10 Get endpoints
 
-Request
+In order to fetch information about service endpoints belonging to a specific `OPENAPI3` or `REST` service in the X-Road Catalog, 
+an HTTP request has to be sent to a respective REST endpoint:
 
 ```bash
 curl "http://<SERVER_ADDRESS>:8070/api/getEndpoints/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>/<SERVICE_CODE>" -H "Content-Type: application/json"
@@ -2117,7 +1901,7 @@ The response has the following fields:
 
 ### 3.2.11 Get Rest
 
-Request
+In order to fetch information about a specific `REST` service in the X-Road Catalog, an HTTP request has to be sent to a respective REST endpoint:
 
 ```bash
 curl "http://<SERVER_ADDRESS>:8070/api/getRest/<INSTANCE>/<MEMBER_CLASS>/<MEMBER_CODE>/<SUBSYSTEM_CODE>/<SERVICE_CODE>" -H "Content-Type: application/json"
@@ -2198,9 +1982,9 @@ Response:
 {
   "organizationData": {
     "businessCode": "0130729-0",
-    "created": [2021,8,24,16,21,53,649000000],
-    "changed": [2021,8,24,16,21,53,649000000],
-    "fetched": [2022,2,3,13,19,34,411000000],
+    "created": "2021-08-24T16:21:53",
+    "changed": "2021-08-24T16:21:53",
+    "fetched": "2022-02-03T13:19:34",
     "removed": null,
     "organizationType": "Municipality",
     "publishingStatus": "Published",
@@ -2210,9 +1994,9 @@ Response:
         "language": "fi",
         "type": "Name",
         "value": "Pukkilan kunta",
-        "created": [2021,8,24,16,21,53,651000000],
-        "changed": [2021,8,24,16,21,53,651000000],
-        "fetched": [2022,2,3,13,19,34,414000000],
+        "created": "2021-08-24T16:21:53",
+        "changed": "2021-08-24T16:21:53",
+        "fetched": "2022-02-03T13:19:34",
         "removed": null
       }
     ]
