@@ -80,6 +80,12 @@ configuration file.
 
 ## 2.3 Setup Package Repository
 
+Install `yum-utils`, a collection of utilities that integrate with `yum` to extend its native features.
+
+```bash
+sudo yum install yum-utils
+```
+
 Add X-Road package repository and Extra Packages for Enterprise Linux (EPEL) repository:
 
 ```bash

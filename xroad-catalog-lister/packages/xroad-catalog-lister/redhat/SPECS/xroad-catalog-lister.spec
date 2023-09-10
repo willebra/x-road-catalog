@@ -51,15 +51,13 @@ rm -rf %{buildroot}
 
 %pre
 if ! id xroad-catalog > /dev/null 2>&1 ; then
-    echo "Create xroad-catalog user"
     adduser --system --no-create-home --shell /bin/false xroad-catalog
 fi
 
 %post -p /bin/bash
 %systemd_post %{name}.service
 
-if ! id -nG "xroad-catalog" | grep -qw "xroad"; then
-    echo "Add xroad-catalog user to the xroad group"
+if ! id -nG "xroad-catalog" | grep -qw "^xroad$"; then
     usermod -a -G xroad xroad-catalog
 fi
 
