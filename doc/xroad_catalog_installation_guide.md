@@ -1,14 +1,15 @@
 # X-Road Catalog Installation Guide
-Version: 1.1.0
+Version: 1.2.0
 Doc. ID: IG-XRDCAT
 
 ---
 
 ## Version history <!-- omit in toc -->
-| Date       | Version | Description                                                           | Author           |
-|------------|---------|-----------------------------------------------------------------------|------------------|
-| 22.03.2023 | 1.0.0   | Export installation-related parts from the X-Road Catalog User Guide  | Petteri Kivimäki |
-| 16.08.2023 | 1.1.0   | Add instruction to install and configure the `xroad-conflient` module | Petteri Kivimäki |
+| Date       | Version | Description                                                            | Author           |
+|------------|---------|------------------------------------------------------------------------|------------------|
+| 22.03.2023 | 1.0.0   | Export installation-related parts from the X-Road Catalog User Guide   | Petteri Kivimäki |
+| 16.08.2023 | 1.1.0   | Add instructions to install and configure the `xroad-conflient` module | Petteri Kivimäki |
+| 09.09.2023 | 1.2.0   | Remove instructions to install the `xroad-conflient` module manually   | Petteri Kivimäki |
 
 ## Table of Contents <!-- omit in toc -->
 
@@ -21,12 +22,13 @@ Doc. ID: IG-XRDCAT
 * [2. Installation](#2-installation)
   * [2.1 Prerequisites to Installation](#21-prerequisites-to-installation)
   * [2.2 Deployment Diagram](#22-deployment-diagram)
-  * [2.3 Installation](#23-installation)
-    * [2.3.1 Installation of X-Road Configuration Client](#231-installation-of-x-road-configuration-client)
-  * [2.4 Initial Configuration](#24-initial-configuration)
-  * [2.5 SSL (optional)](#25-ssl-optional)
-  * [2.6 Post-Installation Checks](#26-post-installation-checks)
-  * [2.7 Logs](#27-logs)
+  * [2.3 Setup Package Repository](#23-setup-package-repository)
+  * [2.4 Installation](#24-installation)
+    * [2.4.1 Complete the Installation of X-Road Configuration Client](#241-complete-the-installation-of-x-road-configuration-client)
+  * [2.5 Initial Configuration](#25-initial-configuration)
+  * [2.6 SSL (optional)](#26-ssl-optional)
+  * [2.7 Post-Installation Checks](#27-post-installation-checks)
+  * [2.8 Logs](#28-logs)
 
 <!-- vim-markdown-toc -->
 <!-- tocstop -->
@@ -67,34 +69,22 @@ version 8 on a x86-64 platform. The software can be installed both on physical a
 
 The installation requires that the X-Road Catalog Lister is installed on the same host with the [X-Road Configuration 
 Client](https://docs.x-road.global/Architecture/arc-ss_x-road_security_server_architecture.html#33-xroad-confclient) 
-(`xroad-confclient`) module. Also, the X-Road Catalog Lister must be able to access the 
-`/etc/xroad/globalconf/<INSTANCE_IDENTIFIER>/shared-params.xml` configuration file.
+(`xroad-confclient`) module. If the X-Road Catalog Lister is not installed on the same host with a Security Server, 
+the X-Road Configuration Client (`xroad-confclient`) module is installed automatically as an RPM dependency. Also, the 
+X-Road Catalog Lister must be able to access the `/etc/xroad/globalconf/<INSTANCE_IDENTIFIER>/shared-params.xml` 
+configuration file.
 
 ## 2.2 Deployment Diagram
 
 ![X-Road Catalog production](../img/xroad_catalog_production.png)
 
-## 2.3 Installation
+## 2.3 Setup Package Repository
 
-The installable software consists of `xroad-catalog-collector` and `xroad-catalog-lister` modules. Both are provided
-as RPM packages.
-
-```bash
-sudo yum install xroad-catalog-lister xroad-catalog-collector
-```
-
-Or alternatively:
+Install `yum-utils`, a collection of utilities that integrate with `yum` to extend its native features.
 
 ```bash
-rpm -i install xroad-catalog-lister xroad-catalog-collector
+sudo yum install yum-utils
 ```
-
-Instructions on how to build the RPM packages using Docker can be found [here](../BUILD.md).
-
-## 2.3.1 Installation of X-Road Configuration Client
-
-If the X-Road Catalog Lister is not installed on the same host with a Security Server, the X-Road Configuration Client
-(`xroad-confclient`) module must be installed manually.
 
 Add X-Road package repository and Extra Packages for Enterprise Linux (EPEL) repository:
 
@@ -111,11 +101,25 @@ Add the X-Road repository’s signing key to the list of trusted keys:
 sudo rpm --import https://artifactory.niis.org/api/gpg/key/public
 ```
 
-Install the `xroad-confclient` module:
+## 2.4 Installation
+
+The installable software consists of `xroad-catalog-collector` and `xroad-catalog-lister` modules. Both are provided
+as RPM packages.
 
 ```bash
-sudo yum install xroad-confclient
+sudo yum install xroad-catalog-lister.rpm xroad-catalog-collector.rpm
 ```
+
+Instructions on how to build the RPM packages using Docker can be found [here](../BUILD.md).
+
+## 2.4.1 Complete the Installation of X-Road Configuration Client
+
+**Note:** The configuration steps described in this section are needed only if the X-Road Catalog Lister is not installed on the
+same host with a Security Server
+
+If the X-Road Catalog Lister is not installed on the same host with a Security Server, the X-Road Configuration Client
+(`xroad-confclient`) module is installed automatically as an RPM dependency. In this case, some manual configuration steps 
+are needed.
 
 Copy the X-Road ecosystem configuration anchor to `/etc/xroad/configuration-anchor.xml`. Make sure that the `xroad` user 
 is the owner of the file with sufficient permissions:
@@ -134,7 +138,7 @@ sudo systemctl start xroad-confclient
 
 The application log of the `xroad-confclient` module is available in `/var/log/xroad/configuration_client.log`.
 
-## 2.4 Initial Configuration
+## 2.5 Initial Configuration
 
 Configure the below parameters in `/etc/xroad/xroad-catalog/collector-production.properties`, especially X-Road instance
 information and URL of Security Server.
@@ -173,16 +177,10 @@ The parameters are explained in the table below.
 | `XROAD_CATALOG_COLLECTOR_FETCH_INTERVAL_MINUTES` | A parameter for setting the amount of time in minutes after which the X-Road Catalog Collector should start re-fetching data from Security Server, e.g. value `60` means `every 60 minutes`. |
 
 In addition, update the `xroad-catalog.shared-params-file` property value in `/etc/xroad/xroad-catalog/lister-production.properties`.
-The value must point to the `/etc/xroad/globalconf/<INSTANCE_IDENTIFIER>/shared-params.xml` configuration file:
+The value must point to the `/etc/xroad/globalconf/<INSTANCE_IDENTIFIER>/shared-params.xml` X-Road global configuration file:
 
 ```properties
 xroad-catalog.shared-params-file=/etc/xroad/globalconf/<INSTANCE_IDENTIFIER>/shared-params.xml
-```
-
-Add the `xroad-catalog` user to the `xroad` group:
-
-```bash
-sudo usermod -a -G xroad xroad-catalog
 ```
 
 Change also the database password in `/etc/xroad/xroad-catalog/catalogdb-production.properties`:
@@ -204,7 +202,7 @@ sudo systemctl restart xroad-catalog-lister
 sudo systemctl restart xroad-catalog-collector
 ```
 
-## 2.5 SSL (optional)
+## 2.6 SSL (optional)
 
 If secure connection to the Security Server is required, add the server's cert for the JVM trust store. For example:
 
@@ -235,7 +233,7 @@ The keystore password can be configured in `/etc/xroad/xroad-catalog/collector-p
 xroad-catalog.ssl-keystore-password=changeit
 ```
 
-## 2.6 Post-Installation Checks
+## 2.7 Post-Installation Checks
 
 This instruction expects that `xroad-catalog-collector` and `xroad-catalog-lister` are installed on the same host. It
 is also possible to install them on different hosts, but then database settings need to be set for both services. For the 
@@ -291,7 +289,7 @@ Apr 07 11:01:11 ip-172-31-128-199.eu-west-1.compute.internal xroad-catalog-liste
 Hint: Some lines were ellipsized, use -l to show in full.
 ```
 
-## 2.7 Logs
+## 2.8 Logs
 
 The application logs of the `xroad-catalog-collector` and `xroad-catalog-lister` can be accessed using the `journalctl`
 command:
