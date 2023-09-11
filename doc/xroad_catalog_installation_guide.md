@@ -107,20 +107,14 @@ The installable software consists of `xroad-catalog-collector` and `xroad-catalo
 as RPM packages.
 
 ```bash
-sudo yum install xroad-catalog-lister xroad-catalog-collector
-```
-
-Or alternatively:
-
-```bash
-rpm -i install xroad-catalog-lister xroad-catalog-collector
+sudo yum install xroad-catalog-lister.rpm xroad-catalog-collector.rpm
 ```
 
 Instructions on how to build the RPM packages using Docker can be found [here](../BUILD.md).
 
 ## 2.4.1 Complete the Installation of X-Road Configuration Client
 
-**Note:** The configuration steps described in section 2.4.1 are needed only if the X-Road Catalog Lister is not installed on the
+**Note:** The configuration steps described in this section are needed only if the X-Road Catalog Lister is not installed on the
 same host with a Security Server
 
 If the X-Road Catalog Lister is not installed on the same host with a Security Server, the X-Road Configuration Client
