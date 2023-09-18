@@ -31,12 +31,16 @@ mkdir -p %{buildroot}%{_unitdir}
 mkdir -p %{buildroot}%{conf}
 mkdir -p %{buildroot}/usr/share/xroad/bin
 mkdir -p %{buildroot}/var/log/xroad/
+mkdir -p %{buildroot}/usr/share/doc/%{name}
+
 cp -p %{src}/../../../build/libs/xroad-catalog-lister-%{version}.jar %{buildroot}%{jlib}/%{name}.jar
 cp -p %{src}/SOURCES/%{name}.service %{buildroot}%{_unitdir}
 cp -p %{src}/SOURCES/%{name} %{buildroot}/usr/share/xroad/bin
 cp -p %{src}/../../../build/resources/main/lister-production.properties %{buildroot}%{conf}
 cp -p catalog-profile.properties %{buildroot}%{conf}
 cp -p %{src}/../../../build/resources/main/version.properties %{buildroot}%{conf}
+cp -p %{src}/../../../../LICENSE.txt %{buildroot}/usr/share/doc/%{name}/LICENSE.txt
+cp -p %{src}/../../../../3RD-PARTY-NOTICES.txt %{buildroot}/usr/share/doc/%{name}/3RD-PARTY-NOTICES.txt
 
 %clean
 rm -rf %{buildroot}
@@ -48,6 +52,9 @@ rm -rf %{buildroot}
 %config(noreplace) %{conf}/lister-production.properties
 %attr(644,root,root) %{conf}/version.properties
 %attr(644, xroad-catalog, xroad-catalog) %{conf}/catalog-profile.properties
+
+%doc /usr/share/doc/%{name}/LICENSE.txt
+%doc /usr/share/doc/%{name}/3RD-PARTY-NOTICES.txt
 
 %pre
 if ! id xroad-catalog > /dev/null 2>&1 ; then
