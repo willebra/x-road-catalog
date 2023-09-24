@@ -1,15 +1,16 @@
 # X-Road Catalog Installation Guide
-Version: 1.2.0
+Version: 1.3.0
 Doc. ID: IG-XRDCAT
 
 ---
 
 ## Version history <!-- omit in toc -->
-| Date       | Version | Description                                                            | Author           |
-|------------|---------|------------------------------------------------------------------------|------------------|
-| 22.03.2023 | 1.0.0   | Export installation-related parts from the X-Road Catalog User Guide   | Petteri Kivimäki |
-| 16.08.2023 | 1.1.0   | Add instructions to install and configure the `xroad-conflient` module | Petteri Kivimäki |
-| 09.09.2023 | 1.2.0   | Remove instructions to install the `xroad-conflient` module manually   | Petteri Kivimäki |
+| Date       | Version | Description                                                                               | Author           |
+|------------|---------|-------------------------------------------------------------------------------------------|------------------|
+| 22.03.2023 | 1.0.0   | Export installation-related parts from the X-Road Catalog User Guide                      | Petteri Kivimäki |
+| 16.08.2023 | 1.1.0   | Add instructions to install and configure the `xroad-conflient` module                    | Petteri Kivimäki |
+| 09.09.2023 | 1.2.0   | Remove instructions to install the `xroad-conflient` module manually                      | Petteri Kivimäki |
+| 24.09.2023 | 1.3.0   | Add instructions to disable the automatic backup job run by the `xroad-conflient` module  | Petteri Kivimäki |
 
 ## Table of Contents <!-- omit in toc -->
 
@@ -127,6 +128,15 @@ is the owner of the file with sufficient permissions:
 ```bash
 sudo chown xroad:xroad /etc/xroad/configuration-anchor.xml
 sudo chmod 660 /etc/xroad/configuration-anchor.xml
+```
+
+The Configuration Client is responsible for running the Security Server automatic backup job. When the Configuration
+Client isn't installed on the same host with the Security Server, the backup job must be disabled. Disable the backup job 
+by adding the below configuration in the `/etc/xroad/conf.d/local.ini` configuration file:
+
+```bash
+[configuration-client]
+proxy-configuration-backup-cron=* * * * * ? 2099
 ```
 
 Make sure that the `xroad-confclient` service is enabled on boot and start the service:
