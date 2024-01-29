@@ -1,0 +1,83 @@
+---
+excludes:
+  paths:
+  - pattern: "3RD-PARTY-NOTICES.txt"
+    reason: "OTHER"
+    comment: "File including 3rd party license notices."
+
+  - pattern: "doc/**"
+    reason: "DOCUMENTATION_OF"
+    comment: "This directory contains documentation that's not distributed."
+
+  - pattern: "gradle/**"
+    reason: "BUILD_TOOL_OF"
+    comment: "This directory contains Gradle build tool."
+
+  - pattern: "img/**"
+    reason: "DOCUMENTATION_OF"
+    comment: "This directory contains documentation images that are not distributed."
+
+  - pattern: "xroad-catalog-collector/packages/**"
+    reason: "BUILD_TOOL_OF"
+    comment: "This directory contains packaging scripts."
+
+  - pattern: "xroad-catalog-collector/src/test/**"
+    reason: "TEST_OF"
+    comment: "This directory contains tests."
+
+  - pattern: "xroad-catalog-lister/img/**"
+    reason: "DOCUMENTATION_OF"
+    comment: "This directory contains documentation images that are not distributed."
+
+  - pattern: "xroad-catalog-lister/packages/**"
+    reason: "BUILD_TOOL_OF"
+    comment: "This directory contains packaging scripts."
+
+  - pattern: "xroad-catalog-lister/src/test/**"
+    reason: "TEST_OF"
+    comment: "This directory contains tests."
+
+  - pattern: "xroad-catalog-persistence/src/test/**"
+    reason: "TEST_OF"
+    comment: "This directory contains tests."
+
+  - pattern: "xroad-catalog-persistence/img/**"
+    reason: "DOCUMENTATION_OF"
+    comment: "This directory contains documentation images that are not distributed."
+
+  scopes:
+  - pattern: "checkstyle"
+    reason: "BUILD_DEPENDENCY_OF"
+    comment: "Packages for code styling checks (testing) only."
+
+  - pattern: "devDependencies"
+    reason: "DEV_DEPENDENCY_OF"
+    comment: "Packages for development only."
+
+  - pattern: "jacocoAgent"
+    reason: "TEST_DEPENDENCY_OF"
+    comment: "Packages for code coverage (testing) only."
+
+  - pattern: "jacocoAnt"
+    reason: "TEST_DEPENDENCY_OF"
+    comment: "Packages for code coverage (testing) only."
+
+  - pattern: "test.*"
+    reason: "TEST_DEPENDENCY_OF"
+    comment: "Packages for testing only."
+
+  - pattern: "annotationProcessor"
+    reason: "DEV_DEPENDENCY_OF"
+    comment: "Packages for development only."
+
+  - pattern: "compileClasspath"
+    reason: "DEV_DEPENDENCY_OF"
+    comment: "Packages for development only."
+
+  - pattern: "compileOnly"
+    reason: "DEV_DEPENDENCY_OF"
+    comment: "Packages for development only."
+
+  - pattern: "provided"
+    reason: "RUNTIME_DEPENDENCY_OF"
+    comment: "Packages that are provided by the runtime."
