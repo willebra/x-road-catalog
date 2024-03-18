@@ -81,3 +81,12 @@ excludes:
   - pattern: "provided"
     reason: "RUNTIME_DEPENDENCY_OF"
     comment: "Packages that are provided by the runtime."
+
+resolutions:
+  rule_violations:
+    - message: "free-restricted license LicenseRef-scancode-ecma-documentation in Maven:org.apache.cxf:.*"
+      reason: "LICENSE_ACQUIRED_EXCEPTION"
+      comment: "The specification files meant by this license hit are not modified and thus are used in accordance with the license."
+    - message: "proprietary-free license LicenseRef-scancode-efsl-1.0 in Maven:jakarta.*"
+      reason: "LICENSE_ACQUIRED_EXCEPTION"
+      comment: "The specification files meant by this license hit are not modified and thus are used in accordance with the license."
