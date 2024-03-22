@@ -90,3 +90,6 @@ resolutions:
     - message: "proprietary-free license LicenseRef-scancode-efsl-1.0 in Maven:jakarta.*"
       reason: "LICENSE_ACQUIRED_EXCEPTION"
       comment: "The specification files meant by this license hit are not modified and thus are used in accordance with the license."
+    - message: "The declared license 'The BSD License' could not be mapped to a valid license or parsed as an SPDX expression. The license was found in package Maven:org.codehaus.woodstox:stax2-api:4.2.1."
+      reason: "LICENSE_ACQUIRED_EXCEPTION"
+      comment: "The declared license is not conflicting, and the actual license has been checked from the package."
